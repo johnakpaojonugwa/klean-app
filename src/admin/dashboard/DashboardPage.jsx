@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { Loader2, ShieldAlert } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 

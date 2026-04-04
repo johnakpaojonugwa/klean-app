@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { ADMIN_ROLES } from "@/constants/roles";
 import { useApp } from "@/context/AppContext";
 import useRoleGuard from "@/hooks/useRoleGuard";

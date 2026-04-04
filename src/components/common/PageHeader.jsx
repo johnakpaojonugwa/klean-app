@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Plus } from "lucide-react";
 
 export default function PageHeader({ title, subtitle, actionLabel, onAction, icon: Icon }) {

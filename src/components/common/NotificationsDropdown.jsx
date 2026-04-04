@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Bell, Check, Trash2, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdownmenu';
-import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/Button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/DropdownMenu';
+import { Badge } from '@/components/ui/Badge';
 import { ScrollArea } from '@/components/ui/scrollarea';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getNotifications, markNotificationAsRead, markAllNotificationsAsRead, deleteNotification } from '@/api/notifications';

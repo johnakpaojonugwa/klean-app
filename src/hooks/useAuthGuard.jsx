@@ -1,6 +1,6 @@
 import { useLocation, Navigate } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export default function useAuthGuard() {
   const { isAuthenticated, loadingUser, user } = useApp();

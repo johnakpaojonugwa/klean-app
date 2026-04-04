@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, Briefcase, ShieldCheck, MoreVertical, Edit, Trash2 } from "lucide-react";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/Avatar";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from "@/components/ui/dropdownmenu";
+} from "@/components/ui/DropdownMenu";
 
 const statusColors = {
     active: "bg-emerald-100 text-emerald-700",

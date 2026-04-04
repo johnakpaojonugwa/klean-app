@@ -1,7 +1,7 @@
 import React from "react";
 import { Download, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/Card";
 import PageHeader from "@/components/common/PageHeader";
 
 import { useReports } from "@/components/reports/useReports";

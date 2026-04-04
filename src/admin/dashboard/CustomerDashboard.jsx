@@ -3,11 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { ShoppingBag, TrendingUp, Clock, CheckCircle, Eye, Inbox } from 'lucide-react';
 
 // Shadcn UI Components
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/Table";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 import { ExportButton } from '@/components/dashboard/ExportButton';
 import StatCard from '@/components/dashboard/StatCard';

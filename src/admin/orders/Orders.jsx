@@ -13,15 +13,15 @@ import OrderCard from "@/components/orders/OrderCard";
 import OrderForm from "@/components/orders/OrderForm";
 import PaymentDialog from "@/components/orders/PaymentDialog";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { Skeleton } from "@/components/ui/Skeleton";
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from "@/components/ui/select";
+} from "@/components/ui/Select";
 
 export default function Orders() {
   const { state, actions, mutations, data, user } = useOrdersManager();

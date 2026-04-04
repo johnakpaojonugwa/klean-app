@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 import { format } from "date-fns";
 import { PRIORITY_COLORS } from "@/components/tracking/TrackingConstants";
 

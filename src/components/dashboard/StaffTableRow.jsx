@@ -1,8 +1,8 @@
 import React from "react";
 import { MoreHorizontal, Pencil, Trash2, Wallet } from "lucide-react"; 
-import { TableCell, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { TableCell, TableRow } from "@/components/ui/Table";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdownmenu"; 
+} from "@/components/ui/DropdownMenu"; 
 
 /**
  * @param {Object} staff - The employee data object

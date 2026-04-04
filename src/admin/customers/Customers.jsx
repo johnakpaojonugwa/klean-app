@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 import { getCustomers } from "@/api/customers";
 import api from "@/api/api";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 import PageHeader from "@/components/common/PageHeader";
 import SearchFilter from "@/components/common/SearchFilter";
 import EmptyState from "@/components/common/EmptyState";

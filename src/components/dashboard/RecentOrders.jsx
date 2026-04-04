@@ -1,6 +1,6 @@
 import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import { Clock, Package } from "lucide-react";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";

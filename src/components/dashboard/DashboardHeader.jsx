@@ -7,7 +7,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/Select";
 
 const ROLE_CONFIGS = {
   [ROLES.SUPER_ADMIN]: {

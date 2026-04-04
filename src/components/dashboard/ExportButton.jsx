@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 import { Download } from "lucide-react";
 import { useApp } from "@/context/AppContext";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { exportDashboardPdf } from "@/api/analytics";
 
 export function ExportButton({ dashboardData, dateRange }) {

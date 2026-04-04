@@ -1,14 +1,14 @@
 import { motion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import { Mail, Phone, MapPin, Trash2, Edit, MoreVertical } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/Avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdownmenu";
+} from "@/components/ui/DropdownMenu";
 
 export default function CustomerCard({ customer, index, onEdit, onDelete }) {
   return (

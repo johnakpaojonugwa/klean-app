@@ -9,7 +9,7 @@ import {
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCurrentUser } from "@/api/api.js";
 import { ROLES } from "@/constants/roles";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 const AppContext = createContext();
 

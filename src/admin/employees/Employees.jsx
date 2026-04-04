@@ -12,7 +12,7 @@ import {
 } from "@/api/employees";
 import { useApp } from "@/context/AppContext";
 
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 import PageHeader from "@/components/common/PageHeader";
 import SearchFilter from "@/components/common/SearchFilter";
 import EmptyState from "@/components/common/EmptyState";

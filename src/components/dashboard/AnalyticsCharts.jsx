@@ -1,5 +1,5 @@
 import React from "react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { RevenueChart, StatusBreakdownChart } from "@/admin/dashboard/DashboardComponents";
 
 const AnalyticsCharts = ({ revenueData, statusData, loading }) => {

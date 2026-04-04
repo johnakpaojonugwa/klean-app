@@ -6,13 +6,13 @@ import { getBranchManagers, branchManagerApi } from "@/api/branchManager";
 
 import { useApp } from "@/context/AppContext";
 import { useDebouncedSearch } from "@/hooks/useDebounce";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 import PageHeader from "@/components/common/PageHeader";
 import EmptyState from "@/components/common/EmptyState";
 import SearchFilter from "@/components/common/SearchFilter";
 
-import ManagerCard from "@/components/managers/managerCard";
-import ManagerForm from "@/components/managers/managerForm";
+import ManagerCard from "@/components/managers/ManagerCard";
+import ManagerForm from "@/components/managers/ManagerForm";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 export default function Managers() {

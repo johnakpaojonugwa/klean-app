@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FileText, Eye, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 
 const Status_Color = {
   PENDING: "bg-amber-50 text-amber-700 border-amber-200",

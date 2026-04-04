@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { useApp } from "@/context/AppContext"; // Import your context
 import { getNavItemsForRole, RBAC_INFO } from "@/constants/roles"; // Import the roles config we created
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 export default function Sidebar({
   collapsed,

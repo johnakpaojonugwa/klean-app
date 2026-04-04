@@ -1,6 +1,6 @@
 import React from "react";
 import { AlertTriangle, Package } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { normalizeApiList } from "@/lib/inventoryUtils";

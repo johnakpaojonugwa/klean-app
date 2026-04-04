@@ -5,11 +5,11 @@ import { getBranches } from "@/api/branches";
 import { getSalaryStructures } from "@/api/payroll";
 
 // Shadcn UI
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableHeader, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Table, TableBody, TableHeader, TableRow, TableHead, TableCell } from "@/components/ui/Table";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
 
 // Project Components
 import { StaffTableRow } from "@/components/dashboard/StaffTableRow";

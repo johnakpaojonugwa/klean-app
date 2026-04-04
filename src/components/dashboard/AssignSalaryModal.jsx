@@ -12,18 +12,18 @@ import {
   DialogTitle,
   DialogFooter,
   DialogDescription,
-} from "@/components/ui/dialog";
+} from "@/components/ui/Dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+} from "@/components/ui/Select";
+import { Button } from "@/components/ui/Button";
+import { Label } from "@/components/ui/Label";
+import { Badge } from "@/components/ui/Badge";
+import { Alert, AlertDescription } from "@/components/ui/Alert";
 
 /**
  * @param {boolean} isOpen - Dialog state

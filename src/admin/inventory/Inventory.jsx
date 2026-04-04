@@ -11,10 +11,10 @@ import { apiFromUi, normalizeApiList } from "@/lib/inventoryUtils";
 import { useApp } from "@/context/AppContext";
 import { toast } from "sonner";
 import { Package, Loader2, AlertCircle, Activity, Plus, Search } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 // Components

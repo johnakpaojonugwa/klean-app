@@ -15,10 +15,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdownmenu";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/DropdownMenu";
+import { Button } from "@/components/ui/Button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
+import { Input } from "@/components/ui/Input";
 import NotificationsDropdown from "@/components/common/NotificationsDropdown";
 
 export default function Header({

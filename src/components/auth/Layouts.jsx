@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/components/ui/Dialog";
 
 export function AuthVisuals({ isLogin, LoginGif, SignupGif }) {
   return (
