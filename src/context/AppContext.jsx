@@ -28,7 +28,7 @@ const getInitialToken = () => sessionStorage.getItem("klean_token") || null;
 export const AppProvider = ({ children }) => {
   const queryClient = useQueryClient();
   const baseURL =
-    import.meta.env.VITE_API_BASE || "http://localhost:5000/api/v1";
+    import.meta.env.VITE_API_BASE || "https://klean-dev.onrender.com/api/v1";
 
   const [userToken, setUserToken] = useState(getInitialToken);
 
