@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  /* Keyframes */
+  @keyframes draw-circle {
+    0% {
+      stroke-dasharray: 0 175;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 175 175;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dasharray: 175 175;
+      stroke-dashoffset: -175;
+    }
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(-3px); }
+    50% { transform: translateY(0); }
+  }
+
+  @keyframes shimmer {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+  
+  --animate-shimmer: shimmer 2s infinite linear;
+
+  /* Utility Animations */
+  --animate-draw-circle: draw-circle 2s ease-in-out infinite;
+  --animate-typing: typing 2s steps(10, end) infinite;
+  --animate-bounce-subtle: bounce-subtle 2s ease-in-out infinite;
+}
+
+.dark .bg-slate-200 { background-color: rgba(255,255,255,0.1); }
+
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 4s ease-in-out infinite;
+}
+

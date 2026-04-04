@@ -1,0 +1,171 @@
+# Klean Frontend
+
+A comprehensive React-based frontend application for managing a laundry and cleaning service business. This application provides role-based dashboards for administrators, managers, staff, and customers, along with features for booking services, managing inventory, processing orders, and generating reports.
+
+## Features
+
+### Admin & Management
+- **Role-Based Access Control**: Separate dashboards for Super Admin, Branch Managers, Staff, and Customers
+- **User Management**: Create, update, and manage employees, customers, and managers
+- **Branch Management**: Handle multiple service locations
+- **Inventory Tracking**: Monitor cleaning supplies and equipment
+- **Order Processing**: Manage service orders from booking to completion
+- **Invoice Generation**: Automated invoicing for completed services
+- **Reports & Analytics**: Comprehensive reporting on business metrics
+
+### Customer Features
+- **Online Booking**: Easy-to-use booking form with service selection
+- **Order Tracking**: Real-time status updates on service orders
+- **Profile Management**: Customer account management
+- **Service History**: View past orders and invoices
+
+### Technical Features
+- **Responsive Design**: Mobile-friendly interface using Tailwind CSS
+- **Real-time Updates**: Live data synchronization with React Query
+- **Form Validation**: Robust client-side validation
+- **Search & Filtering**: Advanced search capabilities across all modules
+- **Notifications**: In-app notifications for important updates
+
+## Tech Stack
+
+- **Frontend Framework**: React 19 with Vite
+- **Styling**: Tailwind CSS with Radix UI components
+- **State Management**: React Query for server state
+- **HTTP Client**: Axios for API communication
+- **Routing**: React Router DOM
+- **Icons**: Lucide React
+- **Charts**: Recharts for data visualization
+- **Animations**: Framer Motion
+- **Date Handling**: date-fns
+- **Build Tool**: Vite
+- **Linting**: ESLint
+
+## Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd klean-frontend
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+5. **Preview production build**:
+   ```bash
+   npm run preview
+   ```
+
+## Usage
+
+### Development
+- Run `npm run dev` to start the development server
+- The application will be available at `http://localhost:5173`
+- Use `npm run lint` to check for code quality issues
+
+### Production
+- Run `npm run build` to create an optimized production build
+- The build artifacts will be stored in the `dist/` directory
+- Use `npm run preview` to preview the production build locally
+
+## Project Structure
+
+```
+klean-frontend/
+├── public/                 # Static assets
+├── src/
+│   ├── admin/              # Admin-specific components
+│   │   ├── customers/      # Customer management
+│   │   ├── dashboard/      # Role-based dashboards
+│   │   ├── employees/      # Employee management
+│   │   ├── inventory/      # Inventory management
+│   │   ├── invoices/       # Invoice handling
+│   │   ├── locations/      # Branch/location management
+│   │   ├── managers/       # Manager tools
+│   │   ├── orders/         # Order processing
+│   │   ├── reports/        # Reporting features
+│   │   └── tracking/       # Order tracking
+│   ├── api/                # API client functions
+│   ├── assets/             # Static assets
+│   ├── components/         # Reusable UI components
+│   │   ├── auth/           # Authentication components
+│   │   ├── common/         # Shared components
+│   │   ├── customers/      # Customer-specific components
+│   │   ├── dashboard/      # Dashboard widgets
+│   │   ├── ui/             # UI library components
+│   │   └── ...             # Other feature components
+│   ├── constants/          # Application constants
+│   ├── context/            # React context providers
+│   ├── hooks/              # Custom React hooks
+│   ├── lib/                # Utility libraries
+│   ├── pages/              # Page components
+│   ├── router/             # Routing configuration
+│   └── utils/              # Utility functions
+├── eslint.config.js        # ESLint configuration
+├── index.html              # Main HTML file
+├── package.json            # Project dependencies and scripts
+├── vite.config.js          # Vite configuration
+└── README.md               # This file
+```
+
+## Key Components
+
+### Authentication System
+- Role-based routing with protected routes
+- Admin authentication with different access levels
+- Customer login and registration
+
+### Booking System
+- Customer-facing booking form
+- Service selection with pricing
+- Branch and time slot selection
+- Automatic form population from user profile
+
+### Dashboard System
+- **Super Admin**: System-wide overview and management
+- **Branch Manager**: Branch-specific operations
+- **Staff**: Daily operations and customer service
+- **Customer**: Personal orders and account management
+
+### API Integration
+- RESTful API client with Axios
+- React Query for caching and synchronization
+- Error handling and loading states
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Code Style
+- Follow the existing ESLint configuration
+- Use meaningful commit messages
+- Write descriptive component and function names
+- Add comments for complex logic
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For support, please contact the development team or create an issue in the repository.
+
+---
+
+Built with ❤️ using React and Vite
