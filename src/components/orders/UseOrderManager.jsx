@@ -11,7 +11,7 @@ import { employeesApi, getEmployees } from "@/api/employees";
 import { useApp } from "@/context/AppContext";
 
 // Constants
-import { STATUS_GROUPS } from "@/components/orders/orderConstants";
+import { STATUS_GROUPS } from "@/components/orders/OrderConstants";
 
 export function useOrdersManager() {
   const { user } = useApp();
