@@ -1,4 +1,3 @@
-import React, { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { ShoppingBag, TrendingUp, Clock, CheckCircle, Eye, Inbox } from 'lucide-react';
 
@@ -134,7 +133,9 @@ export function CustomerDashboard({ customerId }) {
                             #{order.orderNumber || order._id.slice(-6).toUpperCase()}
                           </TableCell>
                           <TableCell className="text-slate-500 text-sm hidden md:table-cell">
-                            {new Date(order.createdAt || Date.now()).toLocaleDateString()}
+                            {order.createdAt
+                              ? new Date(order.createdAt).toLocaleDateString()
+                              : "N/A"}
                           </TableCell>
                           <TableCell className="text-slate-600 text-sm hidden lg:table-cell">
                             {order.items?.length || 0} item{order.items?.length !== 1 ? 's' : ''}

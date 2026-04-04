@@ -187,7 +187,7 @@ export function StaffDashboard({ branchId }) {
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
-            <Button className="bg-blue-600 hover:bg-blue-700" onClick={() => handleUpdate(selectedOrderId, 'WASHING')}>
+            <Button className="bg-blue-600 hover:bg-blue-700" onClick={() => handleUpdateStatus(selectedOrderId, 'WASHING')}>
                Confirm Start
             </Button>
           </DialogFooter>
