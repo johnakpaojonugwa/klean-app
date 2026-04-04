@@ -1,4 +1,4 @@
-import { Linkedin, ArrowRight } from "lucide-react"; // Added ArrowRight for the button
+import { Linkedin, ArrowRight } from "lucide-react"; 
 import CEO from "@/assets/profile-pics.jpg";
 import ActingCEO from "@/assets/about-us-ceo-.png";
 
