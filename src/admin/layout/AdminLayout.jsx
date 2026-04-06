@@ -47,7 +47,7 @@ export default function AdminLayout() {
   const handleLogout = async () => {
     try {
       await logout?.();
-      navigate("/admin-auth");
+      navigate("/auth");
     } catch (error) {
       console.error("Logout failed:", error);
     }
