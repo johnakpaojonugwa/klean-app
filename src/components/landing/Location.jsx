@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone } from 'lucide-react';
+import { MapPin, Phone, Facebook, Linkedin, Twitter } from 'lucide-react';
 import BranchImg from "@/assets/location-img.jpg";
 
 const branches = [
@@ -68,15 +68,18 @@ const BranchCard = ({ branch }) => (
       <img 
         src={branch.image} 
         alt={branch.name} 
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover object-center" 
+        loading='lazy'
+        decoding="async"
       />
-      {/* The "Arc" Effect: A white div with a massive top-radius */}
+      {/* The "Arc" Effect */}
       <div className="absolute -bottom-1 left-0 right-0 bg-white h-8 rounded-t-[50%] scale-x-125"></div>
     </div>
 
     {/* Content */}
     <div className="px-6 pb-8 pt-2 text-center flex flex-col flex-grow">
       <h3 className="text-lg font-bold text-slate-800 mb-3">{branch.name}</h3>
+
       <div className="text-[13px] text-slate-500 leading-relaxed mb-4 flex-grow">
         <p className="mb-1">{branch.address.split(',')[0]}</p>
         <p>{branch.address.split(',').slice(1).join(',')}</p>
@@ -86,14 +89,15 @@ const BranchCard = ({ branch }) => (
       {/* Social/Action Icons */}
       <div className="flex justify-center items-center gap-4 mt-auto">
         <button className="hover:scale-110 transition-transform">
-          <img src="/icons/google-maps.png" alt="Maps" className="w-6 h-6" /> 
-          {/* Note: I'm using img tags for specific colorful icons like in your screenshot */}
+          <Facebook size={18} className="text-[#4F7DF3]" />
         </button>
+
         <button className="hover:scale-110 transition-transform">
-          <img src="/icons/whatsapp.png" alt="WhatsApp" className="w-6 h-6" />
+          <Linkedin size={18} className="text-[#4F7DF3]" />
         </button>
+
         <button className="hover:scale-110 transition-transform">
-          <img src="/icons/telephone.png" alt="Call" className="w-6 h-6" />
+          <Twitter size={18} className="text-[#4F7DF3]" />
         </button>
       </div>
     </div>

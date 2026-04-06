@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Facebook, Linkedin, Twitter, MessageSquare, Send }
 
 const ContactForm = () => {
   return (
-    <div className="bg-[#f8fafc] min-h-screen py-20 px-6 font-sans antialiased">
+    <div className="bg-[#f8fafc] min-h-[80vh] py-20 px-6 font-sans antialiased">
       <div className="max-w-7xl mx-auto">
         
         {/* Header Section */}
