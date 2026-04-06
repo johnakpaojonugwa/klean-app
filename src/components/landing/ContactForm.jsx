@@ -8,7 +8,7 @@ const ContactForm = () => {
         
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-extrabold text-[#4F7DF3] tracking-tight mb-4 uppercase">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-[#4F7DF3] tracking-tight mb-4 uppercase">
             Get in Touch
           </h1>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
