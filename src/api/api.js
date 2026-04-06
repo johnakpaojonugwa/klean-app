@@ -67,7 +67,7 @@ export default api;
 
 // Convenience helpers for react-query usage
 export const getCurrentUser = async () => {
-  const res = await api.get('/users');
+  const res = await api.get('/users/me');
   return res.data;
 };
 

@@ -13,27 +13,21 @@ import { Skeleton } from "@/components/ui/Skeleton";
 
 const AppContext = createContext();
 
-const getInitialUser = () => {
-  try {
-    const raw = sessionStorage.getItem("klean_user");
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
-};
-console.log("Current User:", getInitialUser)
-
-const getInitialToken = () => sessionStorage.getItem("klean_token") || null;
+// Centralized Storage Helpers
+const getStoredUser = () =>
+  JSON.parse(sessionStorage.getItem("klean_user") || "null");
+const getStoredToken = () => sessionStorage.getItem("klean_token") || null;
 
 export const AppProvider = ({ children }) => {
   const queryClient = useQueryClient();
   const baseURL =
     import.meta.env.VITE_API_BASE || "https://klean-dev.onrender.com/api/v1";
 
-  const [userToken, setUserToken] = useState(getInitialToken);
+  const [userToken, setUserToken] = useState(getStoredToken);
 
+  // React Query for Profile Data
   const {
-    data: queryResponse,
+    data: userData,
     isLoading: isFetchingUser,
     isError,
     error,
@@ -42,32 +36,21 @@ export const AppProvider = ({ children }) => {
     queryFn: getCurrentUser,
     enabled: !!userToken,
     staleTime: 5 * 60 * 1000,
+    // Use the stored user as the starting point so the UI is instant
     initialData: () => {
-      const stored = getInitialUser();
+      const stored = getStoredUser();
       return stored ? { data: stored } : undefined;
     },
+    // Map the nested API response directly to the user object
+    select: (response) => response?.data || response,
   });
 
-  // Extract the actual user object 
-const user = useMemo(() => {
-    const employees = queryResponse?.data?.employees || [];
-    const storedUser = getInitialUser();
-    
-    if (!storedUser) return null;
+  // The final user object (Falls back to storage if API hasn't returned yet)
+  const user = userData || getStoredUser();
 
-    // Find the current user in the API response by matching IDs
-    const serverUser = employees.find(
-      (employee) => employee._id === (storedUser._id || storedUser.id)
-    );
-
-    // Fallback to storedUser 
-    return serverUser || storedUser;
-  }, [queryResponse]);
-  // 3. Auth Actions
+  // Auth Actions
   const logout = useCallback(() => {
-    sessionStorage.removeItem("klean_token");
-    sessionStorage.removeItem("klean_refresh");
-    sessionStorage.removeItem("klean_user");
+    sessionStorage.clear(); // Safety first
     setUserToken(null);
     queryClient.setQueryData(["currentUser"], null);
     queryClient.removeQueries();
@@ -76,26 +59,25 @@ const user = useMemo(() => {
 
   const login = useCallback(
     (userData, token, refreshToken = null) => {
-      if (token) sessionStorage.setItem("klean_token", token);
+      sessionStorage.setItem("klean_token", token);
       if (refreshToken) sessionStorage.setItem("klean_refresh", refreshToken);
-      sessionStorage.setItem("klean_user", JSON.stringify(userData));      
-      // Store phone number separately if available
-      if (userData?.phoneNumber || userData?.phone) {
-        sessionStorage.setItem("klean_user_phone", userData.phoneNumber || userData.phone);
-      }
-            setUserToken(token);
-      queryClient.setQueryData(["currentUser"], { data: userData });
+      sessionStorage.setItem("klean_user", JSON.stringify(userData));
+
+      setUserToken(token);
+      // Directly seed the cache with the new user object
+      queryClient.setQueryData(["currentUser"], userData);
     },
     [queryClient],
   );
 
+  // Handle Global 401s
   useEffect(() => {
     if (isError && error?.response?.status === 401) {
       logout();
     }
   }, [isError, error, logout]);
 
-  // RBAC & Context Value Memoization
+  // 4. RBAC Logic
   const rbac = useMemo(() => {
     const role = user?.role;
     return {
@@ -149,7 +131,9 @@ const user = useMemo(() => {
           <Skeleton className="h-12 w-full" />
           <Skeleton className="h-12 w-full" />
         </div>
-        <p className="mt-6 text-slate-600">Initializing Klean Laundry Systems...</p>
+        <p className="mt-6 text-slate-600">
+          Initializing Klean Laundry Systems...
+        </p>
       </div>
     );
   }
