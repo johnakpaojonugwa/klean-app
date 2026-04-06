@@ -28,7 +28,7 @@ export const AppProvider = ({ children }) => {
   // React Query for Profile Data
   const {
     data: userData,
-    isLoading: isFetchingUser,
+    isPending: isFetchingUser,
     isError,
     error,
   } = useQuery({
@@ -45,16 +45,16 @@ export const AppProvider = ({ children }) => {
     select: (response) => response?.data || response,
   });
 
-  // The final user object (Falls back to storage if API hasn't returned yet)
+  // The final user object 
   const user = userData || getStoredUser();
 
   // Auth Actions
   const logout = useCallback(() => {
-    sessionStorage.clear(); // Safety first
+    sessionStorage.clear(); 
     setUserToken(null);
     queryClient.setQueryData(["currentUser"], null);
     queryClient.removeQueries();
-    window.location.href = "/admin-auth";
+    window.location.href = "/auth";
   }, [queryClient]);
 
   const login = useCallback(
@@ -77,7 +77,7 @@ export const AppProvider = ({ children }) => {
     }
   }, [isError, error, logout]);
 
-  // 4. RBAC Logic
+  // RBAC Logic
   const rbac = useMemo(() => {
     const role = user?.role;
     return {
