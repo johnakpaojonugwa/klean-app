@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { ShoppingBag, TrendingUp, Clock, CheckCircle, Eye, Inbox } from 'lucide-react';
 
@@ -10,6 +11,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 
 import { ExportButton } from '@/components/dashboard/ExportButton';
 import StatCard from '@/components/dashboard/StatCard';
+import OrderDetailsDialog from '@/components/orders/OrderDetailsDialog';
 import { getOrders } from '@/api/orders';
 
 // Modern status configuration matching InvoiceTable design
@@ -49,6 +51,9 @@ const STATUS_CONFIG = {
 };
 
 export function CustomerDashboard({ customerId }) {
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showOrderDetails, setShowOrderDetails] = useState(false);
+
   const { 
     data: ordersData, 
     isPending: ordersLoading 
@@ -60,6 +65,16 @@ export function CustomerDashboard({ customerId }) {
     gcTime: 10 * 60 * 1000, 
     retry: 1,
   });
+
+  const handleViewOrderDetails = (order) => {
+    setSelectedOrder(order);
+    setShowOrderDetails(true);
+  };
+
+  const handleDownloadOrder = (order) => {
+    // Implement PDF download functionality here
+    console.log("Download order:", order);
+  };
   
 
   // Derived State & Analytics
@@ -156,6 +171,7 @@ export function CustomerDashboard({ customerId }) {
                               variant="ghost" 
                               size="sm" 
                               className="h-8 w-8 p-0 cursor-pointer hover:bg-slate-100"
+                              onClick={() => handleViewOrderDetails(order)}
                             >
                               <Eye className="h-4 w-4 text-slate-400" />
                             </Button>
@@ -170,6 +186,13 @@ export function CustomerDashboard({ customerId }) {
           )}
         </CardContent>
       </Card>
+
+      <OrderDetailsDialog 
+        open={showOrderDetails}
+        onOpenChange={setShowOrderDetails}
+        order={selectedOrder}
+        onDownload={handleDownloadOrder}
+      />
     </div>
   );
 }
