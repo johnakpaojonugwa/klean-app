@@ -63,7 +63,7 @@ const ContactForm = () => {
           </div>
 
           {/* Right: Location & Info Panel (The "Enhanced" Card) */}
-          <div className="flex-1 bg-slate-900 relative text-white p-10 lg:p-16 overflow-hidden flex flex-col justify-between">
+          <div className="flex-1 bg-[#1A2E56] relative text-white p-10 lg:p-16 overflow-hidden flex flex-col justify-between">
             {/* Background Accent */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#4F7DF3] opacity-10 blur-[100px] -mr-32 -mt-32"></div>
             
