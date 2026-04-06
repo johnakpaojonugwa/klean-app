@@ -129,11 +129,11 @@ const BranchCard = ({ branch }) => {
 
 const Location = () => {
   return (
-    <section className="bg-[#f8fafc] py-24 px-6 min-h-screen">
+    <section className="bg-[#f7f7f7] py-24 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20 space-y-4">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900">
-            Our <span className="text-blue-600">Network</span>
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#4F7DF3] uppercase">
+            Our Network
           </h2>
           <p className="text-slate-500 max-w-xl mx-auto text-lg">
             Find a Klean Enterprise branch closest to you. Professional garment care, just around the corner.
