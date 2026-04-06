@@ -1,98 +1,117 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Linkedin, Twitter, MessageSquare, Send } from 'lucide-react';
 import FormImg from "@/assets/location-img.jpg";
 
 const ContactForm = () => {
   return (
-    <div className="bg-slate-50 min-h-screen py-16 px-4 font-sans">
-      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-8 items-start justify-center">
+    <div className="bg-[#f8fafc] min-h-screen py-20 px-6 font-sans antialiased">
+      <div className="max-w-6xl mx-auto">
         
-        {/* Left Card: Contact Form */}
-        <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200 w-full lg:max-w-1/2">
-          <h2 className="text-xl font-semibold text-slate-800 mb-8 leading-tight">
-            Send us a quick note and we will get back to you as soon as possible
-          </h2>
-          
-          <form className="space-y-6">
-            <div>
-              <input 
-                type="text" 
-                placeholder="Name" 
-                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-300 transition-all"
-              />
-            </div>
-            <div>
-              <input 
-                type="email" 
-                placeholder="Email" 
-                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-300 transition-all"
-              />
-            </div>
-            <div>
-              <textarea 
-                placeholder="Message" 
-                rows="5"
-                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-300 transition-all resize-none"
-              ></textarea>
-            </div>
-            
-            <button className="w-full bg-[#8b77eb] hover:bg-[#7a65d8] text-white font-medium py-3 rounded-lg transition-colors shadow-md">
-              Contact Us
-            </button>
-          </form>
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+            Get in Touch
+          </h1>
+          <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+            Have a question or need a professional laundry service? We're here to help. 
+            Drop us a message and our team will reach out shortly.
+          </p>
         </div>
 
-        {/* Right Card: Location Info */}
-        <div className="w-full lg:max-w-1/2">
-          <h2 className="text-2xl font-bold text-slate-800 mb-6">Head Office</h2>
+        {/* Main Interface Container */}
+        <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/60 overflow-hidden flex flex-col lg:flex-row border border-slate-100">
           
-          <div className="bg-white rounded-2xl shadow-xl shadow-slate-200 overflow-hidden">
-            {/* Building Image */}
-            <div className="relative h-56">
-              <img 
-                src={FormImg}
-                alt="Head Office Building" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-white h-4 rounded-t-full"></div>
+          {/* Left: Contact Form Section */}
+          <div className="flex-[1.2] p-8 lg:p-16">
+            <div className="flex items-center gap-3 mb-8 text-[#8b77eb]">
+              <MessageSquare size={24} />
+              <span className="font-bold uppercase tracking-widest text-sm">Send a Message</span>
             </div>
-            
-            <div className="p-8 pt-0 text-center">
-              <h3 className="text-xl font-bold text-slate-800 mb-4">Lugbe</h3>
-              <div className="text-slate-500 text-sm leading-relaxed space-y-2">
-                <p>No 7, VON Garden City Estate,</p>
-                <p>Lugbe FCT.</p>
-                <p className="pt-2">Tel: +234 — 8101389942</p>
+
+            <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="col-span-1">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                <input 
+                  type="text" 
+                  placeholder="John Doe" 
+                  className="w-full px-5 py-4 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-[#8b77eb] focus:ring-4 focus:ring-[#8b77eb]/10 outline-none transition-all placeholder:text-slate-400"
+                />
+              </div>
+              <div className="col-span-1">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                <input 
+                  type="email" 
+                  placeholder="john@example.com" 
+                  className="w-full px-5 py-4 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-[#8b77eb] focus:ring-4 focus:ring-[#8b77eb]/10 outline-none transition-all placeholder:text-slate-400"
+                />
+              </div>
+              <div className="col-span-2">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">How can we help?</label>
+                <textarea 
+                  placeholder="Tell us about your needs..." 
+                  rows="4"
+                  className="w-full px-5 py-4 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-[#8b77eb] focus:ring-4 focus:ring-[#8b77eb]/10 outline-none transition-all resize-none placeholder:text-slate-400"
+                ></textarea>
               </div>
               
-              {/* Icon Group */}
-              <div className="flex justify-center gap-4 mt-6">
-                <div className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-50 cursor-pointer">
-                  <MapPin className="text-red-500 w-6 h-6" />
+              <div className="col-span-2 pt-4">
+                <button className="group flex items-center justify-center gap-3 w-full bg-[#8b77eb] hover:bg-[#7a65d8] text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-indigo-200 active:scale-[0.98]">
+                  <span>Send Message</span>
+                  <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Right: Location & Info Panel (The "Enhanced" Card) */}
+          <div className="flex-1 bg-slate-900 relative text-white p-10 lg:p-16 overflow-hidden flex flex-col justify-between">
+            {/* Background Accent */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#8b77eb] opacity-10 blur-[100px] -mr-32 -mt-32"></div>
+            
+            <div className="relative z-10">
+              <h2 className="text-3xl font-bold mb-8">Head Office</h2>
+              
+              <div className="space-y-8">
+                <div className="flex items-start gap-5">
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                    <MapPin className="text-[#8b77eb]" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg">Lugbe Branch</h4>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      No 7, VON Garden City Estate,<br /> Lugbe FCT, Abuja.
+                    </p>
+                  </div>
                 </div>
-                <div className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-50 cursor-pointer">
-                  <span className="text-green-500 text-2xl font-bold">💬</span>
-                </div>
-                <div className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-50 cursor-pointer">
-                  <Phone className="text-black w-6 h-6" />
+
+                <div className="flex items-start gap-5">
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                    <Phone className="text-[#8b77eb]" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg">Phone Support</h4>
+                    <p className="text-slate-400 text-sm">+234 810 138 9942</p>
+                    <p className="text-xs text-slate-500 mt-1">Mon-Sat, 8am - 6pm</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Footer Socials */}
-      <div className="mt-16 border-t border-slate-300 pt-8 flex flex-col items-center">
-        <div className="flex gap-4 mb-8">
-          <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-600 cursor-pointer">
-            <Facebook size={18} />
-          </div>
-          <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-600 cursor-pointer">
-            <Linkedin size={18} />
-          </div>
-          <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-600 cursor-pointer text-lg font-bold">
-            X
+            {/* Social Links Panel */}
+            <div className="relative z-10 pt-12">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-6">Follow Our Journey</p>
+              <div className="flex gap-4">
+                {[
+                  { icon: <Facebook size={20}/>, link: "#" },
+                  { icon: <Linkedin size={20}/>, link: "#" },
+                  { icon: <Twitter size={20}/>, link: "#" }
+                ].map((social, i) => (
+                  <a key={i} href={social.link} className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#8b77eb] hover:border-[#8b77eb] transition-all duration-300">
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
