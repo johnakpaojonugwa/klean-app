@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, Phone, Facebook, Linkedin, Twitter } from "lucide-react";
+import { MapPin, Phone, Globe, ExternalLink, MessageCircle } from "lucide-react";
 import BranchImg from "@/assets/location-img.jpg";
 
 const branches = [
@@ -63,60 +63,84 @@ const branches = [
   },
 ];
 
-const BranchCard = ({ branch }) => (
-  <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full border border-slate-50">
-    {/* Image Container with Curve Overlay */}
-    <div className="relative h-40 w-full">
-      <img
-        src={branch.image}
-        alt={branch.name}
-        className="w-full h-full object-cover object-center"
-        loading="lazy"
-        decoding="async"
-      />
-      {/* The "Arc" Effect */}
-      <div className="absolute -bottom-1 left-0 right-0 bg-white h-8 rounded-t-[50%] scale-x-125"></div>
-    </div>
+const BranchCard = ({ branch }) => {
+  const isHeadOffice = branch.name === "Head Office";
 
-    {/* Content */}
-    <div className="px-6 pb-8 pt-2 text-center flex flex-col flex-grow">
-      <h3 className="text-lg font-bold text-slate-800 mb-3">{branch.name}</h3>
+  return (
+    <div className="group relative bg-white rounded-[2rem] p-3 shadow-sm hover:shadow-2xl hover:shadow-blue-100 transition-all duration-500 border border-slate-100 flex flex-col h-full overflow-hidden">
+      
+      {/* Image Section */}
+      <div className="relative h-52 w-full rounded-[1.5rem] overflow-hidden">
+        <img
+          src={branch.image}
+          alt={branch.name}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        
+        {/* Overlay Badge */}
+        {isHeadOffice && (
+          <div className="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
+            Main Hub
+          </div>
+        )}
 
-      <div className="text-[13px] text-slate-500 leading-relaxed mb-4 flex-grow">
-        <p className="mb-1">{branch.address.split(",")[0]}</p>
-        <p>{branch.address.split(",").slice(1).join(",")}</p>
-        <p className="mt-3 font-medium text-slate-400">Tel: {branch.tel}</p>
-      </div>
-
-      {/* Social/Action Icons */}
-      <div className="flex gap-4">
-        {[
-          { icon: <Facebook size={20} />, link: "#" },
-          { icon: <Linkedin size={20} />, link: "#" },
-          { icon: <Twitter size={20} />, link: "#" },
-        ].map((social, i) => (
-          <a
-            key={i}
-            href={social.link}
-            className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#4F7DF3] hover:border-[#4F7DF3] transition-all duration-300"
-          >
-            {social.icon}
+        {/* Floating Quick Actions (Visible on Hover) */}
+        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+          <a href={`tel:${branch.tel}`} className="p-3 bg-white rounded-full text-blue-600 hover:bg-blue-600 hover:text-white transition-colors shadow-xl">
+            <Phone size={20} />
           </a>
-        ))}
+          <button className="p-3 bg-white rounded-full text-green-600 hover:bg-green-600 hover:text-white transition-colors shadow-xl">
+            <MessageCircle size={20} />
+          </button>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div className="px-4 py-6 flex flex-col flex-grow">
+        <div className="flex items-start justify-between mb-3">
+          <h3 className="text-xl font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
+            {branch.name}
+          </h3>
+          <MapPin size={18} className="text-slate-300 group-hover:text-blue-400 transition-colors" />
+        </div>
+
+        <div className="space-y-3 flex-grow">
+          <p className="text-[13px] text-slate-500 leading-relaxed line-clamp-2">
+            {branch.address}
+          </p>
+          
+          <div className="pt-4 border-t border-slate-50">
+             <div className="flex items-center gap-2 text-slate-400 group-hover:text-slate-600 transition-colors">
+                <Phone size={14} />
+                <span className="text-[12px] font-medium">{branch.tel}</span>
+             </div>
+          </div>
+        </div>
+
+        {/* Modern "Directions" Button */}
+        <button className="mt-6 w-full flex items-center justify-center gap-2 py-3 bg-slate-50 group-hover:bg-blue-600 text-slate-600 group-hover:text-white rounded-xl font-semibold text-sm transition-all duration-300">
+          <span>Get Directions</span>
+          <ExternalLink size={14} />
+        </button>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Location = () => {
   return (
-    <section className="bg-white py-20 px-4 md:px-10 lg:px-20 min-h-screen">
+    <section className="bg-[#f8fafc] py-24 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold text-center text-[#4F7DF3] mb-16">
-          Klean Enterprise branches
-        </h2>
+        <div className="text-center mb-20 space-y-4">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900">
+            Our <span className="text-blue-600">Network</span>
+          </h2>
+          <p className="text-slate-500 max-w-xl mx-auto text-lg">
+            Find a Klean Enterprise branch closest to you. Professional garment care, just around the corner.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {branches.map((branch) => (
             <BranchCard key={branch.id} branch={branch} />
           ))}
