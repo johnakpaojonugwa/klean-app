@@ -5,10 +5,10 @@ import FormImg from "@/assets/location-img.jpg";
 const ContactForm = () => {
   return (
     <div className="bg-slate-50 min-h-screen py-16 px-4 font-sans">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 items-start justify-center">
+      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-8 items-start justify-center">
         
         {/* Left Card: Contact Form */}
-        <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200 w-full lg:max-w-md">
+        <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200 w-full lg:max-w-1/2">
           <h2 className="text-xl font-semibold text-slate-800 mb-8 leading-tight">
             Send us a quick note and we will get back to you as soon as possible
           </h2>
@@ -43,7 +43,7 @@ const ContactForm = () => {
         </div>
 
         {/* Right Card: Location Info */}
-        <div className="w-full lg:max-w-sm">
+        <div className="w-full lg:max-w-1/2">
           <h2 className="text-2xl font-bold text-slate-800 mb-6">Head Office</h2>
           
           <div className="bg-white rounded-2xl shadow-xl shadow-slate-200 overflow-hidden">
@@ -58,11 +58,11 @@ const ContactForm = () => {
             </div>
             
             <div className="p-8 pt-0 text-center">
-              <h3 className="text-xl font-bold text-slate-800 mb-4">Lekki Phase I</h3>
+              <h3 className="text-xl font-bold text-slate-800 mb-4">Lugbe</h3>
               <div className="text-slate-500 text-sm leading-relaxed space-y-2">
-                <p>Block A12 Plot 6, Otunba Adedoyin Ogungbe Street,</p>
-                <p>Lekki Phase I, Lagos.</p>
-                <p className="pt-2">Tel: +234 — 8077716364</p>
+                <p>No 7, VON Garden City Estate,</p>
+                <p>Lugbe FCT.</p>
+                <p className="pt-2">Tel: +234 — 8101389942</p>
               </div>
               
               {/* Icon Group */}
