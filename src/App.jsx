@@ -32,6 +32,7 @@ const Auth = lazy(() => import("@/pages/auth/Auth.jsx"));
 const HomePage = lazy(() => import("@/pages/home/HomePage.jsx"));
 const ServicesPage = lazy(() => import("@/pages/services/ServicesPage.jsx"));
 const AboutPage = lazy(() => import("@/pages/about/AboutPage.jsx"));
+const ContactPage = lazy(() => import("@/pages/contact/ContactPage.jsx"));
 const BookingPage = lazy(() => import("@/pages/booking/BookingPage.jsx"));
 const NotFound = lazy(() => import("@/pages/notfound/NotFound.jsx"));
 
@@ -116,6 +117,7 @@ export default function App() {
               <Route path="about" element={<AboutPage />} />
               <Route path="services" element={<ServicesPage />} />
               <Route path="booking" element={<BookingPage />} />
+              <Route path="contact" element={<ContactPage />} />
             </Route>
 
             {/* Auth Routes */}

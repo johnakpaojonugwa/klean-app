@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { LogOut } from "lucide-react";
-import { useApp } from "@/context/AppContext"; // Import your context
-import { getNavItemsForRole, RBAC_INFO } from "@/constants/roles"; // Import the roles config we created
+import { useApp } from "@/context/AppContext"; 
+import { getNavItemsForRole, RBAC_INFO } from "@/constants/roles"; 
 import { Button } from "@/components/ui/Button";
 
 export default function Sidebar({
@@ -110,7 +110,6 @@ export default function Sidebar({
                     isActive ? "text-white" : "text-indigo-300/50 group-hover:text-indigo-100"
                   } transition-colors`}
                 >
-                  {/* Render the Icon directly since it's a component in our config */}
                   <link.icon size={20} />
                 </span>
 
