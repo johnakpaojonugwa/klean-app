@@ -20,6 +20,7 @@ const Reports = lazy(() => import("@/admin/reports/Reports.jsx"));
 const Locations = lazy(() => import("@/admin/locations/Locations.jsx"));
 const Tracking = lazy(() => import("@/admin/tracking/Tracking.jsx"));
 const Managers = lazy(() => import("@/admin/managers/Managers.jsx"));
+const ProfilePage = lazy(() => import("@/admin/profile/ProfilePage.jsx"));
 const Unauthorized = lazy(
   () => import("@/admin/unauthorized/Unauthorized.jsx"),
 );
@@ -143,6 +144,7 @@ export default function App() {
               <Route path="locations" element={<Locations />} />
               <Route path="tracking" element={<Tracking />} />
               <Route path="managers" element={<Managers />} />
+              <Route path="profile" element={<ProfilePage />} />
             </Route>
 
             {/* Error & Not Found Routes */}

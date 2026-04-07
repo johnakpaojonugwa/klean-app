@@ -124,14 +124,14 @@ export default function Header({
             
             <div className="py-1">
               <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-3 py-2.5 focus:bg-indigo-700/50 focus:text-indigo-100 text-slate-800/80 hover:bg-indigo-50 transition-colors">
-                <Link to="/admin/profile" className="flex items-center w-full text-sm font-medium">
+                <Link to="/dashboard/profile" className="flex items-center w-full text-sm font-medium">
                   <User className="mr-3 h-4 w-4 opacity-70" />
                   <span>Profile Account</span>
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-3 py-2.5 focus:bg-indigo-700/50 focus:text-indigo-100 text-slate-800/80 hover:bg-indigo-50 transition-colors">
-                <Link to="/admin/settings" className="flex items-center w-full text-sm font-medium">
+                <Link to="/dashboard/settings" className="flex items-center w-full text-sm font-medium">
                   <Settings className="mr-3 h-4 w-4 opacity-70" />
                   <span>Workspace Settings</span>
                 </Link>

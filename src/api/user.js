@@ -23,9 +23,34 @@ export const updateUser = async (id, data) => {
   return res.data;
 };
 
+export const updateUserProfile = async (id, data) => {
+  const res = await api.put(`/users/${id}/profile`, data);
+  return res.data;
+};
+
+export const changePassword = async (id, data) => {
+  const res = await api.post(`/users/${id}/change-password`, data);
+  return res.data;
+};
+
+export const uploadAvatar = async (id, file) => {
+  const formData = new FormData();
+  formData.append("avatar", file);
+
+  const res = await api.post(`/users/${id}/avatar`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};
+
 export const userApi = {
   list: getUsers,
   detail: getUserById,
   profile: getCurrentUserProfile,
   update: updateUser,
+  updateProfile: updateUserProfile,
+  changePassword: changePassword,
+  uploadAvatar: uploadAvatar,
 };

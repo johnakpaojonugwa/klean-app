@@ -554,7 +554,7 @@ export default function BookingForm({
             disabled={isPending}
             className="w-full bg-blue-600 hover:bg-blue-700 h-14 rounded-2xl text-lg font-bold transition-all active:scale-[0.98] cursor-pointer"
           >
-            {isPending ? <Loader2 className="animate-spin mr-2" /> : "Confirm Booking"}
+            {isPending ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : "Confirm Booking"}
           </Button>
         </div>
       </form>
