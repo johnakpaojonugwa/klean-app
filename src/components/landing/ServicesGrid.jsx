@@ -1,4 +1,5 @@
-import { Sparkles, Waves, Zap, Shirt, CheckCircle, Link } from "lucide-react";
+import { Sparkles, Waves, Zap, Shirt, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Assets
 import ServiceDry from "@/assets/Dryclean.png";
