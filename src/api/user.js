@@ -33,8 +33,19 @@ export const changePassword = async (id, data) => {
   return res.data;
 };
 
-export const uploadAvatar = async (id, file) => {
+export const uploadAvatar = async (id, file, currentUserData) => {
   const formData = new FormData();
+
+  // Include current user data to ensure changes are detected
+  if (currentUserData) {
+    Object.keys(currentUserData).forEach(key => {
+      if (key !== 'avatar' && currentUserData[key] !== null && currentUserData[key] !== undefined) {
+        formData.append(key, currentUserData[key]);
+      }
+    });
+  }
+
+  // Add the avatar file
   formData.append("avatar", file);
 
   const res = await api.put(`/users/${id}`, formData, {
