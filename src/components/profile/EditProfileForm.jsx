@@ -44,7 +44,14 @@ export default function EditProfileForm({ user, onSuccess }) {
       queryClient.invalidateQueries({ queryKey: ["currentUser"] });
     },
     onError: (error) => {
-      toast.error(error?.response?.data?.message || "Failed to upload avatar");
+      console.error("Avatar upload error:", error);
+      console.error("Error response:", error?.response);
+      console.error("Error data:", error?.response?.data);
+      const errorMessage = error?.response?.data?.message ||
+                          error?.response?.data?.error ||
+                          error?.message ||
+                          "Failed to upload avatar";
+      toast.error(errorMessage);
     },
   });
 

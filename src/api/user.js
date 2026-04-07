@@ -39,7 +39,7 @@ export const uploadAvatar = async (id, file) => {
 
   const res = await api.put(`/users/${id}`, formData, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      // Let browser set Content-Type automatically for multipart/form-data
     },
   });
   return res.data;
