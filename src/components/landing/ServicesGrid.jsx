@@ -1,5 +1,4 @@
-import React from "react";
-import { Sparkles, Waves, Zap, Shirt, CheckCircle } from "lucide-react";
+import { Sparkles, Waves, Zap, Shirt, CheckCircle, Link } from "lucide-react";
 
 // Assets
 import ServiceDry from "@/assets/Dryclean.png";
@@ -101,12 +100,14 @@ export default function ServiceGrid() {
                   </p>
 
                   <div className="mt-auto">
+                    <Link to="/booking">
                     <button className="relative overflow-hidden bg-[#1A2E56] text-white font-black px-5 py-3 sm:px-6 sm:py-3.5 cursor-pointer rounded-full text-[9px] uppercase tracking-[0.2em] group/btn transition-all duration-300 shadow-lg shadow-[#1A2E56]/20 w-full sm:w-auto text-center">
                       <span className="relative z-10 flex items-center justify-center gap-2">
                         Book Now <CheckCircle size={12} />
                       </span>
                       <span className="absolute inset-0 bg-[#26C1C9] translate-y-full transition-transform duration-300 ease-out group-hover/btn:translate-y-0"></span>
                     </button>
+                    </Link>
                   </div>
                   
                   {/* DASHED ACCENT - Adjusted size for responsiveness */}

@@ -63,7 +63,6 @@ export default function Header() {
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Contact", href: "/contact" },
-    { name: "Locations", href: "/location" },
   ];
 
   const handleLogout = () => {
