@@ -28,17 +28,18 @@ A comprehensive React-based frontend application for managing a laundry and clea
 
 ## Tech Stack
 
-- **Frontend Framework**: React 19 with Vite
-- **Styling**: Tailwind CSS with Radix UI components
-- **State Management**: React Query for server state
-- **HTTP Client**: Axios for API communication
-- **Routing**: React Router DOM
-- **Icons**: Lucide React
-- **Charts**: Recharts for data visualization
-- **Animations**: Framer Motion
-- **Date Handling**: date-fns
-- **Build Tool**: Vite
-- **Linting**: ESLint
+- **Frontend Framework**: React 19.2.0 with Vite 7.2.4
+- **Styling**: Tailwind CSS 4.1.18 with Radix UI components
+- **State Management**: TanStack React Query 5.90.20 for server state
+- **HTTP Client**: Axios 1.13.4 for API communication
+- **Routing**: React Router DOM 7.12.0
+- **Icons**: Lucide React 0.562.0
+- **Charts**: Recharts 3.7.0 for data visualization
+- **Animations**: Framer Motion 12.33.0
+- **Date Handling**: date-fns 4.1.0
+- **Notifications**: Sonner 2.0.7 for toast notifications
+- **Build Tool**: Vite 7.2.4
+- **Linting**: ESLint 9.39.1
 
 ## Installation
 
@@ -68,6 +69,15 @@ A comprehensive React-based frontend application for managing a laundry and clea
    npm run preview
    ```
 
+## Deployment
+
+This application is configured for deployment on Vercel. The `vercel.json` file handles SPA routing by rewriting all routes to `index.html`.
+
+To deploy:
+1. Push your changes to the repository
+2. Connect the repository to Vercel
+3. Vercel will automatically build and deploy using the `npm run build` script
+
 ## Usage
 
 ### Development
@@ -87,16 +97,19 @@ klean-frontend/
 ├── public/                 # Static assets
 ├── src/
 │   ├── admin/              # Admin-specific components
+│   │   ├── admin-auth/     # Admin authentication page
 │   │   ├── customers/      # Customer management
 │   │   ├── dashboard/      # Role-based dashboards
 │   │   ├── employees/      # Employee management
 │   │   ├── inventory/      # Inventory management
 │   │   ├── invoices/       # Invoice handling
+│   │   ├── layout/         # Admin layout component
 │   │   ├── locations/      # Branch/location management
 │   │   ├── managers/       # Manager tools
 │   │   ├── orders/         # Order processing
 │   │   ├── reports/        # Reporting features
-│   │   └── tracking/       # Order tracking
+│   │   ├── tracking/       # Order tracking
+│   │   └── unauthorized/   # Unauthorized access page
 │   ├── api/                # API client functions
 │   ├── assets/             # Static assets
 │   ├── components/         # Reusable UI components
@@ -104,8 +117,16 @@ klean-frontend/
 │   │   ├── common/         # Shared components
 │   │   ├── customers/      # Customer-specific components
 │   │   ├── dashboard/      # Dashboard widgets
-│   │   ├── ui/             # UI library components
-│   │   └── ...             # Other feature components
+│   │   ├── employees/      # Employee components
+│   │   ├── inventory/      # Inventory components
+│   │   ├── invoices/       # Invoice components
+│   │   ├── landing/        # Landing page components
+│   │   ├── layout/         # Layout components
+│   │   ├── managers/       # Manager components
+│   │   ├── orders/         # Order components
+│   │   ├── reports/        # Report components
+│   │   ├── tracking/       # Tracking components
+│   │   └── ui/             # UI library components
 │   ├── constants/          # Application constants
 │   ├── context/            # React context providers
 │   ├── hooks/              # Custom React hooks
