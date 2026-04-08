@@ -27,6 +27,7 @@ export default function ChangePasswordForm() {
       changePassword({
         currentPassword: data.currentPassword,
         newPassword: data.newPassword,
+        confirmPassword: data.confirmPassword,
       }),
     onSuccess: () => {
       toast.success("Password changed successfully!");

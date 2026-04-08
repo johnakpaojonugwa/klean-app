@@ -33,24 +33,11 @@ export const changePassword = async (data) => {
   return res.data;
 };
 
-export const uploadAvatar = async (file, currentUserData) => {
+export const uploadAvatar = async (file) => {
   const formData = new FormData();
-
-  if (currentUserData) {
-    Object.keys(currentUserData).forEach((key) => {
-      if (key !== "avatar" && currentUserData[key] != null) {
-        formData.append(key, currentUserData[key]);
-      }
-    });
-  }
-
   formData.append("avatar", file);
 
-  const res = await api.put(`/users/me`, formData, {
-    headers: {
-      // Allow browser to set multipart/form-data boundary automatically
-    },
-  });
+  const res = await api.put(`/users/me`, formData);
   return res.data;
 };
 
