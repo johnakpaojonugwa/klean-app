@@ -74,15 +74,21 @@ export default function EditProfileForm({ user, onSuccess }) {
     if (!formData.fullname.trim()) return toast.error("Full name is required");
     if (!formData.phoneNumber.trim()) return toast.error("Phone number is required");
 
-    const data = new FormData();
-    data.append("fullname", formData.fullname.trim());
-    data.append("phoneNumber", formData.phoneNumber.trim());
+    const hasAvatar = avatarFile !== null;
+    const payload = hasAvatar
+      ? new FormData()
+      : {
+          fullname: formData.fullname.trim(),
+          phoneNumber: formData.phoneNumber.trim(),
+        };
 
-    if (avatarFile) {
-      data.append("avatar", avatarFile);
+    if (hasAvatar) {
+      payload.append("fullname", formData.fullname.trim());
+      payload.append("phoneNumber", formData.phoneNumber.trim());
+      payload.append("avatar", avatarFile);
     }
 
-    updateMutation.mutate(data);
+    updateMutation.mutate(payload);
   };
 
   const handleCancel = () => {

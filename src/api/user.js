@@ -17,7 +17,7 @@ export const getUserById = async (id) => {
 
 export const getCurrentUserProfile = async () => {
   const res = await api.get("/users/me");
-  return res.data;
+  return res.data?.data?.user || res.data?.data || res.data;
 };
 
 export const updateUser = async (id, data) => {
@@ -28,10 +28,8 @@ export const updateUser = async (id, data) => {
 export const updateUserProfile = async (data) => {
   const config = { timeout: 60000 };
 
-  if (isFormData(data)) {
-    config.headers = { "Content-Type": "multipart/form-data" };
-  }
-
+  // Let the browser set multipart boundaries automatically for FormData.
+  // Manually setting Content-Type can cause malformed multipart requests.
   const res = await api.put(`/users/me`, data, config);
   return res.data;
 };
