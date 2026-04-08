@@ -37,7 +37,7 @@ export const SIDEBAR_NAV_ITEMS = [
   { 
     href: "/dashboard", 
     label: "Overview", 
-    icon: Home, // Store the component, not JSX
+    icon: Home, 
     allowedRoles: [ROLES.SUPER_ADMIN, ROLES.BRANCH_MANAGER, ROLES.STAFF] 
   },
   {
@@ -134,7 +134,7 @@ export const RBAC_INFO = [
 
 export const isAdminRole = (role) => ADMIN_ROLES.includes(role);
 
-export const normalizeRole = (role) => String(role || "").toUpperCase(); // Changed to UpperCase to match your ROLES object
+export const normalizeRole = (role) => String(role || "").toUpperCase(); 
 
 export const hasRequiredRole = (userRole, allowedRoles = []) => {
   if (!allowedRoles.length) return true;
