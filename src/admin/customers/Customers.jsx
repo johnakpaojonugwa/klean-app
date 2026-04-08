@@ -57,18 +57,10 @@ export default function Customers() {
         return editCustomer
           ? api.put(
               `/users/${editCustomer._id || editCustomer.id}`,
-              formDataPayload,
-              {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              }
+              formDataPayload
             )
-          : api.post("/users", formDataPayload, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            });
+          : api.post("/users", formDataPayload);
+
       }
 
       return editCustomer

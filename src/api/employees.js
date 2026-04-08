@@ -19,9 +19,7 @@ getEmployee.queryKey = (id) => employeeKeys.detail(id);
 
 export const createEmployee = async (data) => {
   if (data instanceof FormData) {
-    const res = await api.post("/employees", data, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    const res = await api.post("/employees", data);
     return res.data;
   }
 
@@ -31,9 +29,7 @@ export const createEmployee = async (data) => {
 
 export const updateEmployee = async (id, data) => {
   if (data instanceof FormData) {
-    const res = await api.put(`/employees/${id}`, data, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    const res = await api.put(`/employees/${id}`, data);
     return res.data;
   }
 

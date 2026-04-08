@@ -23,6 +23,8 @@ api.interceptors.request.use(
     if (config.data instanceof FormData) {
       // Let the browser assign the proper multipart boundary header.
       delete config.headers["Content-Type"];
+      delete config.headers?.common?.["Content-Type"];
+      delete config.headers?.[config.method]?.["Content-Type"];
     }
 
     return config;
