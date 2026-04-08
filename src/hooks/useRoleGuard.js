@@ -26,6 +26,7 @@ export const useRoleGuard = (allowedRoles = []) => {
       isDenied: !allowed, 
     };
   }, [user, isAuthenticated, isLoading, allowedRoles]);
+  console.log("Role Guard:", user?.role, allowedRoles);
 
   return {
     isLoading,
