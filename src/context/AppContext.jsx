@@ -73,7 +73,10 @@ export const AppProvider = ({ children }) => {
   // Handle Global 401s
   useEffect(() => {
     if (isError && error?.response?.status === 401) {
-      logout();
+      const isRefreshing = error.config?._retry;
+      if (isRefreshing) {
+        logout();
+      }
     }
   }, [isError, error, logout]);
 
@@ -104,7 +107,7 @@ export const AppProvider = ({ children }) => {
       baseURL,
       login,
       logout,
-      isAuthenticated: !!userToken && !!user && !isError,
+      isAuthenticated: !!userToken && !!user && (isError ? error?.response?.status !== 401 : true),
       loadingUser: isFetchingUser,
       initializing: isInitializing,
       branchId: user?.branchId?._id || user?.branchId || null,
