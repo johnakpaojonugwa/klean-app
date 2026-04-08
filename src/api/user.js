@@ -1,5 +1,7 @@
 import api from "./api.js";
 
+const isFormData = (data) => data instanceof FormData;
+
 export const getUsers = async (page = 1, limit = 10, query = null) => {
   const params = { page, limit };
   if (query) params.query = query;
@@ -24,7 +26,10 @@ export const updateUser = async (id, data) => {
 };
 
 export const updateUserProfile = async (data) => {
-  const res = await api.put(`/users/me`, data);
+  const config = {};
+  config.timeout = 60000;
+
+  const res = await api.put(`/users/me`, data, config);
   return res.data;
 };
 
@@ -36,12 +41,7 @@ export const changePassword = async (data) => {
 export const uploadAvatar = async (file) => {
   const formData = new FormData();
   formData.append("avatar", file);
-
-  const res = await api.put(`/users/me`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-    timeout: 60000, // 60 seconds for file uploads
-  });
-  return res.data;
+  return updateUserProfile(formData);
 };
 
 export const userApi = {
@@ -51,5 +51,4 @@ export const userApi = {
   update: updateUser,
   updateProfile: updateUserProfile,
   changePassword: changePassword,
-  uploadAvatar: uploadAvatar,
 };

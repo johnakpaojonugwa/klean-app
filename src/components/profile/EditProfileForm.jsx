@@ -43,6 +43,7 @@ export default function EditProfileForm({ user, onSuccess }) {
         response?.user?.avatar;
       setFormData((prev) => ({ ...prev, avatar: imageUrl }));
       setPreviewAvatar(imageUrl);
+      setAvatarFile(null);
       toast.success("Avatar uploaded successfully!");
       queryClient.invalidateQueries({ queryKey: ["currentUser"] });
     },
