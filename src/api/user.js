@@ -38,9 +38,6 @@ export const uploadAvatar = async (file) => {
   formData.append("avatar", file);
 
   const res = await api.put(`/users/me`, formData, {
-    headers: {
-      "Content-Type": undefined,
-    },
     timeout: 60000, // 60 seconds for file uploads
   });
   return res.data;
