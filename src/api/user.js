@@ -26,8 +26,11 @@ export const updateUser = async (id, data) => {
 };
 
 export const updateUserProfile = async (data) => {
-  const config = {};
-  config.timeout = 60000;
+  const config = { timeout: 60000 };
+
+  if (isFormData(data)) {
+    config.headers = { "Content-Type": "multipart/form-data" };
+  }
 
   const res = await api.put(`/users/me`, data, config);
   return res.data;

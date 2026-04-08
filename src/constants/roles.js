@@ -138,7 +138,11 @@ export const normalizeRole = (role) => String(role || "").toUpperCase();
 
 export const hasRequiredRole = (userRole, allowedRoles = []) => {
   if (!allowedRoles.length) return true;
-  return allowedRoles.includes(userRole);
+
+  const normalizedUserRole = normalizeRole(userRole).trim();
+  const normalizedAllowedRoles = allowedRoles.map(normalizeRole).map((role) => role.trim());
+
+  return normalizedAllowedRoles.includes(normalizedUserRole);
 };
 
 /**

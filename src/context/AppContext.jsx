@@ -42,7 +42,7 @@ export const AppProvider = ({ children }) => {
       return stored ? { data: stored } : undefined;
     },
     // Map the nested API response directly to the user object
-    select: (response) => response?.data || response,
+    select: (response) => response?.data?.user || response?.data || response,
   });
 
   // The final user object 
