@@ -41,6 +41,7 @@ export const uploadAvatar = async (file) => {
     headers: {
       "Content-Type": undefined,
     },
+    timeout: 60000, // 60 seconds for file uploads
   });
   return res.data;
 };

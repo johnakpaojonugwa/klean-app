@@ -37,7 +37,7 @@ export default function EditProfileForm({ user, onSuccess }) {
   const uploadMutation = useMutation({
     mutationFn: (file) => uploadAvatar(file),
     onSuccess: (response) => {
-      const imageUrl = response?.data?.avatar || response?.avatar;
+      const imageUrl = response?.data?.user?.avatar || response?.data?.avatar;
       setFormData((prev) => ({ ...prev, avatar: imageUrl }));
       setPreviewAvatar(imageUrl);
       toast.success("Avatar uploaded successfully!");
