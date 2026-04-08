@@ -37,7 +37,11 @@ export const uploadAvatar = async (file) => {
   const formData = new FormData();
   formData.append("avatar", file);
 
-  const res = await api.put(`/users/me`, formData);
+  const res = await api.put(`/users/me`, formData, {
+    headers: {
+      "Content-Type": undefined,
+    },
+  });
   return res.data;
 };
 
