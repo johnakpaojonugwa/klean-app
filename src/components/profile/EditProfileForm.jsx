@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Loader2, Upload, X } from "lucide-react";
+import { Loader2, Upload, X, User } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
-import { updateUserProfile } from "@/api/user"; // Ensure this accepts FormData
+import { updateUserProfile } from "@/api/user";
 
 export default function EditProfileForm({ user, onSuccess }) {
   const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    fullname: user?.fullname || "",
-    phoneNumber: user?.phoneNumber || "",
+    fullname: "",
+    phoneNumber: "",
+    email: "", // Read-only
   });
-  const [previewAvatar, setPreviewAvatar] = useState(user?.avatar || "");
+  
+  const [previewAvatar, setPreviewAvatar] = useState("");
   const [avatarFile, setAvatarFile] = useState(null);
+
+  // Sync state with user data when prop changes or editing starts
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        fullname: user.fullname || "",
+        phoneNumber: user.phoneNumber || "",
+        email: user.email || "",
+      });
+      setPreviewAvatar(user.avatar || "");
+    }
+  }, [user, isEditing]);
 
   const updateMutation = useMutation({
     mutationFn: (data) => updateUserProfile(data),
@@ -31,27 +45,39 @@ export default function EditProfileForm({ user, onSuccess }) {
     },
   });
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleAvatarChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) return toast.error("Max size 5MB");
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("File size must be less than 5MB");
+        return;
+      }
       
       setAvatarFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => setPreviewAvatar(reader.result);
-      reader.readAsDataURL(file);
+      // Generate temporary local preview
+      const objectUrl = URL.createObjectURL(file);
+      setPreviewAvatar(objectUrl);
+      
+      // Cleanup memory when component unmounts
+      return () => URL.revokeObjectURL(objectUrl);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Create FormData for multipart/form-data upload
+
+    if (!formData.fullname.trim()) return toast.error("Full name is required");
+    if (!formData.phoneNumber.trim()) return toast.error("Phone number is required");
+
     const data = new FormData();
     data.append("fullname", formData.fullname.trim());
     data.append("phoneNumber", formData.phoneNumber.trim());
-    
-    // Only append avatar if a new file was actually picked
+
     if (avatarFile) {
       data.append("avatar", avatarFile);
     }
@@ -59,62 +85,130 @@ export default function EditProfileForm({ user, onSuccess }) {
     updateMutation.mutate(data);
   };
 
+  const handleCancel = () => {
+    setIsEditing(false);
+    setAvatarFile(null);
+    setPreviewAvatar(user?.avatar || "");
+  };
+
   const isLoading = updateMutation.isPending;
+  const hasChanges = 
+    formData.fullname !== user?.fullname || 
+    formData.phoneNumber !== user?.phoneNumber || 
+    avatarFile !== null;
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+      <div className="flex justify-between items-start mb-8">
+        <div>
+          <h2 className="text-xl font-bold text-slate-900">Profile Settings</h2>
+          <p className="text-sm text-slate-500">Manage your public profile and account details</p>
+        </div>
+        {!isEditing && (
+          <Button 
+            onClick={() => setIsEditing(true)} 
+            variant="outline" 
+            className="border-indigo-200 text-indigo-600 hover:bg-indigo-50"
+          >
+            Edit Profile
+          </Button>
+        )}
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-8">
         {/* Avatar Section */}
-        <div className="flex items-center gap-6 pb-6 border-b border-slate-100">
-          <div className="relative">
-            <Avatar className="h-24 w-24 border-2 border-indigo-100">
-              <AvatarImage src={previewAvatar} />
-              <AvatarFallback>{user?.fullname?.charAt(0)}</AvatarFallback>
+        <div className="flex flex-col sm:flex-row items-center gap-6">
+          <div className="relative group">
+            <Avatar className="h-24 w-24 border-4 border-white shadow-md ring-1 ring-slate-200">
+              <AvatarImage src={previewAvatar} className="object-cover" />
+              <AvatarFallback className="bg-indigo-600 text-white text-2xl">
+                <User size={32} />
+              </AvatarFallback>
             </Avatar>
+            
             {isEditing && (
-              <label className="absolute bottom-0 right-0 p-1 bg-white rounded-full shadow-sm border border-slate-200 cursor-pointer hover:bg-slate-50">
-                <Upload className="h-4 w-4 text-slate-600" />
-                <input type="file" className="hidden" accept="image/*" onChange={handleAvatarChange} />
+              <label 
+                htmlFor="avatar-upload" 
+                className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+              >
+                <Upload className="text-white h-6 w-6" />
+                <input 
+                  id="avatar-upload" 
+                  type="file" 
+                  className="hidden" 
+                  accept="image/*" 
+                  onChange={handleAvatarChange}
+                />
               </label>
             )}
           </div>
-          <div>
-             <h3 className="font-medium text-slate-900">{formData.fullname || "User"}</h3>
-             <p className="text-sm text-slate-500">{user?.role}</p>
+          
+          <div className="text-center sm:text-left">
+            <h3 className="text-sm font-semibold text-slate-800">Profile Photo</h3>
+            <p className="text-xs text-slate-500 mt-1">Accepts PNG, JPG or GIF. Max 5MB.</p>
+            {avatarFile && isEditing && (
+              <span className="inline-block mt-2 text-xs font-medium text-indigo-600 bg-indigo-50 px-2 py-1 rounded">
+                New image selected
+              </span>
+            )}
           </div>
         </div>
 
         {/* Inputs */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Input
-            label="Full Name"
-            name="fullname"
-            value={formData.fullname}
-            onChange={(e) => setFormData({...formData, fullname: e.target.value})}
-            disabled={!isEditing || isLoading}
-          />
-          <Input
-            label="Phone Number"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})}
-            disabled={!isEditing || isLoading}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-700">Full Name</label>
+            <Input
+              name="fullname"
+              value={formData.fullname}
+              onChange={handleInputChange}
+              disabled={!isEditing || isLoading}
+              className="focus-visible:ring-indigo-500"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-700">Email Address</label>
+            <Input
+              value={formData.email}
+              disabled
+              className="bg-slate-50 text-slate-500 cursor-not-allowed border-slate-200"
+            />
+          </div>
+
+          <div className="space-y-2 md:col-span-2">
+            <label className="text-sm font-medium text-slate-700">Phone Number</label>
+            <Input
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleInputChange}
+              disabled={!isEditing || isLoading}
+              className="focus-visible:ring-indigo-500"
+            />
+          </div>
         </div>
 
-        <div className="flex justify-end gap-3">
-          {isEditing ? (
-            <>
-              <Button type="button" variant="outline" onClick={() => setIsEditing(false)}>Cancel</Button>
-              <Button type="submit" disabled={isLoading} className="bg-indigo-600">
-                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Save Changes
-              </Button>
-            </>
-          ) : (
-            <Button type="button" onClick={() => setIsEditing(true)}>Edit Profile</Button>
-          )}
-        </div>
+        {/* Footer Actions */}
+        {isEditing && (
+          <div className="flex items-center justify-end gap-3 pt-6 border-t border-slate-100">
+            <Button 
+              type="button" 
+              variant="ghost" 
+              onClick={handleCancel}
+              disabled={isLoading}
+              className="text-slate-600 hover:bg-slate-100"
+            >
+              Cancel
+            </Button>
+            <Button 
+              type="submit" 
+              disabled={!hasChanges || isLoading}
+              className="bg-indigo-600 hover:bg-indigo-700 min-w-[120px]"
+            >
+              {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Save Changes"}
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );
