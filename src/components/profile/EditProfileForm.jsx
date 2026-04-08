@@ -21,7 +21,7 @@ export default function EditProfileForm({ user, onSuccess }) {
 
   // Mutation for updating profile
   const updateMutation = useMutation({
-    mutationFn: (data) => updateUserProfile(user?._id || user?.id, data),
+    mutationFn: (data) => updateUserProfile(data),
     onSuccess: (response) => {
       toast.success("Profile updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["currentUser"] });
@@ -35,7 +35,7 @@ export default function EditProfileForm({ user, onSuccess }) {
 
   // Mutation for uploading avatar
   const uploadMutation = useMutation({
-    mutationFn: (file) => uploadAvatar(user?._id || user?.id, file, user),
+    mutationFn: (file) => uploadAvatar(file, user),
     onSuccess: (response) => {
       const imageUrl = response?.data?.avatar || response?.avatar;
       setFormData((prev) => ({ ...prev, avatar: imageUrl }));

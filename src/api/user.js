@@ -23,34 +23,32 @@ export const updateUser = async (id, data) => {
   return res.data;
 };
 
-export const updateUserProfile = async (id, data) => {
-  const res = await api.put(`/users/${id}/profile`, data);
+export const updateUserProfile = async (data) => {
+  const res = await api.put(`/users/me`, data);
   return res.data;
 };
 
-export const changePassword = async (id, data) => {
-  const res = await api.post(`/users/${id}/change-password`, data);
+export const changePassword = async (data) => {
+  const res = await api.patch(`/auth/change-password`, data);
   return res.data;
 };
 
-export const uploadAvatar = async (id, file, currentUserData) => {
+export const uploadAvatar = async (file, currentUserData) => {
   const formData = new FormData();
 
-  // Include current user data to ensure changes are detected
   if (currentUserData) {
-    Object.keys(currentUserData).forEach(key => {
-      if (key !== 'avatar' && currentUserData[key] !== null && currentUserData[key] !== undefined) {
+    Object.keys(currentUserData).forEach((key) => {
+      if (key !== "avatar" && currentUserData[key] != null) {
         formData.append(key, currentUserData[key]);
       }
     });
   }
 
-  // Add the avatar file
   formData.append("avatar", file);
 
-  const res = await api.put(`/users/${id}`, formData, {
+  const res = await api.put(`/users/me`, formData, {
     headers: {
-      // Let browser set Content-Type automatically for multipart/form-data
+      // Allow browser to set multipart/form-data boundary automatically
     },
   });
   return res.data;

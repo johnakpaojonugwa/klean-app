@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { changePassword } from "@/api/user";
 
-export default function ChangePasswordForm({ user }) {
+export default function ChangePasswordForm() {
   const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState(false);
   const [showPasswords, setShowPasswords] = useState({
@@ -24,7 +24,7 @@ export default function ChangePasswordForm({ user }) {
   // Mutation for changing password
   const changePwdMutation = useMutation({
     mutationFn: (data) =>
-      changePassword(user?._id || user?.id, {
+      changePassword({
         currentPassword: data.currentPassword,
         newPassword: data.newPassword,
       }),
