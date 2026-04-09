@@ -9,6 +9,7 @@ import { ROLES } from "@/constants/roles";
 
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import RevenueChart from "@/components/dashboard/RevenueChart";
+import BranchRevenueComparison from "@/components/dashboard/BranchRevenueComparison";
 import OrderStatusChart from "@/components/dashboard/OrderStatusChart";
 import RecentOrders from "@/components/dashboard/RecentOrders";
 import LowStockAlert from "@/components/dashboard/LowStockAlert";
@@ -119,8 +120,8 @@ export function SuperAdminDashboard() {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
           <RevenueChart
-            data={revenue?.data?.analytics ? [revenue.data.analytics] : []}
-            loading={revenueLoading}
+            summaryData={summaryWithCustomers}
+            loading={summaryLoading}
           />
         </div>
         <div className="lg:col-span-1">
@@ -129,6 +130,14 @@ export function SuperAdminDashboard() {
             loading={ordersLoading}
           />
         </div>
+      </div>
+
+      {/* Branch Performance Section */}
+      <div className="grid grid-cols-1 gap-6">
+        <BranchRevenueComparison
+          summaryData={summaryWithCustomers}
+          loading={summaryLoading}
+        />
       </div>
 
       {/* Inventory & Orders Section */}

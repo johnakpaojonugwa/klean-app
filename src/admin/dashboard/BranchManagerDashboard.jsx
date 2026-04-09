@@ -114,8 +114,8 @@ export function BranchManagerDashboard({ branchId }) {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
           <RevenueChart
-            data={revenue?.data?.dailyRevenue ? [revenue.data.dailyRevenue] : []}
-            loading={revenueLoading}
+            summaryData={summaryWithStaff}
+            loading={summaryLoading}
           />
         </div>
         <div className="lg:col-span-1">

@@ -1,87 +1,115 @@
 import React, { useMemo } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { format, parseISO, subDays, startOfDay, isSameDay } from 'date-fns';
 import { Skeleton } from "@/components/ui/Skeleton";
+import { TrendingUp, CheckCircle, Clock, DollarSign } from 'lucide-react';
 
-export default function RevenueChart({ data = [], loading }) {
-  const chartData = useMemo(() => {
-    return Array.from({ length: 7 }, (_, i) => {
-      const dayDate = subDays(new Date(), 6 - i);
-      const dayStart = startOfDay(dayDate);
+export default function RevenueChart({ summaryData, loading }) {
+  const metrics = useMemo(() => {
+    if (!summaryData?.liveTotals) return [];
+    
+    const total = summaryData.liveTotals.revenue || 0;
+    const completed = summaryData.liveTotals.completedOrders || 0;
+    const pending = summaryData.liveTotals.pendingOrders || 0;
+    const avgOrderValue = summaryData.$avg?.orderValue || 0;
 
-      const dayData = data.find(item => 
-        item.date && isSameDay(parseISO(item.date), dayStart)
-      );
-
-      return {
-        date: format(dayDate, 'EEE'),
-        fullDate: format(dayDate, 'MMM dd'),
-        revenue: dayData ? Number(dayData.revenue) : 0, 
-        paid: dayData ? dayData.paid : 0
-      };
-    });
-  }, [data]);
+    return [
+      {
+        label: 'Total Revenue',
+        value: total,
+        formatted: `₦${total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+        icon: TrendingUp,
+        color: 'emerald',
+        bgColor: 'bg-emerald-50',
+        textColor: 'text-emerald-600',
+        borderColor: 'border-emerald-100',
+      },
+      {
+        label: 'Completed Orders',
+        value: completed,
+        formatted: completed.toLocaleString(),
+        icon: CheckCircle,
+        color: 'green',
+        bgColor: 'bg-green-50',
+        textColor: 'text-green-600',
+        borderColor: 'border-green-100',
+      },
+      {
+        label: 'Pending Orders',
+        value: pending,
+        formatted: pending.toLocaleString(),
+        icon: Clock,
+        color: 'amber',
+        bgColor: 'bg-amber-50',
+        textColor: 'text-amber-600',
+        borderColor: 'border-amber-100',
+      },
+      {
+        label: 'Avg Order Value',
+        value: avgOrderValue,
+        formatted: `₦${avgOrderValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+        icon: DollarSign,
+        color: 'blue',
+        bgColor: 'bg-blue-50',
+        textColor: 'text-blue-600',
+        borderColor: 'border-blue-100',
+      },
+    ];
+  }, [summaryData]);
 
   if (loading) {
     return (
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 h-[380px]">
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
         <Skeleton className="h-6 w-48 mb-6" />
-        <Skeleton className="h-[280px] w-full" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-32" />)}
+        </div>
       </div>
     );
   }
 
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-lg font-semibold text-slate-800">Revenue Analytics</h3>
-          <p className="text-xs text-slate-500">Daily performance overview</p>
-        </div>
-        <div className="flex items-center gap-3">
-           <span className="flex items-center gap-1 text-[10px] font-medium text-slate-500 uppercase">
-             <span className="w-2 h-2 rounded-full bg-teal-500"></span> Revenue
-           </span>
-        </div>
+      <div className="mb-6">
+        <h3 className="text-lg font-semibold text-slate-800">Revenue Metrics</h3>
+        <p className="text-xs text-slate-500 mt-1">Current period overview</p>
       </div>
 
-      <div className="w-full">
-        <ResponsiveContainer width="100%" height={280}>
-          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-            <defs>
-              <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0d9488" stopOpacity={0.15}/>
-                <stop offset="95%" stopColor="#0d9488" stopOpacity={0}/>
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-            <XAxis 
-              dataKey="date" 
-              axisLine={false} 
-              tickLine={false} 
-              tick={{ fill: '#94a3b8', fontSize: 12 }}
-              dy={10}
-            />
-            <YAxis 
-              axisLine={false} 
-              tickLine={false} 
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              tickFormatter={(val) => `₦${val >= 1000 ? `${val/1000}k` : val}`}
-            />
-            <Tooltip 
-              contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}
-              labelFormatter={(label, payload) => payload[0]?.payload?.fullDate || label}
-              formatter={(val) => [`₦${val.toLocaleString()}`, 'Total Revenue']}
-            />
-            <Area 
-              type="monotone" 
-              dataKey="revenue" 
-              stroke="#0d9488" 
-              strokeWidth={3}
-              fill="url(#colorRevenue)" 
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+        {metrics.map((metric, idx) => {
+          const Icon = metric.icon;
+          return (
+            <div 
+              key={idx} 
+              className={`p-5 rounded-xl border-2 transition-all hover:shadow-md ${metric.bgColor} ${metric.borderColor}`}
+            >
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex-1">
+                  <p className="text-xs font-semibold text-slate-600 uppercase tracking-wide">
+                    {metric.label}
+                  </p>
+                </div>
+                <Icon className={`h-5 w-5 ${metric.textColor} opacity-60`} />
+              </div>
+
+              <p className={`text-2xl font-bold ${metric.textColor} leading-tight`}>
+                {metric.formatted}
+              </p>
+
+              <div className="mt-2 h-1 bg-gradient-to-r rounded-full" 
+                   style={{
+                     backgroundImage: `linear-gradient(to right, var(--color-start), var(--color-end))`,
+                     '--color-start': metric.color === 'emerald' ? '#10b981' : 
+                                     metric.color === 'green' ? '#16a34a' :
+                                     metric.color === 'amber' ? '#f59e0b' :
+                                     metric.color === 'blue' ? '#3b82f6' : '#6b7280',
+                     '--color-end': metric.color === 'emerald' ? '#14b8a6' : 
+                                   metric.color === 'green' ? '#22c55e' :
+                                   metric.color === 'amber' ? '#fbbf24' :
+                                   metric.color === 'blue' ? '#60a5fa' : '#9ca3af',
+                   }}>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
