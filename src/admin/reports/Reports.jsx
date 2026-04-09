@@ -45,8 +45,8 @@ export default function Reports() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <LogisticsCard analytics={data.analytics} />
-        <ServicePerformanceCard revenue={data.revenue} />
+        <LogisticsCard analytics={data.analytics} loading={states.isLoading} />
+        <ServicePerformanceCard revenue={data.revenue} loading={states.isLoading} />
       </div>
 
       {/* Footer Metrics Card */}

@@ -1,10 +1,40 @@
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { motion } from "framer-motion";
 
-export function LogisticsCard({ analytics }) {
+export function LogisticsCard({ analytics, loading }) {
   const totals = analytics?.totals || {};
   const sum = (totals.pendingOrders || 0) + (totals.processingOrders || 0) + (totals.readyOrders || 0) + (totals.deliveredOrders || 0);
+
+  if (loading) {
+    return (
+      <Card className="border-none shadow-md">
+        <CardHeader>
+          <Skeleton className="h-6 w-32 mb-2" />
+          <Skeleton className="h-4 w-48" />
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-16" />
+            <Skeleton className="h-2 w-full" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-2 w-full" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-12" />
+            <Skeleton className="h-2 w-full" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-18" />
+            <Skeleton className="h-2 w-full" />
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="border-none shadow-md">
@@ -22,8 +52,33 @@ export function LogisticsCard({ analytics }) {
   );
 }
 
-export function ServicePerformanceCard({ revenue }) {
+export function ServicePerformanceCard({ revenue, loading }) {
   const hasData = revenue?.revenueByService?.length > 0;
+
+  if (loading) {
+    return (
+      <Card className="border-none shadow-md">
+        <CardHeader>
+          <Skeleton className="h-6 w-36 mb-2" />
+          <Skeleton className="h-4 w-52" />
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-2 w-full" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-28" />
+            <Skeleton className="h-2 w-full" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-2 w-full" />
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="border-none shadow-md">
