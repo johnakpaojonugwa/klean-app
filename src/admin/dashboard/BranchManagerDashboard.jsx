@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
-import BranchRevenueAnalytics from "@/components/dashboard/BranchRevenueAnalytics";
+import RevenueChart from "@/components/dashboard/RevenueChart";
 import OrderStatusChart from "@/components/dashboard/OrderStatusChart";
 import RecentOrders from "@/components/dashboard/RecentOrders";
 import LowStockAlert from "@/components/dashboard/LowStockAlert";
@@ -10,6 +10,7 @@ import { ROLES } from "@/constants/roles";
 import {
   analyticsApi,
   getDashboardSummary,
+  getRevenueAnalytics,
 } from "@/api/analytics";
 import { ordersApi, getOrders } from "@/api/orders";
 import { employeesApi, getEmployees } from "@/api/employees";
@@ -43,6 +44,12 @@ export function BranchManagerDashboard({ branchId }) {
   const { data: summary, isPending: summaryLoading } = useQuery({
     queryKey: analyticsApi.keys.summary({ branchId }),
     queryFn: () => getDashboardSummary(branchId),
+    ...queryConfig,
+  });
+
+  const { data: revenue, isPending: revenueLoading } = useQuery({
+    queryKey: analyticsApi.keys.period({ startDate: params.start, endDate: params.end, branchId }),
+    queryFn: () => getRevenueAnalytics(params.start, params.end, branchId),
     ...queryConfig,
   });
 
@@ -106,9 +113,9 @@ export function BranchManagerDashboard({ branchId }) {
       {/* Analytics Section */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
-          <BranchRevenueAnalytics
-            orders={orders}
-            loading={ordersLoading}
+          <RevenueChart
+            data={revenue?.data?.dailyRevenue || []}
+            loading={revenueLoading}
           />
         </div>
         <div className="lg:col-span-1">
