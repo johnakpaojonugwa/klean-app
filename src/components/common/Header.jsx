@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/Button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { Input } from "@/components/ui/Input";
 import NotificationsDropdown from "@/components/common/NotificationsDropdown";
+import { useApp } from "@/context/AppContext";
 
 export default function Header({
   collapsed,
@@ -29,6 +30,12 @@ export default function Header({
   handleLogout,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
+  const { user } = useApp();
+
+  // Get avatar and user info from context, fallback to props
+  const displayName = user?.name || adminName;
+  const displayEmail = user?.email || adminEmail;
+  const avatarUrl = user?.avatar;
 
   return (
     <header
@@ -93,19 +100,19 @@ export default function Header({
             >
               <Avatar className="h-8 w-8 border-2 border-white/30 shadow-sm ring-1 ring-white/20">
                 <AvatarImage
-                  src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${adminName}`}
+                  src={avatarUrl}
                 />
                 <AvatarFallback className="bg-indigo-500 text-white font-bold text-xs">
-                  {adminName.substring(0, 2).toUpperCase()}
+                  {displayName.substring(0, 2).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
 
               <div className="hidden lg:flex flex-col items-start text-left">
                 <span className="text-sm font-bold text-white leading-none">
-                  {adminName}
+                  {displayName}
                 </span>
                 <span className="text-[10px] font-semibold text-white/60 mt-1 tracking-tight">
-                  {adminEmail}
+                  {displayEmail}
                 </span>
               </div>
               <ChevronDown className="h-3.5 w-3.5 text-white/60" />
@@ -115,8 +122,8 @@ export default function Header({
           <DropdownMenuContent align="end" className="w-64 p-2 rounded-xl border-white/10 shadow-xl mt-2 bg-white backdrop-blur border">
             <DropdownMenuLabel className="px-3 py-3">
               <div className="flex flex-col gap-1">
-                <p className="text-sm font-bold text-slate-800">{adminName}</p>
-                <p className="text-xs text-slate-800/60 font-normal lowercase">{adminEmail}</p>
+                <p className="text-sm font-bold text-slate-800">{displayName}</p>
+                <p className="text-xs text-slate-800/60 font-normal lowercase">{displayEmail}</p>
               </div>
             </DropdownMenuLabel>
             
