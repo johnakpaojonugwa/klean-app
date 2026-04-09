@@ -14,7 +14,7 @@ export function LogisticsCard({ analytics }) {
       </CardHeader>
       <CardContent className="space-y-6">
         <ProgressBar label="Pending" value={totals.pendingOrders} total={sum} color="bg-orange-400" />
-        <ProgressBar label="Processing" value={[totals.processingOrders, totals.washingOrders, totals.dryingOrders, totals.ironingOrders]} total={sum} color="bg-blue-400" />
+        <ProgressBar label="Processing" value={totals.processingOrders} total={sum} color="bg-blue-400" />
         <ProgressBar label="Ready" value={totals.readyOrders} total={sum} color="bg-emerald-400" />
         <ProgressBar label="Delivered" value={totals.deliveredOrders} total={sum} color="bg-indigo-500" />
       </CardContent>
