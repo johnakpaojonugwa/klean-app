@@ -55,6 +55,12 @@ export const getCustomerAnalytics = async (startDate, endDate, branchId = null) 
 getCustomerAnalytics.queryKey = (startDate, endDate, branchId = null) =>
   analyticsKeys.customers({ startDate, endDate, branchId });
 
+export const getSuperAdminSummary = async () => {
+  const res = await api.get("/analytics/super-admin");
+  return res.data;
+};
+getSuperAdminSummary.queryKey = () => ["super-admin-summary"];
+
 export const exportDashboardPdf = async (dashboardData, dateRange) => {
   const res = await api.post(
     "/analytics/export/pdf",
@@ -72,5 +78,6 @@ export const analyticsApi = {
   trends: getOrderTrends,
   revenue: getRevenueAnalytics,
   customers: getCustomerAnalytics,
+  superAdmin: getSuperAdminSummary,
   exportPdf: exportDashboardPdf,
 };
