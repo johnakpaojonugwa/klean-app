@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
-import RevenueChart from "@/components/dashboard/RevenueChart";
+import BranchRevenueAnalytics from "@/components/dashboard/BranchRevenueAnalytics";
 import OrderStatusChart from "@/components/dashboard/OrderStatusChart";
 import RecentOrders from "@/components/dashboard/RecentOrders";
 import LowStockAlert from "@/components/dashboard/LowStockAlert";
@@ -113,9 +113,9 @@ export function BranchManagerDashboard({ branchId }) {
       {/* Analytics Section */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
-          <RevenueChart
-            summaryData={summaryWithStaff}
-            loading={summaryLoading}
+          <BranchRevenueAnalytics
+            revenueData={revenue?.data}
+            loading={revenueLoading}
           />
         </div>
         <div className="lg:col-span-1">
