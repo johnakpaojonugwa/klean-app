@@ -10,7 +10,6 @@ import { ROLES } from "@/constants/roles";
 import {
   analyticsApi,
   getDashboardSummary,
-  getRevenueAnalytics,
 } from "@/api/analytics";
 import { ordersApi, getOrders } from "@/api/orders";
 import { employeesApi, getEmployees } from "@/api/employees";
@@ -44,12 +43,6 @@ export function BranchManagerDashboard({ branchId }) {
   const { data: summary, isPending: summaryLoading } = useQuery({
     queryKey: analyticsApi.keys.summary({ branchId }),
     queryFn: () => getDashboardSummary(branchId),
-    ...queryConfig,
-  });
-
-  const { data: revenue, isPending: revenueLoading } = useQuery({
-    queryKey: analyticsApi.keys.period({ startDate: params.start, endDate: params.end, branchId }),
-    queryFn: () => getRevenueAnalytics(params.start, params.end, branchId),
     ...queryConfig,
   });
 
@@ -114,8 +107,8 @@ export function BranchManagerDashboard({ branchId }) {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
           <RevenueChart
-            data={revenue?.data?.dailyRevenue || []}
-            loading={revenueLoading}
+            data={summary?.data?.dailyRevenue || []}
+            loading={summaryLoading}
           />
         </div>
         <div className="lg:col-span-1">
