@@ -1,16 +1,14 @@
 import { useMemo, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { analyticsApi, getDashboardSummary, getDailyAnalytics } from "@/api/analytics";
+import { analyticsApi, getDashboardSummary } from "@/api/analytics";
 import { ordersApi, getOrders } from "@/api/orders";
 import { branchesApi, getAllBranches } from "@/api/branches";
 import { inventoryApi, getLowStockItems } from "@/api/inventory";
-import { customersApi, getCustomers } from "@/api/customers";
+import { getCustomers } from "@/api/customers";
 import { ROLES } from "@/constants/roles";
 
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
-import RevenueChart from "@/components/dashboard/RevenueChart";
 import BranchRevenueComparison from "@/components/dashboard/BranchRevenueComparison";
-import OrderStatusChart from "@/components/dashboard/OrderStatusChart";
 import RecentOrders from "@/components/dashboard/RecentOrders";
 import LowStockAlert from "@/components/dashboard/LowStockAlert";
 import KPIGrid from "@/components/dashboard/KPIGrid";
@@ -48,12 +46,6 @@ export function SuperAdminDashboard() {
   const { data: summary, isPending: summaryLoading, } = useQuery({
     queryKey: analyticsApi.keys.summary({ branchId }),
     queryFn: () => getDashboardSummary(branchId),
-    ...queryConfig,
-  });
-
-  const { data: revenue, isPending: revenueLoading } = useQuery({
-    queryKey: analyticsApi.keys.period({ startDate: params.start, endDate: params.end, branchId }),
-    queryFn: () => getDailyAnalytics(params.start, params.end, branchId),
     ...queryConfig,
   });
 
@@ -115,22 +107,6 @@ export function SuperAdminDashboard() {
         loading={summaryLoading || customersLoading}
         userRole={ROLES.SUPER_ADMIN}
       />
-
-      {/* Analytics Section */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <RevenueChart
-            summaryData={summaryWithCustomers}
-            loading={summaryLoading}
-          />
-        </div>
-        <div className="lg:col-span-1">
-          <OrderStatusChart
-            data={ordersArray}
-            loading={ordersLoading}
-          />
-        </div>
-      </div>
 
       {/* Branch Performance Section */}
       <div className="grid grid-cols-1 gap-6">
