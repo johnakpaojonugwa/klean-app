@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { 
-  LogOut, 
-  Menu, 
-  Settings, 
-  User, 
-  ChevronDown, 
-  Search, 
+import {
+  LogOut,
+  Menu,
+  Settings,
+  User,
+  ChevronDown,
+  Search,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -77,14 +77,24 @@ export default function Header({
       {/* RIGHT SECTION: Utility & Profile */}
       <div className="flex items-center gap-1 sm:gap-3">
         {/* Mobile Search Button */}
-        <Button variant="ghost" size="icon" className="md:hidden text-white/70 rounded-full hover:bg-white/10">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden text-white/70 rounded-full hover:bg-white/10"
+        >
           <Search className="h-5 w-5" />
         </Button>
 
         {/* Support/Docs */}
-        <Button variant="ghost" size="icon" className="hidden sm:flex text-white/70 rounded-full hover:bg-white/10">
-          <Settings className="h-5 w-5" />
-        </Button>
+        <Link to="/dashboard/profile">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hidden sm:flex text-white/70 rounded-full hover:bg-white/10"
+          >
+            <Settings className="h-5 w-5" />
+          </Button>
+        </Link>
 
         {/* Notifications */}
         <NotificationsDropdown />
@@ -99,9 +109,7 @@ export default function Header({
               className="flex items-center gap-3 pl-1 pr-2 py-1 rounded-full hover:bg-white/10 transition-all outline-none"
             >
               <Avatar className="h-8 w-8 border-2 border-white/30 shadow-sm ring-1 ring-white/20">
-                <AvatarImage
-                  src={avatarUrl}
-                />
+                <AvatarImage src={avatarUrl} />
                 <AvatarFallback className="bg-indigo-500 text-white font-bold text-xs">
                   {displayName.substring(0, 2).toUpperCase()}
                 </AvatarFallback>
@@ -119,26 +127,45 @@ export default function Header({
             </Button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end" className="w-64 p-2 rounded-xl border-white/10 shadow-xl mt-2 bg-white backdrop-blur border">
+          <DropdownMenuContent
+            align="end"
+            className="w-64 p-2 rounded-xl border-white/10 shadow-xl mt-2 bg-white backdrop-blur border"
+          >
             <DropdownMenuLabel className="px-3 py-3">
               <div className="flex flex-col gap-1">
-                <p className="text-sm font-bold text-slate-800">{displayName}</p>
-                <p className="text-xs text-slate-800/60 font-normal lowercase">{displayEmail}</p>
+                <p className="text-sm font-bold text-slate-800">
+                  {displayName}
+                </p>
+                <p className="text-xs text-slate-800/60 font-normal lowercase">
+                  {displayEmail}
+                </p>
               </div>
             </DropdownMenuLabel>
-            
+
             <DropdownMenuSeparator className="bg-white/10" />
-            
+
             <div className="py-1">
-              <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-3 py-2.5 focus:bg-indigo-700/50 focus:text-indigo-100 text-slate-800/80 hover:bg-indigo-50 transition-colors">
-                <Link to="/dashboard/profile" className="flex items-center w-full text-sm font-medium">
+              <DropdownMenuItem
+                asChild
+                className="cursor-pointer rounded-lg px-3 py-2.5 focus:bg-indigo-700/50 focus:text-indigo-100 text-slate-800/80 hover:bg-indigo-50 transition-colors"
+              >
+                <Link
+                  to="/dashboard/profile"
+                  className="flex items-center w-full text-sm font-medium"
+                >
                   <User className="mr-3 h-4 w-4 opacity-70" />
                   <span>Profile Account</span>
                 </Link>
               </DropdownMenuItem>
 
-              <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-3 py-2.5 focus:bg-indigo-700/50 focus:text-indigo-100 text-slate-800/80 hover:bg-indigo-50 transition-colors">
-                <Link to="/dashboard/settings" className="flex items-center w-full text-sm font-medium">
+              <DropdownMenuItem
+                asChild
+                className="cursor-pointer rounded-lg px-3 py-2.5 focus:bg-indigo-700/50 focus:text-indigo-100 text-slate-800/80 hover:bg-indigo-50 transition-colors"
+              >
+                <Link
+                  to="/dashboard/settings"
+                  className="flex items-center w-full text-sm font-medium"
+                >
                   <Settings className="mr-3 h-4 w-4 opacity-70" />
                   <span>Workspace Settings</span>
                 </Link>
@@ -146,8 +173,8 @@ export default function Header({
             </div>
 
             <DropdownMenuSeparator className="bg-slate-100" />
-            
-            <DropdownMenuItem 
+
+            <DropdownMenuItem
               onClick={handleLogout}
               className="text-rose-600 focus:bg-rose-50 focus:text-rose-600 cursor-pointer rounded-lg px-3 py-2.5 font-bold text-sm mt-1 hover:bg-rose-50 transition-colors"
             >
