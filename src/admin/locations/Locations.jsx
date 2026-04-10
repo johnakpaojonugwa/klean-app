@@ -61,6 +61,7 @@ export default function Locations() {
   const [editBranches, setEditBranches] = useState(null);
   const [search, setSearch] = useState("");
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
+  const [errors, setErrors] = useState({});
   const queryClient = useQueryClient();
 
   // 1. Fetch Branches (Aligned with your JSON structure)
@@ -147,8 +148,50 @@ export default function Locations() {
   setShowForm(true);
 };
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Branch Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Branch name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Branch name must be at least 2 characters';
+    }
+
+    // Address validation
+    if (!formData.address.trim()) {
+      newErrors.address = 'Address is required';
+    } else if (formData.address.trim().length < 10) {
+      newErrors.address = 'Address must be at least 10 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Phone Number validation (optional but if provided, validate)
+    const phoneTrimmed = formData.contactNumber.trim();
+    if (phoneTrimmed) {
+      if (!/^\+?[\d\s\-()]{7,20}$/.test(phoneTrimmed)) {
+        newErrors.contactNumber = 'Please enter a valid phone number';
+      } else if ((phoneTrimmed.replace(/\D/g, '').length) < 7) {
+        newErrors.contactNumber = 'Phone number is too short';
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSave = (e) => {
   e.preventDefault();
+
+  if (!validateForm()) {
+    return;
+  }
 
   const parts = (formData.address || "").split(",").map((p) => p.trim());
   
@@ -184,6 +227,7 @@ export default function Locations() {
     if (!showForm) {
       setFormData(INITIAL_FORM_STATE);
       setEditBranches(null);
+      setErrors({});
     }
   }, [showForm]);
 
@@ -342,21 +386,29 @@ export default function Locations() {
                 <Label>Branch Name</Label>
                 <Input
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  required
+                  onChange={(e) => {
+                    setFormData({ ...formData, name: e.target.value });
+                    if (errors.name) setErrors(prev => ({ ...prev, name: '' }));
+                  }}
+                  className={errors.name ? 'border-red-500 focus:border-red-500' : ''}
                 />
+                {errors.name && (
+                  <p className="text-red-600 text-sm mt-1">{errors.name}</p>
+                )}
               </div>
               <div>
                 <Label>Full Address</Label>
                 <Input
                   value={formData.address}
-                  onChange={(e) =>
-                    setFormData({ ...formData, address: e.target.value })
-                  }
-                  required
+                  onChange={(e) => {
+                    setFormData({ ...formData, address: e.target.value });
+                    if (errors.address) setErrors(prev => ({ ...prev, address: '' }));
+                  }}
+                  className={errors.address ? 'border-red-500 focus:border-red-500' : ''}
                 />
+                {errors.address && (
+                  <p className="text-red-600 text-sm mt-1">{errors.address}</p>
+                )}
               </div>
 
               <div>
@@ -364,11 +416,15 @@ export default function Locations() {
                 <Input
                   type="email"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  required
+                  onChange={(e) => {
+                    setFormData({ ...formData, email: e.target.value });
+                    if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
+                  }}
+                  className={errors.email ? 'border-red-500 focus:border-red-500' : ''}
                 />
+                {errors.email && (
+                  <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -376,13 +432,18 @@ export default function Locations() {
                   <Label>Phone Number</Label>
                   <Input
                     value={formData.contactNumber}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setFormData({
                         ...formData,
                         contactNumber: e.target.value,
-                      })
-                    }
+                      });
+                      if (errors.contactNumber) setErrors(prev => ({ ...prev, contactNumber: '' }));
+                    }}
+                    className={errors.contactNumber ? 'border-red-500 focus:border-red-500' : ''}
                   />
+                  {errors.contactNumber && (
+                    <p className="text-red-600 text-sm mt-1">{errors.contactNumber}</p>
+                  )}
                 </div>
                 <div>
                   <Label>Operating Hours</Label>

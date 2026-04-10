@@ -1,6 +1,81 @@
-import { Mail, Phone, MapPin, Facebook, Linkedin, Twitter, MessageSquare, Send } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, Phone, MapPin, Facebook, Linkedin, Twitter, MessageSquare, Send, AlertCircle } from 'lucide-react';
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    message: ''
+  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Full Name validation
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = 'Full name is required';
+    } else if (formData.fullName.trim().length < 2) {
+      newErrors.fullName = 'Full name must be at least 2 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Here you would typically send the form data to your backend
+      console.log('Form submitted:', formData);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Reset form on success
+      setFormData({ fullName: '', email: '', message: '' });
+      setErrors({});
+      
+      // Show success message (you might want to add a toast notification here)
+      alert('Thank you for your message! We\'ll get back to you soon.');
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error sending your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
   return (
     <div className="bg-[#f8fafc] min-h-[80vh] py-20 px-6 font-sans antialiased">
       <div className="max-w-7xl mx-auto">
@@ -26,36 +101,79 @@ const ContactForm = () => {
               <span className="font-bold uppercase tracking-widest text-md">Send a Message</span>
             </div>
 
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-6 space-y-8">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 space-y-8">
               <div className="col-span-1">
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
                 <input 
                   type="text" 
-                  placeholder="John Doe" 
-                  className="w-full px-5 py-4 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-[#4F7DF3] focus:ring-4 focus:ring-[#4F7DF3]/10 outline-none transition-all placeholder:text-slate-400"
+                  value={formData.fullName}
+                  onChange={(e) => handleInputChange('fullName', e.target.value)}
+                  className={`w-full px-5 py-4 rounded-xl bg-slate-50 border focus:bg-white focus:ring-4 focus:ring-[#4F7DF3]/10 outline-none transition-all placeholder:text-slate-400 ${
+                    errors.fullName ? 'border-red-500 focus:border-red-500 focus:ring-red-500/10' : 'border-transparent focus:border-[#4F7DF3]'
+                  }`}
+                  placeholder="John Doe"
                 />
+                {errors.fullName && (
+                  <div className="flex items-center gap-2 mt-2 text-red-600 text-sm">
+                    <AlertCircle className="w-4 h-4" />
+                    {errors.fullName}
+                  </div>
+                )}
               </div>
               <div className="col-span-1">
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
                 <input 
                   type="email" 
-                  placeholder="john@example.com" 
-                  className="w-full px-5 py-4 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-[#4F7DF3] focus:ring-4 focus:ring-[#4F7DF3]/10 outline-none transition-all placeholder:text-slate-400"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
+                  className={`w-full px-5 py-4 rounded-xl bg-slate-50 border focus:bg-white focus:ring-4 focus:ring-[#4F7DF3]/10 outline-none transition-all placeholder:text-slate-400 ${
+                    errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500/10' : 'border-transparent focus:border-[#4F7DF3]'
+                  }`}
+                  placeholder="john@example.com"
                 />
+                {errors.email && (
+                  <div className="flex items-center gap-2 mt-2 text-red-600 text-sm">
+                    <AlertCircle className="w-4 h-4" />
+                    {errors.email}
+                  </div>
+                )}
               </div>
               <div className="col-span-2">
-                <label className="block text-sm font-semibold text-slate-700 mb-2">How can we help?</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">How can we help? *</label>
                 <textarea 
-                  placeholder="Tell us about your needs..." 
+                  value={formData.message}
+                  onChange={(e) => handleInputChange('message', e.target.value)}
                   rows="4"
-                  className="w-full px-5 py-4 rounded-xl bg-slate-50 border border-transparent focus:bg-white focus:border-[#4F7DF3] focus:ring-4 focus:ring-[#4F7DF3]/10 outline-none transition-all resize-none placeholder:text-slate-400"
+                  className={`w-full px-5 py-4 rounded-xl bg-slate-50 border focus:bg-white focus:ring-4 focus:ring-[#4F7DF3]/10 outline-none transition-all resize-none placeholder:text-slate-400 ${
+                    errors.message ? 'border-red-500 focus:border-red-500 focus:ring-red-500/10' : 'border-transparent focus:border-[#4F7DF3]'
+                  }`}
+                  placeholder="Tell us about your needs..."
                 ></textarea>
+                {errors.message && (
+                  <div className="flex items-center gap-2 mt-2 text-red-600 text-sm">
+                    <AlertCircle className="w-4 h-4" />
+                    {errors.message}
+                  </div>
+                )}
               </div>
               
               <div className="col-span-2 pt-4">
-                <button className="group flex items-center justify-center gap-3 w-full bg-[#4F7DF3] hover:bg-[#3B63C9] text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-200 active:scale-[0.98]">
-                  <span>Send Message</span>
-                  <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group flex items-center justify-center gap-3 w-full bg-[#4F7DF3] hover:bg-[#3B63C9] disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-200 active:scale-[0.98]"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </>
+                  )}
                 </button>
               </div>
             </form>

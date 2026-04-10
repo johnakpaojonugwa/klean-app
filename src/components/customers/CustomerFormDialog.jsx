@@ -15,6 +15,65 @@ export default function CustomerFormDialog({
   isPending,
 }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Full Name validation
+    if (!formData.fullname.trim()) {
+      newErrors.fullname = 'Full name is required';
+    } else if (formData.fullname.trim().length < 2) {
+      newErrors.fullname = 'Full name must be at least 2 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Phone Number validation (optional but if provided, validate)
+    const phoneTrimmed = formData.phoneNumber.trim();
+    if (phoneTrimmed) {
+      if (!/^\+?[\d\s\-()]{7,20}$/.test(phoneTrimmed)) {
+        newErrors.phoneNumber = 'Please enter a valid phone number';
+      } else if ((phoneTrimmed.replace(/\D/g, '').length) < 7) {
+        newErrors.phoneNumber = 'Phone number is too short';
+      }
+    }
+
+    // Password validation (only for new customers)
+    if (!isEditing) {
+      if (!formData.password) {
+        newErrors.password = 'Password is required';
+      } else if (formData.password.length < 6) {
+        newErrors.password = 'Password must be at least 6 characters';
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    onSubmit(formData);
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData((p) => ({ ...p, [field]: value }));
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -31,7 +90,7 @@ export default function CustomerFormDialog({
           </p>
         </div>
 
-        <form onSubmit={onSubmit} className="p-8 space-y-8">
+        <form onSubmit={handleSubmit} className="p-8 space-y-8">
           {/* Personal Information Section */}
           <div className="space-y-6">
             <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
@@ -49,13 +108,17 @@ export default function CustomerFormDialog({
                   id="fullname"
                   value={formData.fullname}
                   onChange={(e) =>
-                    setFormData((p) => ({ ...p, fullname: e.target.value }))
+                    handleInputChange('fullname', e.target.value)
                   }
-                  required
                   autoComplete="off"
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 ${
+                    errors.fullname ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="Enter full name"
                 />
+                {errors.fullname && (
+                  <p className="text-red-600 text-sm mt-1">{errors.fullname}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -85,13 +148,17 @@ export default function CustomerFormDialog({
                   type="email"
                   value={formData.email}
                   onChange={(e) =>
-                    setFormData((p) => ({ ...p, email: e.target.value }))
+                    handleInputChange('email', e.target.value)
                   }
-                  required
                   autoComplete="off"
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 ${
+                    errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="Enter email address"
                 />
+                {errors.email && (
+                  <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -131,13 +198,17 @@ export default function CustomerFormDialog({
                   type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={(e) =>
-                    setFormData((p) => ({ ...p, password: e.target.value }))
+                    handleInputChange('password', e.target.value)
                   }
-                  required
                   autoComplete="new-password"
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 pr-10"
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 pr-10 ${
+                    errors.password ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="Enter password"
                 />
+                {errors.password && (
+                  <p className="text-red-600 text-sm mt-1">{errors.password}</p>
+                )}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}

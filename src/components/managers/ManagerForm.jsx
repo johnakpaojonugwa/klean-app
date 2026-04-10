@@ -53,6 +53,7 @@ export default function ManagerForm({
   const [formData, setFormData] = useState(() => defaultFormData(initialData));
   const [showPassword, setShowPassword] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const { data: branchesResponse, isPending: isBranchesPending } = useQuery({
     queryKey: branchesApi.list.queryKey(1, 100, true),
@@ -63,6 +64,72 @@ export default function ManagerForm({
     () => branchesResponse?.data?.branches || [],
     [branchesResponse],
   );
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Full Name validation
+    if (!formData.fullname.trim()) {
+      newErrors.fullname = 'Full name is required';
+    } else if (formData.fullname.trim().length < 2) {
+      newErrors.fullname = 'Full name must be at least 2 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Phone Number validation
+    const phoneTrimmed = formData.phoneNumber.trim();
+
+    if (!phoneTrimmed) {
+      newErrors.phoneNumber = 'Phone number is required';
+    } 
+    else if (!/^\+?[\d\s\-()]{7,20}$/.test(phoneTrimmed)) {
+      newErrors.phoneNumber = 'Please enter a valid phone number';
+    }
+    else if ((phoneTrimmed.replace(/\D/g, '').length) < 7) {
+      newErrors.phoneNumber = 'Phone number is too short';
+    }
+
+    // Branch validation
+    if (!formData.branchId) {
+      newErrors.branchId = 'Please select a branch';
+    }
+
+    // Password validation (only for new managers)
+    if (!initialData) {
+      if (!formData.password) {
+        newErrors.password = 'Password is required';
+      } else if (formData.password.length < 6) {
+        newErrors.password = 'Password must be at least 6 characters';
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    onSubmit(formData);
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -80,14 +147,7 @@ export default function ManagerForm({
         </div>
 
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!formData.branchId) {
-              alert("Please select a branch");
-              return;
-            }
-            onSubmit(formData);
-          }}
+          onSubmit={handleSubmit}
           className="p-8 space-y-8"
         >
           <div className="space-y-6">
@@ -104,10 +164,12 @@ export default function ManagerForm({
               <Select
                 value={formData.branchId}
                 onValueChange={(value) =>
-                  setFormData((prev) => ({ ...prev, branchId: value }))
+                  handleInputChange('branchId', value)
                 }
               >
-                <SelectTrigger className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70">
+                <SelectTrigger className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
+                  errors.branchId ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                }`}>
                   <SelectValue placeholder={isBranchesPending ? "Loading branches..." : "Select Branch"} />
                 </SelectTrigger>
                 <SelectContent>
@@ -118,6 +180,9 @@ export default function ManagerForm({
                   ))}
                 </SelectContent>
               </Select>
+              {errors.branchId && (
+                <p className="text-red-600 text-sm mt-1">{errors.branchId}</p>
+              )}
             </div>
           </div>
 
@@ -136,12 +201,16 @@ export default function ManagerForm({
                 <Input
                   value={formData.fullname}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, fullname: e.target.value }))
+                    handleInputChange('fullname', e.target.value)
                   }
-                  required
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
+                    errors.fullname ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="Enter full name"
                 />
+                {errors.fullname && (
+                  <p className="text-red-600 text-sm mt-1">{errors.fullname}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -153,12 +222,16 @@ export default function ManagerForm({
                   type="email"
                   value={formData.email}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, email: e.target.value }))
+                    handleInputChange('email', e.target.value)
                   }
-                  required
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
+                    errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="Enter email"
                 />
+                {errors.email && (
+                  <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -169,12 +242,16 @@ export default function ManagerForm({
                 <Input
                   value={formData.phoneNumber}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, phoneNumber: e.target.value }))
+                    handleInputChange('phoneNumber', e.target.value)
                   }
-                  required
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
+                    errors.phoneNumber ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="Enter phone number"
                 />
+                {errors.phoneNumber && (
+                  <p className="text-red-600 text-sm mt-1">{errors.phoneNumber}</p>
+                )}
               </div>
 
               <div className="space-y-2">

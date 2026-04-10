@@ -48,6 +48,7 @@ export function InventoryFormDialog({
     supplierContact: "",
     lastRestock: "",
   });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (open) {
@@ -78,11 +79,49 @@ export function InventoryFormDialog({
           lastRestock: "",
         });
       }
+      setErrors({});
     }
   }, [initialData, open]);
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Item Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Item name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Item name must be at least 2 characters';
+    }
+
+    // Current Stock validation
+    const currentStock = Number(formData.currentStock);
+    if (isNaN(currentStock) || currentStock < 0) {
+      newErrors.currentStock = 'Current stock must be a valid non-negative number';
+    }
+
+    // Minimum Stock validation
+    const minimumStock = Number(formData.minimumStock);
+    if (isNaN(minimumStock) || minimumStock < 0) {
+      newErrors.minimumStock = 'Minimum stock must be a valid non-negative number';
+    }
+
+    // Unit Cost validation
+    const unitCost = Number(formData.unitCost);
+    if (isNaN(unitCost) || unitCost < 0) {
+      newErrors.unitCost = 'Unit cost must be a valid non-negative number';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     const payload = {
       ...formData,
       currentStock: Number(formData.currentStock) || 0,
@@ -93,6 +132,14 @@ export function InventoryFormDialog({
     };
     
     onSave(payload);
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData({ ...formData, [field]: value });
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
   };
 
   return (
@@ -120,10 +167,15 @@ export function InventoryFormDialog({
                 <Input
                   required
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
+                  onChange={(e) => handleInputChange('name', e.target.value)}
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
+                    errors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="e.g., Premium Detergent"
                 />
+                {errors.name && (
+                  <p className="text-red-600 text-sm mt-1">{errors.name}</p>
+                )}
               </div>
 
               <div className="space-y-2">

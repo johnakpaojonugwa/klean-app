@@ -41,6 +41,7 @@ export default function EmployeeForm({
   const [formData, setFormData] = useState(() => defaultFormData(initialData));
   const [showPassword, setShowPassword] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const { data: branches } = useQuery({
     queryKey: ["branches"],
@@ -52,8 +53,75 @@ export default function EmployeeForm({
       setFormData(defaultFormData(initialData));
       setChangePassword(false);
       setShowPassword(false);
+      setErrors({});
     }
   }, [open, initialData]);
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Full Name validation
+    if (!formData.fullname.trim()) {
+      newErrors.fullname = 'Full name is required';
+    } else if (formData.fullname.trim().length < 2) {
+      newErrors.fullname = 'Full name must be at least 2 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Phone Number validation
+    const phoneTrimmed = formData.phoneNumber.trim();
+
+    if (!phoneTrimmed) {
+      newErrors.phoneNumber = 'Phone number is required';
+    } 
+    else if (!/^\+?[\d\s\-()]{7,20}$/.test(phoneTrimmed)) {
+      newErrors.phoneNumber = 'Please enter a valid phone number';
+    }
+    else if ((phoneTrimmed.replace(/\D/g, '').length) < 7) {
+      newErrors.phoneNumber = 'Phone number is too short';
+    }
+
+    // Branch validation
+    if (!formData.branchId) {
+      newErrors.branchId = 'Please select a branch';
+    }
+
+    // Password validation (only for new employees)
+    if (!initialData) {
+      if (!formData.password) {
+        newErrors.password = 'Password is required';
+      } else if (formData.password.length < 6) {
+        newErrors.password = 'Password must be at least 6 characters';
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    onSubmit(formData);
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData((p) => ({ ...p, [field]: value }));
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -71,14 +139,7 @@ export default function EmployeeForm({
         </div>
 
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!formData.branchId) {
-              alert("Please select a branch");
-              return;
-            }
-            onSubmit(formData);
-          }}
+          onSubmit={handleSubmit}
           className="p-8 space-y-8"
         >
           {/* Personal Information Section */}
@@ -97,12 +158,16 @@ export default function EmployeeForm({
                 <Input
                   value={formData.fullname}
                   onChange={(e) =>
-                    setFormData((p) => ({ ...p, fullname: e.target.value }))
+                    handleInputChange('fullname', e.target.value)
                   }
-                  required
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
+                    errors.fullname ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="Enter full name"
                 />
+                {errors.fullname && (
+                  <p className="text-red-600 text-sm mt-1">{errors.fullname}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -114,12 +179,16 @@ export default function EmployeeForm({
                   type="email"
                   value={formData.email}
                   onChange={(e) =>
-                    setFormData((p) => ({ ...p, email: e.target.value }))
+                    handleInputChange('email', e.target.value)
                   }
-                  required
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
+                    errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="Enter email address"
                 />
+                {errors.email && (
+                  <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -130,12 +199,16 @@ export default function EmployeeForm({
                 <Input
                   value={formData.phoneNumber}
                   onChange={(e) =>
-                    setFormData((p) => ({ ...p, phoneNumber: e.target.value }))
+                    handleInputChange('phoneNumber', e.target.value)
                   }
-                  required
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
+                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
+                    errors.phoneNumber ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}
                   placeholder="Enter phone number"
                 />
+                {errors.phoneNumber && (
+                  <p className="text-red-600 text-sm mt-1">{errors.phoneNumber}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -173,12 +246,16 @@ export default function EmployeeForm({
                     type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={(e) =>
-                      setFormData((p) => ({ ...p, password: e.target.value }))
+                      handleInputChange('password', e.target.value)
                     }
-                    required={!initialData}
-                    className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 pr-10"
+                    className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 pr-10 ${
+                      errors.password ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                    }`}
                     placeholder="Enter password"
                   />
+                  {errors.password && (
+                    <p className="text-red-600 text-sm mt-1">{errors.password}</p>
+                  )}
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
@@ -296,10 +373,12 @@ export default function EmployeeForm({
                 <Select
                   value={formData.branchId}
                   onValueChange={(value) =>
-                    setFormData((p) => ({ ...p, branchId: value }))
+                    handleInputChange('branchId', value)
                   }
                 >
-                  <SelectTrigger className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                  <SelectTrigger className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 ${
+                    errors.branchId ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                  }`}>
                     <SelectValue placeholder="Select a branch" />
                   </SelectTrigger>
                   <SelectContent>
@@ -310,6 +389,9 @@ export default function EmployeeForm({
                     ))}
                   </SelectContent>
                 </Select>
+                {errors.branchId && (
+                  <p className="text-red-600 text-sm mt-1">{errors.branchId}</p>
+                )}
               </div>
             </div>
           </div>
