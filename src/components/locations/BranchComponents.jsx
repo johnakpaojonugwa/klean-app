@@ -328,26 +328,32 @@ export const BranchFormDialog = ({
           </Select>
         </div>
 
+        {/* Action Buttons */}
         <div className="flex gap-4 justify-end pt-8 border-t border-slate-200">
           <Button
             type="button"
             variant="outline"
             onClick={() => setShowForm(false)}
+            className="px-6 py-2 h-11 border-slate-300 text-slate-700 hover:bg-slate-50"
             disabled={isSubmitting}
           >
             Cancel
           </Button>
           <Button
             type="submit"
-              className="px-6 py-2 h-11 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+            className="px-6 py-2 h-11 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
             disabled={isSubmitting}
           >
-            {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
-            {isSubmitting
-              ? "Saving..."
-              : editBranches
-                ? "Update Branch"
-                : "Create Branch"}
+            {isSubmitting ? (
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>{editBranches ? "Updating..." : "Creating..."}</span>
+              </div>
+            ) : editBranches ? (
+              "Update Branch"
+            ) : (
+              "Create Branch"
+            )}
           </Button>
         </div>
       </form>
