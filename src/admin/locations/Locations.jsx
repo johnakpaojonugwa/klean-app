@@ -532,7 +532,7 @@ export default function Locations() {
               <div>
                 <Label>Services (Comma separated)</Label>
                 <Input
-                  placeholder="Sales, Support, Repair"
+                  placeholder="Drycleaning, Ironing, Alterations, ..."
                   value={formData.servicesOffered}
                   onChange={(e) =>
                     setFormData({
