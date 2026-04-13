@@ -3,7 +3,8 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import PageHeader from "@/components/common/PageHeader";
 import SearchFilter from "@/components/common/SearchFilter";
 import EmptyState from "@/components/common/EmptyState";
-import { UseLocations } from "@/components/locations/UseLocations";
+import { Pagination } from "@/components/ui/Pagination";
+import { useLocations } from "@/components/locations/UseLocations";
 import { BranchCard, BranchFormDialog } from "@/components/locations/BranchComponents";
 
 export default function Locations() {
@@ -11,16 +12,14 @@ export default function Locations() {
     branches, isBranchesPending, employees, isEmployeesPending,
     staffCounts, search, setSearch, showForm, setShowForm,
     formData, errors, editBranches, handleEdit,
-    handleInputChange, handleSave, deleteMutation, isSubmitting
-  } = UseLocations();
+    handleInputChange, handleSave, deleteMutation, isSubmitting,
+    currentPage, totalPages, totalItems, goToPage, resetPagination
+  } = useLocations();
 
-  const filteredLocations = branches.filter((branch) =>
-    [branch.name, branch.address, branch.branchCode].some((field) =>
-      typeof field === 'string' 
-        ? field.toLowerCase().includes(search.toLowerCase())
-        : JSON.stringify(field).toLowerCase().includes(search.toLowerCase())
-    )
-  );
+  const handleSearchChange = (value) => {
+    setSearch(value);
+    resetPagination();
+  };
 
   return (
     <div className="p-6 lg:p-8 bg-slate-50/50 min-h-screen">
@@ -30,7 +29,7 @@ export default function Locations() {
         onAction={() => setShowForm(true)}
       />
 
-      <SearchFilter searchValue={search} onSearchChange={setSearch} />
+      <SearchFilter searchValue={search} onSearchChange={handleSearchChange} />
 
       {isBranchesPending ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
@@ -38,7 +37,7 @@ export default function Locations() {
             <Skeleton key={i} className="h-64 rounded-xl" />
           ))}
         </div>
-      ) : filteredLocations.length === 0 ? (
+      ) : branches.length === 0 ? (
         <EmptyState
           icon={MapPin}
           title="No branches found"
@@ -46,7 +45,7 @@ export default function Locations() {
         />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
-          {filteredLocations.map((branch) => (
+          {branches.map((branch) => (
             <BranchCard
               key={branch._id}
               branch={branch}
@@ -57,6 +56,15 @@ export default function Locations() {
           ))}
         </div>
       )}
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        totalItems={totalItems}
+        pageSize={9}
+        onPageChange={goToPage}
+        isLoading={isBranchesPending}
+      />
 
       <BranchFormDialog
         showForm={showForm}

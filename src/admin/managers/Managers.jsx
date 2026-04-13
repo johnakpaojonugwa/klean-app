@@ -10,6 +10,8 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import PageHeader from "@/components/common/PageHeader";
 import EmptyState from "@/components/common/EmptyState";
 import SearchFilter from "@/components/common/SearchFilter";
+import { Pagination } from "@/components/ui/Pagination";
+import { usePagination } from "@/hooks/usePagination";
 
 import ManagerCard from "@/components/managers/ManagerCard";
 import ManagerForm from "@/components/managers/ManagerForm";
@@ -137,6 +139,22 @@ export default function Managers() {
     );
   }, [managers, search]);
 
+  // Pagination
+  const {
+    paginatedItems: paginatedManagers,
+    currentPage,
+    totalPages,
+    totalItems,
+    goToPage,
+    resetPagination
+  } = usePagination(filteredManagers, 12);
+
+  // Reset pagination when search changes
+  const handleSearchChange = (value) => {
+    setSearch(value);
+    resetPagination();
+  };
+
   return (
     <div className="p-6 lg:p-8 bg-slate-50/50 min-h-screen">
       <PageHeader
@@ -153,7 +171,7 @@ export default function Managers() {
         <SearchFilter
           placeholder="Search managers..."
           value={search}
-          onSearchChange={setSearch}
+          onSearchChange={handleSearchChange}
         />
       </div>
 
@@ -166,20 +184,31 @@ export default function Managers() {
       ) : filteredManagers.length === 0 ? (
         <EmptyState icon={Package} title="No manager found" />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {filteredManagers.map((manager, i) => (
-            <ManagerCard
-              key={manager._id || manager.id}
-              manager={manager}
-              index={i}
-              onEdit={(e) => {
-                setEditManager(e);
-                setShowForm(true);
-              }}
-              onDelete={handleDelete}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            {paginatedManagers.map((manager, i) => (
+              <ManagerCard
+                key={manager._id || manager.id}
+                manager={manager}
+                index={i}
+                onEdit={(e) => {
+                  setEditManager(e);
+                  setShowForm(true);
+                }}
+                onDelete={handleDelete}
+              />
+            ))}
+          </div>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalItems={totalItems}
+            pageSize={12}
+            onPageChange={goToPage}
+            isLoading={managersLoading}
+          />
+        </>
       )}
 
       <ManagerForm

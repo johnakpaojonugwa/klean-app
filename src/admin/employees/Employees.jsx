@@ -16,6 +16,8 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import PageHeader from "@/components/common/PageHeader";
 import SearchFilter from "@/components/common/SearchFilter";
 import EmptyState from "@/components/common/EmptyState";
+import { Pagination } from "@/components/ui/Pagination";
+import { usePagination } from "@/hooks/usePagination";
 
 import EmployeeCard from "@/components/employees/EmployeeCard";
 import EmployeeForm from "@/components/employees/EmployeeForm";
@@ -154,6 +156,22 @@ export default function Employees() {
       e.email.toLowerCase().includes(search.toLowerCase()),
   );
 
+  // Pagination
+  const {
+    paginatedItems: paginatedEmployees,
+    currentPage,
+    totalPages,
+    totalItems,
+    goToPage,
+    resetPagination
+  } = usePagination(filteredEmployees, 12);
+
+  // Reset pagination when search changes
+  const handleSearchChange = (value) => {
+    setSearch(value);
+    resetPagination();
+  };
+
   return (
     <div className="p-6 lg:p-8 bg-slate-50/50 min-h-screen">
       <PageHeader
@@ -171,7 +189,7 @@ export default function Employees() {
         <SearchFilter
           placeholder="Search..."
           value={search}
-          onSearchChange={setSearch}
+          onSearchChange={handleSearchChange}
         />
       </div>
 
@@ -184,20 +202,31 @@ export default function Employees() {
       ) : filteredEmployees.length === 0 ? (
         <EmptyState icon={UserCircle} title="No employees found" />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {filteredEmployees.map((employee, i) => (
-            <EmployeeCard
-              key={employee._id}
-              employee={employee}
-              index={i}
-              onEdit={(e) => {
-                setEditEmployee(e);
-                setShowForm(true);
-              }}
-              onDelete={() => handleConfirmTerminate(employee._id)}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            {paginatedEmployees.map((employee, i) => (
+              <EmployeeCard
+                key={employee._id}
+                employee={employee}
+                index={i}
+                onEdit={(e) => {
+                  setEditEmployee(e);
+                  setShowForm(true);
+                }}
+                onDelete={() => handleConfirmTerminate(employee._id)}
+              />
+            ))}
+          </div>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalItems={totalItems}
+            pageSize={12}
+            onPageChange={goToPage}
+            isLoading={employeesLoading}
+          />
+        </>
       )}
 
       <EmployeeForm

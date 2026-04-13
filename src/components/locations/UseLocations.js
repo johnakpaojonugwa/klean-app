@@ -1,9 +1,10 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "@/api/api";
 import { branchesApi } from "@/api/branches";
 import { employeesApi, getEmployees } from "@/api/employees";
 import { toast } from "sonner";
+import { usePagination } from "@/hooks/usePagination";
 
 const INITIAL_FORM_STATE = {
   name: "",
@@ -24,10 +25,10 @@ export const useLocations = () => {
   const [errors, setErrors] = useState({});
   const queryClient = useQueryClient();
 
-  // 1. Fetch Branches
+  // 1. Fetch Branches (fetch all for client-side filtering and pagination)
   const { data: branchesResponse, isPending: isBranchesPending } = useQuery({
-    queryKey: branchesApi.list.queryKey(1, 100, true),
-    queryFn: () => branchesApi.list(1, 100, true),
+    queryKey: branchesApi.list.queryKey(1, 1000, true),
+    queryFn: () => branchesApi.list(1, 1000, true),
   });
 
   // 2. Fetch Employees
@@ -36,7 +37,31 @@ export const useLocations = () => {
     queryFn: () => getEmployees(1, 200),
   });
 
-  const branches = useMemo(() => branchesResponse?.data?.branches || [], [branchesResponse]);
+  const allBranches = useMemo(() => branchesResponse?.data?.branches || [], [branchesResponse]);
+  
+  // Filter branches based on search
+  const filteredBranches = useMemo(() => {
+    if (!search) {
+      return allBranches;
+    }
+    return allBranches.filter((branch) =>
+      [branch.name, branch.address, branch.branchCode].some((field) =>
+        typeof field === 'string' 
+          ? field.toLowerCase().includes(search.toLowerCase())
+          : JSON.stringify(field).toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [allBranches, search]);
+
+  // Pagination
+  const {
+    paginatedItems: branches,
+    currentPage,
+    totalPages,
+    totalItems,
+    goToPage,
+    resetPagination
+  } = usePagination(filteredBranches, 9); // 3x3 grid
 
   const employees = useMemo(() => {
     const data = employeesResponse?.data;
@@ -162,13 +187,11 @@ export const useLocations = () => {
     }
   };
 
-  useEffect(() => {
-    if (!showForm) {
-      setFormData(INITIAL_FORM_STATE);
-      setEditBranches(null);
-      setErrors({});
-    }
-  }, [showForm]);
+  const resetForm = () => {
+    setFormData(INITIAL_FORM_STATE);
+    setEditBranches(null);
+    setErrors({});
+  };
 
   return {
     branches,
@@ -186,7 +209,14 @@ export const useLocations = () => {
     handleEdit,
     handleInputChange,
     handleSave,
+    resetForm,
     deleteMutation,
     isSubmitting: createMutation.isPending || updateMutation.isPending,
+    // Pagination
+    currentPage,
+    totalPages,
+    totalItems,
+    goToPage,
+    resetPagination,
   };
 };

@@ -9,6 +9,8 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import PageHeader from "@/components/common/PageHeader";
 import SearchFilter from "@/components/common/SearchFilter";
 import EmptyState from "@/components/common/EmptyState";
+import { Pagination } from "@/components/ui/Pagination";
+import { usePagination } from "@/hooks/usePagination";
 
 import CustomerCard from "@/components/customers/CustomerCard";
 import CustomerFormDialog from "@/components/customers/CustomerFormDialog";
@@ -117,6 +119,22 @@ export default function Customers() {
     );
   }, [customers, search]);
 
+  // Pagination
+  const {
+    paginatedItems: paginatedCustomers,
+    currentPage,
+    totalPages,
+    totalItems,
+    goToPage,
+    resetPagination
+  } = usePagination(filteredCustomers, 12);
+
+  // Reset pagination when search changes
+  const handleSearchChange = (value) => {
+    setSearch(value);
+    resetPagination();
+  };
+
   return (
     <div className="p-6 lg:p-8 bg-slate-50/50 min-h-screen">
       <PageHeader
@@ -131,7 +149,7 @@ export default function Customers() {
       />
 
       <div className="my-6 w-full md:w-72 lg:w-96">
-        <SearchFilter value={search} onSearchChange={setSearch} placeholder="Search..." />
+        <SearchFilter value={search} onSearchChange={handleSearchChange} placeholder="Search..." />
       </div>
 
       {customersLoading ? (
@@ -141,17 +159,28 @@ export default function Customers() {
       ) : filteredCustomers.length === 0 ? (
         <EmptyState icon={Users} title="No customers" />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {filteredCustomers.map((customer, index) => (
-            <CustomerCard 
-              key={customer._id || customer.id} 
-              customer={customer} 
-              index={index} 
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            {paginatedCustomers.map((customer, index) => (
+              <CustomerCard 
+                key={customer._id || customer.id} 
+                customer={customer} 
+                index={index} 
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            ))}
+          </div>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalItems={totalItems}
+            pageSize={12}
+            onPageChange={goToPage}
+            isLoading={customersLoading}
+          />
+        </>
       )}
 
       <CustomerFormDialog 

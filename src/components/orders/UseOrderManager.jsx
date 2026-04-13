@@ -9,6 +9,7 @@ import { invoicesApi, getInvoiceByOrderId } from "@/api/invoices";
 import { customersApi, getCustomers } from "@/api/customers";
 import { employeesApi, getEmployees } from "@/api/employees";
 import { useApp } from "@/context/AppContext";
+import { usePagination } from "@/hooks/usePagination";
 
 // Constants
 import { STATUS_GROUPS } from "@/components/orders/OrderConstants";
@@ -164,6 +165,32 @@ export function useOrdersManager() {
       });
   }, [orders, search, statusFilter, sortBy]);
 
+  // Pagination
+  const {
+    paginatedItems: paginatedOrders,
+    currentPage,
+    totalPages,
+    totalItems,
+    goToPage,
+    resetPagination
+  } = usePagination(filteredAndSortedOrders, 12);
+
+  // Reset pagination when filters change
+  const handleSearchChange = (value) => {
+    setSearch(value);
+    resetPagination();
+  };
+
+  const handleStatusFilterChange = (value) => {
+    setStatusFilter(value);
+    resetPagination();
+  };
+
+  const handleSortChange = (value) => {
+    setSortBy(value);
+    resetPagination();
+  };
+
   const statusCounts = useMemo(() => {
     const counts = { ALL: orders.length, PENDING: 0, PROCESSING: 0, DELIVERED: 0 };
     orders.forEach((o) => {
@@ -186,18 +213,23 @@ export function useOrdersManager() {
       updatingStatusId,
       showPaymentDialog,
       paymentOrder,
-      isActionPending: createOrderMutation.isPending || payOrderMutation.isPending
+      isActionPending: createOrderMutation.isPending || payOrderMutation.isPending,
+      // Pagination
+      currentPage,
+      totalPages,
+      totalItems,
     },
     actions: {
-      setSearch,
-      setStatusFilter,
-      setSortBy,
+      setSearch: handleSearchChange,
+      setStatusFilter: handleStatusFilterChange,
+      setSortBy: handleSortChange,
       setShowForm,
       setEditOrder,
       setShowPaymentDialog,
       setPaymentOrder,
       handleCloseForm,
       handleDelete,
+      goToPage,
       handleSave: (formData) => editOrder 
         ? ordersApi.update(editOrder._id || editOrder.id, formData).then(() => queryClient.invalidateQueries({ queryKey: ordersApi.keys.all }))
         : createOrderMutation.mutate(formData),
@@ -207,7 +239,8 @@ export function useOrdersManager() {
       submitPayment: (id, payload) => payOrderMutation.mutate({ id, payload }),
     },
     data: {
-      filteredOrders: filteredAndSortedOrders,
+      filteredOrders: paginatedOrders,
+      allFilteredOrders: filteredAndSortedOrders, // For status counts
       statusCounts,
       customers: customersData?.data?.customers || [],
       employees: employeesData?.data?.employees || [],

@@ -13,6 +13,7 @@ import OrderCard from "@/components/orders/OrderCard";
 import OrderForm from "@/components/orders/OrderForm";
 import PaymentDialog from "@/components/orders/PaymentDialog";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
+import { Pagination } from "@/components/ui/Pagination";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { Skeleton } from "@/components/ui/Skeleton";
 import {
@@ -96,30 +97,41 @@ export default function Orders() {
           description="Try adjusting your filters or create a new order."
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {data.filteredOrders.map((order) => {
-            const orderId = order._id || order.id;
-            return (
-              <OrderCard
-                key={orderId}
-                order={order}
-                isStatusUpdating={state.updatingStatusId === orderId}
-                onEdit={() => {
-                  actions.setEditOrder(order);
-                  actions.setShowForm(true);
-                }}
-                onDelete={() => setDeleteOrderId(orderId)}
-                onStatusChange={(newStatus) =>
-                  mutations.updateStatus({ id: orderId, status: newStatus })
-                }
-                onMarkAsPaid={() => {
-                  actions.setPaymentOrder(order);
-                  actions.setShowPaymentDialog(true);
-                }}
-              />
-            );
-          })}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            {data.filteredOrders.map((order) => {
+              const orderId = order._id || order.id;
+              return (
+                <OrderCard
+                  key={orderId}
+                  order={order}
+                  isStatusUpdating={state.updatingStatusId === orderId}
+                  onEdit={() => {
+                    actions.setEditOrder(order);
+                    actions.setShowForm(true);
+                  }}
+                  onDelete={() => setDeleteOrderId(orderId)}
+                  onStatusChange={(newStatus) =>
+                    mutations.updateStatus({ id: orderId, status: newStatus })
+                  }
+                  onMarkAsPaid={() => {
+                    actions.setPaymentOrder(order);
+                    actions.setShowPaymentDialog(true);
+                  }}
+                />
+              );
+            })}
+          </div>
+
+          <Pagination
+            currentPage={state.currentPage}
+            totalPages={state.totalPages}
+            totalItems={state.totalItems}
+            pageSize={12}
+            onPageChange={actions.goToPage}
+            isLoading={state.ordersLoading}
+          />
+        </>
       )}
 
       {/* Modals & Dialogs */}
