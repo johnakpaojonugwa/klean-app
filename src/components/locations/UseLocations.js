@@ -138,6 +138,10 @@ export const useLocations = () => {
     } else {
       setFormData((prev) => ({ ...prev, [field]: value }));
     }
+    // Clear error for this field when user starts typing
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
   };
 
   const handleSave = (e) => {
