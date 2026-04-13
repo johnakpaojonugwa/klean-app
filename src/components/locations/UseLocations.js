@@ -59,24 +59,58 @@ export const useLocations = () => {
       toast.success(res.data?.message || "Success!");
       setShowForm(false);
     },
-    onError: (err) => toast.error(err.response?.data?.message || "Action failed"),
+    onError: (err) => {
+      // For timeout errors, refetch data after a delay (branch may have been created)
+      if (err.code === 'ECONNABORTED' || err.message === 'Network Error') {
+        toast.error("Connection timeout - checking for changes...");
+        setTimeout(() => invalidate(), 2000);
+      } else {
+        toast.error(err.response?.data?.message || "Action failed");
+      }
+    },
   };
 
   const createMutation = useMutation({
-    mutationFn: (data) => api.post("/branch", data),
+    mutationFn: async (data) => {
+      const res = await api.post("/branch", data, { timeout: 60000 });
+      // Check if response indicates failure even with 200 status
+      if (res.data && res.data.success === false) {
+        const error = new Error(res.data.message || "Failed to create branch");
+        error.response = { data: res.data };
+        throw error;
+      }
+      return res;
+    },
     ...mutationOptions,
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }) => api.put(`/branch/${id}`, data),
+    mutationFn: async ({ id, data }) => {
+      const res = await api.put(`/branch/${id}`, data, { timeout: 60000 });
+      // Check if response indicates failure even with 200 status
+      if (res.data && res.data.success === false) {
+        const error = new Error(res.data.message || "Failed to update branch");
+        error.response = { data: res.data };
+        throw error;
+      }
+      return res;
+    },
     ...mutationOptions,
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => api.delete(`/branch/${id}`),
+    mutationFn: (id) => api.delete(`/branch/${id}`, { timeout: 60000 }),
     onSuccess: () => {
       invalidate();
       toast.success("Branch removed");
+    },
+    onError: (err) => {
+      if (err.code === 'ECONNABORTED' || err.message === 'Network Error') {
+        toast.error("Connection timeout - checking for changes...");
+        setTimeout(() => invalidate(), 2000);
+      } else {
+        toast.error(err.response?.data?.message || "Failed to remove branch");
+      }
     },
   });
 
