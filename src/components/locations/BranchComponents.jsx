@@ -121,14 +121,10 @@ export const BranchFormDialog = ({
               <Input
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
-                className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
-                  errors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
-                }`}
+                className={`h-11 bg-slate-50 ${errors.name ? 'border-red-500' : ''}`}
                 placeholder="Enter branch name"
               />
-              {errors.name && (
-                <p className="text-red-600 text-sm mt-1">{errors.name}</p>
-              )}
+              {errors.name && <p className="text-red-600 text-sm">{errors.name}</p>}
             </div>
             <div className="space-y-2">
               <Label className="text-sm font-medium text-slate-700 flex items-center gap-2">
@@ -138,14 +134,10 @@ export const BranchFormDialog = ({
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
-                  errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
-                }`}
+                className={`h-11 bg-slate-50 ${errors.email ? 'border-red-500' : ''}`}
                 placeholder="Enter email"
               />
-              {errors.email && (
-                <p className="text-red-600 text-sm mt-1">{errors.email}</p>
-              )}
+              {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>}
             </div>
           </div>
         </div>
@@ -157,58 +149,26 @@ export const BranchFormDialog = ({
           </div>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                <MapPin className="w-4 h-4" /> Street Address *
-              </Label>
+              <Label className="text-sm font-medium text-slate-700 flex items-center gap-2">Street Address *</Label>
               <Input
                 value={formData.address.street}
                 onChange={(e) => handleInputChange('address.street', e.target.value)}
-                className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
-                  errors.address ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
-                }`}
-                placeholder="Enter street address"
+                className={`h-11 bg-slate-50 ${errors.address ? 'border-red-500' : ''}`}
               />
-              {errors.address && (
-                <p className="text-red-600 text-sm mt-1">{errors.address}</p>
-              )}
+              {errors.address && <p className="text-red-600 text-sm">{errors.address}</p>}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <Label className="text-sm font-medium text-slate-700">City *</Label>
-                <Input
-                  value={formData.address.city}
-                  onChange={(e) => handleInputChange('address.city', e.target.value)}
-                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
-                    errors.city ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
-                  }`}
-                  placeholder="Enter city"
-                />
-                {errors.city && (
-                  <p className="text-red-600 text-sm mt-1">{errors.city}</p>
-                )}
+              <div>
+                <Label>City *</Label>
+                <Input value={formData.address.city} onChange={(e) => handleInputChange('address.city', e.target.value)} className={errors.city ? 'border-red-500' : ''} />
               </div>
-              <div className="space-y-2">
-                <Label className="text-sm font-medium text-slate-700">State *</Label>
-                <Input
-                  value={formData.address.state}
-                  onChange={(e) => handleInputChange('address.state', e.target.value)}
-                  className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
-                    errors.state ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
-                  }`}
-                  placeholder="Enter state"
-                />
-                {errors.state && (
-                  <p className="text-red-600 text-sm mt-1">{errors.state}</p>
-                )}
+              <div>
+                <Label>State *</Label>
+                <Input value={formData.address.state} onChange={(e) => handleInputChange('address.state', e.target.value)} className={errors.state ? 'border-red-500' : ''} />
               </div>
-              <div className="space-y-2">
-                <Label className="text-sm font-medium text-slate-700">Zip Code</Label>
-                <Input
-                  value={formData.address.zip}
-                  onChange={(e) => handleInputChange('address.zip', e.target.value)}
-                  className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
-                  placeholder="Enter zip code"
-                />
+              <div>
+                <Label>Zip Code</Label>
+                <Input value={formData.address.zip} onChange={(e) => handleInputChange('address.zip', e.target.value)} />
               </div>
             </div>
           </div>
@@ -221,43 +181,18 @@ export const BranchFormDialog = ({
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                <Phone className="w-4 h-4" /> Phone Number
-              </Label>
-              <Input
-                value={formData.contactNumber}
-                onChange={(e) => handleInputChange('contactNumber', e.target.value)}
-                className={`h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70 ${
-                  errors.contactNumber ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
-                }`}
-                placeholder="Enter phone number"
-              />
-              {errors.contactNumber && (
-                <p className="text-red-600 text-sm mt-1">{errors.contactNumber}</p>
-              )}
+              <Label>Phone Number</Label>
+              <Input value={formData.contactNumber} onChange={(e) => handleInputChange('contactNumber', e.target.value)} className={errors.contactNumber ? 'border-red-500' : ''} />
+              {errors.contactNumber && <p className="text-red-600 text-sm">{errors.contactNumber}</p>}
             </div>
             <div className="space-y-2">
-              <Label className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                <Clock className="w-4 h-4" /> Operating Hours
-              </Label>
-              <Input
-                value={formData.operatingHours}
-                onChange={(e) => handleInputChange('operatingHours', e.target.value)}
-                className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
-                placeholder="e.g. 9AM - 6PM"
-              />
+              <Label>Operating Hours</Label>
+              <Input value={formData.operatingHours} onChange={(e) => handleInputChange('operatingHours', e.target.value)} placeholder="e.g. 9AM - 6PM" />
             </div>
           </div>
           <div className="space-y-2">
-            <Label className="text-sm font-medium text-slate-700 flex items-center gap-2">
-              <Briefcase className="w-4 h-4" /> Services Offered
-            </Label>
-            <Input
-              value={formData.servicesOffered}
-              onChange={(e) => handleInputChange('servicesOffered', e.target.value)}
-              className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70"
-              placeholder="e.g. Wash & Fold, Dry Cleaning"
-            />
+            <Label><Briefcase className="w-4 h-4 inline mr-2" /> Services Offered</Label>
+            <Input value={formData.servicesOffered} onChange={(e) => handleInputChange('servicesOffered', e.target.value)} placeholder="e.g. Wash & Fold, Dry Cleaning" />
           </div>
         </div>
 
@@ -266,22 +201,16 @@ export const BranchFormDialog = ({
             <Users className="w-5 h-5 text-indigo-600" />
             <h3 className="text-lg font-semibold text-slate-800">Manager Assignment</h3>
           </div>
-          <div className="space-y-2">
-            <Label className="text-sm font-medium text-slate-700 flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              Assigned Manager (Optional)
-            </Label>
-            <Select value={formData.manager} onValueChange={(value) => handleInputChange('manager', value)}>
-              <SelectTrigger className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-70">
-                <SelectValue placeholder="Select Manager" />
-              </SelectTrigger>
-              <SelectContent>
-                {employees.map((emp) => (
-                  <SelectItem key={emp._id} value={emp._id}>{emp.fullname || emp.employeeJobRole}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <Select value={formData.manager} onValueChange={(value) => handleInputChange('manager', value)}>
+            <SelectTrigger className="h-11 bg-slate-50">
+              <SelectValue placeholder={isEmployeesPending ? "Loading staff..." : "Select Manager (Optional)"} />
+            </SelectTrigger>
+            <SelectContent>
+              {employees.map((emp) => (
+                <SelectItem key={emp._id} value={emp._id}>{emp.fullname || emp.employeeJobRole}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <div className="flex gap-4 justify-end pt-8 border-t border-slate-200">

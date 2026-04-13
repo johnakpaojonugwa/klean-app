@@ -24,17 +24,20 @@ export const useLocations = () => {
   const [errors, setErrors] = useState({});
   const queryClient = useQueryClient();
 
+  // 1. Fetch Branches
   const { data: branchesResponse, isPending: isBranchesPending } = useQuery({
     queryKey: branchesApi.list.queryKey(1, 100, true),
     queryFn: () => branchesApi.list(1, 100, true),
   });
 
+  // 2. Fetch Employees
   const { data: employeesResponse, isPending: isEmployeesPending } = useQuery({
     queryKey: employeesApi.keys.lists(1, 200),
     queryFn: () => getEmployees(1, 200),
   });
 
   const branches = useMemo(() => branchesResponse?.data?.branches || [], [branchesResponse]);
+
   const employees = useMemo(() => {
     const data = employeesResponse?.data;
     return Array.isArray(data) ? data : data?.employees || [];
@@ -48,62 +51,33 @@ export const useLocations = () => {
     }, {});
   }, [employees]);
 
-  // Aggressive invalidation to ensure UI updates
-  const invalidateAll = async () => {
-    await queryClient.invalidateQueries({ queryKey: ['branches'] });
-    await queryClient.invalidateQueries({ queryKey: branchesApi.keys.lists() });
-    await queryClient.refetchQueries({ queryKey: branchesApi.list.queryKey(1, 100, true) });
-  };
+  const invalidate = () => queryClient.invalidateQueries({ queryKey: branchesApi.keys.lists() });
 
   const mutationOptions = {
-    onSettled: () => {
-      // Runs whether the request succeeded OR failed
-      invalidateAll();
-    },
     onSuccess: (res) => {
-      // If the backend returns success: false inside a 200 OK
-      if (res.data?.success === false) {
-        toast.error(res.data?.message || "Something went wrong, but checking for updates...");
-      } else {
-        toast.success(res.data?.message || "Operation successful");
-        setShowForm(false);
-      }
+      invalidate();
+      toast.success(res.data?.message || "Success!");
+      setShowForm(false);
     },
-    onError: (err) => {
-      // This is what you're currently hitting
-      const serverMessage = err.response?.data?.message;
-      
-      // Since you know the branch is actually created, we treat this as a "Soft Success"
-      if (serverMessage === "An error occurred. Please try again later.") {
-        toast.info("Updating list...");
-        setShowForm(false);
-        invalidateAll();
-      } else {
-        toast.error(serverMessage || "Connection error");
-      }
-    },
+    onError: (err) => toast.error(err.response?.data?.message || "Action failed"),
   };
 
   const createMutation = useMutation({
-    mutationFn: async (data) => {
-      const response = await api.post("/branch", data);
-      return response;
-    },
+    mutationFn: (data) => api.post("/branch", data),
     ...mutationOptions,
   });
 
   const updateMutation = useMutation({
-    mutationFn: async ({ id, data }) => {
-      const response = await api.put(`/branch/${id}`, data);
-      return response;
-    },
+    mutationFn: ({ id, data }) => api.put(`/branch/${id}`, data),
     ...mutationOptions,
   });
 
   const deleteMutation = useMutation({
     mutationFn: (id) => api.delete(`/branch/${id}`),
-    onSettled: () => invalidateAll(),
-    onSuccess: () => toast.success("Branch removed"),
+    onSuccess: () => {
+      invalidate();
+      toast.success("Branch removed");
+    },
   });
 
   const handleEdit = (branch) => {
@@ -138,20 +112,47 @@ export const useLocations = () => {
     } else {
       setFormData((prev) => ({ ...prev, [field]: value }));
     }
-    // Clear error for this field when user starts typing
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }));
+    if (errors[field] || errors[field.split(".")[1]]) {
+      setErrors((prev) => ({ ...prev, [field]: "", [field.split(".")[1]]: "" }));
     }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Branch name is required";
+    else if (formData.name.trim().length < 2) newErrors.name = "Branch name must be at least 2 characters";
+
+    if (!formData.address.street.trim()) newErrors.address = "Street address is required";
+    if (!formData.address.city.trim()) newErrors.city = "City is required";
+    if (!formData.address.state.trim()) newErrors.state = "State is required";
+
+    if (!formData.email.trim()) newErrors.email = "Email address is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Please enter a valid email address";
+
+    const phoneTrimmed = formData.contactNumber.trim();
+    if (phoneTrimmed) {
+      if (!/^\+?[\d\s\-()]{7,20}$/.test(phoneTrimmed)) newErrors.contactNumber = "Please enter a valid phone number";
+      else if (phoneTrimmed.replace(/\D/g, "").length < 7) newErrors.contactNumber = "Phone number is too short";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSave = (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
+
     const payload = {
-      ...formData,
+      name: formData.name,
+      email: formData.email,
+      contactNumber: formData.contactNumber,
+      operatingHours: formData.operatingHours,
       servicesOffered: formData.servicesOffered
         ? formData.servicesOffered.split(",").map((s) => s.trim().toUpperCase().replace(/\s+/g, "_"))
         : [],
-      manager: formData.manager || undefined,
+      address: formData.address,
+      manager: formData.manager && formData.manager !== "" ? formData.manager : undefined,
     };
 
     if (editBranches) {
