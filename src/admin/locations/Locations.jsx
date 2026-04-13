@@ -47,7 +47,12 @@ import { employeesApi } from "@/api/employees";
 
 const INITIAL_FORM_STATE = {
   name: "",
-  address: "",
+  address: {
+    street: "",
+    city: "",
+    state: "",
+    zip: ""
+  },
   contactNumber: "",
   email: "",
   manager: "",
@@ -133,9 +138,12 @@ export default function Locations() {
   setEditBranches(branch);
   setFormData({
     name: branch.name || "",
-    address: branch.address?.street 
-      ? `${branch.address.street}, ${branch.address.city}, ${branch.address.state}`
-      : branch.address || "",
+    address: {
+      street: branch.address?.street || "",
+      city: branch.address?.city || "",
+      state: branch.address?.state || "",
+      zip: branch.address?.zip || ""
+    },
     contactNumber: branch.contactNumber || "",
     email: branch.email || "",
     manager: branch.manager?._id || branch.manager || "",
@@ -159,10 +167,14 @@ export default function Locations() {
     }
 
     // Address validation
-    if (!formData.address.trim()) {
-      newErrors.address = 'Address is required';
-    } else if (formData.address.trim().length < 10) {
-      newErrors.address = 'Address must be at least 10 characters';
+    if (!formData.address.street.trim()) {
+      newErrors.address = 'Street address is required';
+    }
+    if (!formData.address.city.trim()) {
+      newErrors.city = 'City is required';
+    }
+    if (!formData.address.state.trim()) {
+      newErrors.state = 'State is required';
     }
 
     // Email validation
@@ -193,8 +205,6 @@ export default function Locations() {
     return;
   }
 
-  const parts = (formData.address || "").split(",").map((p) => p.trim());
-  
   const payload = {
     name: formData.name,
     email: formData.email,
@@ -206,12 +216,7 @@ export default function Locations() {
           .map(s => s.trim().toUpperCase().replace(/\s+/g, '_')) 
       : [],
     
-    address: {
-      street: parts[0] || "",
-      city: parts[1] || "",
-      state: parts[2] || "",
-      zip: parts[3] || "000000" 
-    },
+    address: formData.address,
 
     manager: formData.manager && formData.manager !== "" ? formData.manager : undefined,
   };
@@ -374,7 +379,7 @@ export default function Locations() {
 
       {/* FORM DIALOG */}
       <Dialog open={showForm} onOpenChange={setShowForm}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-lg">
           <DialogHeader>
             <DialogTitle>
               {editBranches ? "Edit" : "Register New"} Branch
@@ -397,11 +402,11 @@ export default function Locations() {
                 )}
               </div>
               <div>
-                <Label>Full Address</Label>
+                <Label>Street Address</Label>
                 <Input
-                  value={formData.address}
+                  value={formData.address.street}
                   onChange={(e) => {
-                    setFormData({ ...formData, address: e.target.value });
+                    setFormData({ ...formData, address: { ...formData.address, street: e.target.value } });
                     if (errors.address) setErrors(prev => ({ ...prev, address: '' }));
                   }}
                   className={errors.address ? 'border-red-500 focus:border-red-500' : ''}
@@ -409,6 +414,45 @@ export default function Locations() {
                 {errors.address && (
                   <p className="text-red-600 text-sm mt-1">{errors.address}</p>
                 )}
+              </div>
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <Label>City</Label>
+                  <Input
+                    value={formData.address.city}
+                    onChange={(e) => {
+                      setFormData({ ...formData, address: { ...formData.address, city: e.target.value } });
+                      if (errors.city) setErrors(prev => ({ ...prev, city: '' }));
+                    }}
+                    className={errors.city ? 'border-red-500 focus:border-red-500' : ''}
+                  />
+                  {errors.city && (
+                    <p className="text-red-600 text-sm mt-1">{errors.city}</p>
+                  )}
+                </div>
+                <div>
+                  <Label>State</Label>
+                  <Input
+                    value={formData.address.state}
+                    onChange={(e) => {
+                      setFormData({ ...formData, address: { ...formData.address, state: e.target.value } });
+                      if (errors.state) setErrors(prev => ({ ...prev, state: '' }));
+                    }}
+                    className={errors.state ? 'border-red-500 focus:border-red-500' : ''}
+                  />
+                  {errors.state && (
+                    <p className="text-red-600 text-sm mt-1">{errors.state}</p>
+                  )}
+                </div>
+                <div>
+                  <Label>Zip Code</Label>
+                  <Input
+                    value={formData.address.zip}
+                    onChange={(e) => {
+                      setFormData({ ...formData, address: { ...formData.address, zip: e.target.value } });
+                    }}
+                  />
+                </div>
               </div>
 
               <div>
