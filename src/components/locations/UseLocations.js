@@ -51,67 +51,51 @@ export const useLocations = () => {
     }, {});
   }, [employees]);
 
-  const invalidate = () => queryClient.invalidateQueries({ queryKey: branchesApi.keys.lists() });
+  // FIXED: Explicitly invalidate the exact list key and the general branches key
+  const invalidate = () => {
+    queryClient.invalidateQueries({ queryKey: branchesApi.keys.lists() });
+    queryClient.invalidateQueries({ queryKey: ['branches'] }); 
+  };
 
   const mutationOptions = {
     onSuccess: (res) => {
+      // Check if the backend sent a 200 but with a failure payload
+      if (res.data?.success === false) {
+        // Since you said it actually saves, we invalidate anyway to show the data
+        invalidate();
+        toast.error(res.data?.message || "Saved with warnings");
+        setShowForm(false);
+        return;
+      }
+
       invalidate();
       toast.success(res.data?.message || "Success!");
       setShowForm(false);
     },
     onError: (err) => {
-      // For timeout errors, refetch data after a delay (branch may have been created)
-      if (err.code === 'ECONNABORTED' || err.message === 'Network Error') {
-        toast.error("Connection timeout - checking for changes...");
-        setTimeout(() => invalidate(), 2000);
-      } else {
-        toast.error(err.response?.data?.message || "Action failed");
-      }
+      // This catches actual HTTP errors (4xx, 5xx)
+      const errorMsg = err.response?.data?.message || "An unexpected error occurred";
+      toast.error(errorMsg);
     },
   };
 
   const createMutation = useMutation({
-    mutationFn: async (data) => {
-      const res = await api.post("/branch", data, { timeout: 60000 });
-      // Check if response indicates failure even with 200 status
-      if (res.data && res.data.success === false) {
-        const error = new Error(res.data.message || "Failed to create branch");
-        error.response = { data: res.data };
-        throw error;
-      }
-      return res;
-    },
+    mutationFn: (data) => api.post("/branch", data),
     ...mutationOptions,
   });
 
   const updateMutation = useMutation({
-    mutationFn: async ({ id, data }) => {
-      const res = await api.put(`/branch/${id}`, data, { timeout: 60000 });
-      // Check if response indicates failure even with 200 status
-      if (res.data && res.data.success === false) {
-        const error = new Error(res.data.message || "Failed to update branch");
-        error.response = { data: res.data };
-        throw error;
-      }
-      return res;
-    },
+    mutationFn: ({ id, data }) => api.put(`/branch/${id}`, data),
     ...mutationOptions,
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => api.delete(`/branch/${id}`, { timeout: 60000 }),
+    mutationFn: (id) => api.delete(`/branch/${id}`),
     onSuccess: () => {
       invalidate();
       toast.success("Branch removed");
     },
-    onError: (err) => {
-      if (err.code === 'ECONNABORTED' || err.message === 'Network Error') {
-        toast.error("Connection timeout - checking for changes...");
-        setTimeout(() => invalidate(), 2000);
-      } else {
-        toast.error(err.response?.data?.message || "Failed to remove branch");
-      }
-    },
+    onError: (err) => toast.error(err.response?.data?.message || "Delete failed"),
   });
 
   const handleEdit = (branch) => {
@@ -154,20 +138,12 @@ export const useLocations = () => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Branch name is required";
-    else if (formData.name.trim().length < 2) newErrors.name = "Branch name must be at least 2 characters";
-
     if (!formData.address.street.trim()) newErrors.address = "Street address is required";
     if (!formData.address.city.trim()) newErrors.city = "City is required";
     if (!formData.address.state.trim()) newErrors.state = "State is required";
 
     if (!formData.email.trim()) newErrors.email = "Email address is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Please enter a valid email address";
-
-    const phoneTrimmed = formData.contactNumber.trim();
-    if (phoneTrimmed) {
-      if (!/^\+?[\d\s\-()]{7,20}$/.test(phoneTrimmed)) newErrors.contactNumber = "Please enter a valid phone number";
-      else if (phoneTrimmed.replace(/\D/g, "").length < 7) newErrors.contactNumber = "Phone number is too short";
-    }
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email format";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
