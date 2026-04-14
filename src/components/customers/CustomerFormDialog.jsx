@@ -59,11 +59,13 @@ export default function CustomerFormDialog({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
+      console.log("Form validation failed", errors);
       return;
     }
 
+    console.log("Submitting form data:", formData);
     onSubmit(formData);
   };
 
@@ -130,7 +132,7 @@ export default function CustomerFormDialog({
                   id="phone"
                   value={formData.phoneNumber}
                   onChange={(e) =>
-                    setFormData((p) => ({ ...p, phoneNumber: e.target.value }))
+                    handleInputChange('phoneNumber', e.target.value)
                   }
                   autoComplete="off"
                   className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
@@ -170,7 +172,7 @@ export default function CustomerFormDialog({
                   id="address"
                   value={formData.address}
                   onChange={(e) =>
-                    setFormData((p) => ({ ...p, address: e.target.value }))
+                    handleInputChange('address', e.target.value)
                   }
                   autoComplete="off"
                   className="h-11 bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"

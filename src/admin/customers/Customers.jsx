@@ -69,12 +69,18 @@ export default function Customers() {
         ? api.put(`/users/${editCustomer._id || editCustomer.id}`, baseData)
         : api.post("/users", baseData);
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["customers"] });
       toast.success(editCustomer ? "Customer updated!" : "Customer created!");
       setShowForm(false);
+      // Reset form data after successful submission
+      setFormData({ fullname: "", email: "", phoneNumber: "", address: "", password: "", avatar: null });
+      setEditCustomer(null);
     },
-    onError: (err) => toast.error(err.response?.data?.message || "Operation failed"),
+    onError: (err) => {
+      console.error("Customer save error:", err);
+      toast.error(err.response?.data?.message || "Operation failed");
+    },
   });
 
   const deleteMutation = useMutation({
@@ -183,14 +189,14 @@ export default function Customers() {
         </>
       )}
 
-      <CustomerFormDialog 
-        open={showForm} 
+      <CustomerFormDialog
+        open={showForm}
         onOpenChange={setShowForm}
         formData={formData}
         setFormData={setFormData}
         isEditing={!!editCustomer}
         isPending={saveMutation.isPending}
-        onSubmit={(e) => { e.preventDefault(); saveMutation.mutate(formData); }}
+        onSubmit={saveMutation.mutate}
       />
 
       <ConfirmDialog
