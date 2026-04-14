@@ -2,7 +2,7 @@ import api from "./api.js";
 
 const isFormData = (data) => data instanceof FormData;
 
-export const getUsers = async (page = 1, limit = 10, query = null) => {
+export const getUsers = async (page = 1, limit = 50, query = null) => {
   const params = { page, limit };
   if (query) params.query = query;
 

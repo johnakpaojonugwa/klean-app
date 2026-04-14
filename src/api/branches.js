@@ -7,13 +7,13 @@ export const createBranch = async (data) => {
   return res.data;
 };
 
-export const getAllBranches = async (page = 1, limit = 10, isActive = true) => {
+export const getAllBranches = async (page = 1, limit = 20, isActive = true) => {
   const res = await api.get("/branch", {
     params: { page, limit, isActive },
   });
   return res.data;
 };
-getAllBranches.queryKey = (page = 1, limit = 10, isActive = true) =>
+getAllBranches.queryKey = (page = 1, limit = 20, isActive = true) =>
   branchKeys.lists({ page, limit, isActive });
 
 export const getBranchById = async (id) => {

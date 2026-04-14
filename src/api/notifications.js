@@ -2,13 +2,13 @@ import api from "./api.js";
 import { notificationKeys } from "./keys.js";
 
 // ===== Notifications =====
-export const getNotifications = async (page = 1, limit = 10) => {
+export const getNotifications = async (page = 1, limit = 20) => {
   const res = await api.get("/notifications", {
     params: { page, limit },
   });
   return res.data;
 };
-getNotifications.queryKey = (page = 1, limit = 10) =>
+getNotifications.queryKey = (page = 1, limit = 20) =>
   notificationKeys.lists({ page, limit });
 
 export const markNotificationAsRead = async (notificationId) => {

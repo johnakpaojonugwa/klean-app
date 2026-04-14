@@ -12,7 +12,7 @@ createOrder.queryKey = () => orderKeys.all;
 
 export const getOrders = async (
   page = 1,
-  limit = 10,
+  limit = 50,
   status = null,
   branchId = null,
   customerId = null,
@@ -29,7 +29,7 @@ export const getOrders = async (
 };
 getOrders.queryKey = (
   page = 1,
-  limit = 10,
+  limit = 50,
   status = null,
   branchId = null,
   customerId = null,

@@ -2,13 +2,13 @@ import api from "./api.js";
 import { customerKeys } from "./keys.js";
 
 // ===== Customers =====
-export const getCustomers = async (page = 1, limit = 10) => {
+export const getCustomers = async (page = 1, limit = 100) => {
   const res = await api.get("/users/customers", {
     params: { page, limit },
   });
   return res.data;
 };
-getCustomers.queryKey = (page = 1, limit = 10) =>
+getCustomers.queryKey = (page = 1, limit = 100) =>
   customerKeys.lists({ page, limit });
 
 export const assignCustomerToBranch = async (customerId, branchId) => {

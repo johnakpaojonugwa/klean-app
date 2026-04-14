@@ -2,13 +2,13 @@ import api from "./api.js";
 import { employeeKeys } from "./keys.js";
 
 // ===== Employees =====
-export const getEmployees = async (page = 1, limit = 10, branchId = null) => {
+export const getEmployees = async (page = 1, limit = 50, branchId = null) => {
   const params = { page, limit };
   if (branchId) params.branchId = branchId;
   const res = await api.get("/employees", { params });
   return res.data;
 };
-getEmployees.queryKey = (page = 1, limit = 10, branchId = null) =>
+getEmployees.queryKey = (page = 1, limit = 50, branchId = null) =>
   employeeKeys.lists({ page, limit, branchId });
 
 export const getEmployee = async (id) => {

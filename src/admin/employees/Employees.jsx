@@ -33,8 +33,8 @@ export default function Employees() {
 
   // --- DATA FETCHING ---
   const { data: rawEmployees, isPending: employeesLoading } = useQuery({
-    queryKey: employeesApi.keys.lists({ page: 1, limit: 10, branchId }),
-    queryFn: () => getEmployees(1, 10, branchId),
+    queryKey: employeesApi.keys.lists({ page: 1, limit: 50, branchId }),
+    queryFn: () => getEmployees(1, 50, branchId),
   });
 
   const employees = useMemo(() => {

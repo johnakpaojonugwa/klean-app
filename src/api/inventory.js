@@ -9,7 +9,7 @@ export const getInventoryByBranch = async (branchId, page = 1, limit = 20) => {
   return res.data;
 };
 getInventoryByBranch.queryKey = (branchId, page = 1, limit = 20) =>
-  inventoryKeys.lists(branchId);
+  inventoryKeys.lists(branchId, page, limit);
 
 export const getLowStockItems = async (page = 1, limit = 20, branchId = null) => {
   const params = { page, limit };
@@ -18,7 +18,7 @@ export const getLowStockItems = async (page = 1, limit = 20, branchId = null) =>
   return res.data;
 };
 getLowStockItems.queryKey = (page = 1, limit = 20, branchId = null) =>
-  inventoryKeys.lowStock(branchId);
+  inventoryKeys.lowStock(branchId, page, limit);
 
 export const addInventoryItem = async (data) => {
   const res = await api.post("/inventory", data);
