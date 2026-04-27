@@ -15,6 +15,7 @@ import {
 import { Card, CardContent } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 
 // Internal Imports
@@ -194,11 +195,31 @@ export default function Invoices() {
         <Card className="border-none shadow-sm bg-white/70 backdrop-blur-md overflow-hidden">
           <CardContent className="p-0">
             {isPending ? (
-              <div className="flex flex-col items-center justify-center py-24 gap-4">
-                <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
-                <span className="text-slate-400 text-sm font-medium">
-                  Loading ledger...
-                </span>
+              <div className="w-full overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-slate-50/50 border-b border-slate-100">
+                    <tr>
+                      <th className="px-6 py-3"><Skeleton className="h-4 w-20" /></th>
+                      <th className="px-6 py-3"><Skeleton className="h-4 w-24" /></th>
+                      <th className="px-6 py-3"><Skeleton className="h-4 w-20" /></th>
+                      <th className="px-6 py-3"><Skeleton className="h-4 w-20" /></th>
+                      <th className="px-6 py-3"><Skeleton className="h-4 w-20" /></th>
+                      <th className="px-6 py-3"><Skeleton className="h-4 w-20" /></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[...Array(6)].map((_, i) => (
+                      <tr key={i} className="border-b border-slate-50">
+                        <td className="px-6 py-4"><Skeleton className="h-4 w-20" /></td>
+                        <td className="px-6 py-4"><Skeleton className="h-4 w-32" /></td>
+                        <td className="px-6 py-4"><Skeleton className="h-4 w-24" /></td>
+                        <td className="px-6 py-4"><Skeleton className="h-4 w-20" /></td>
+                        <td className="px-6 py-4 text-center"><Skeleton className="h-6 w-20 mx-auto" /></td>
+                        <td className="px-6 py-4 text-right"><Skeleton className="h-8 w-16 ml-auto" /></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             ) : filteredInvoices.length > 0 ? (
               <InvoiceTable

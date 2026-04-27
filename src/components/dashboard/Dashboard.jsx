@@ -54,24 +54,28 @@ export default function Dashboard() {
           value={`₦${summary?.totalRevenue?.toLocaleString()}`} 
           icon={<DollarSign className="text-emerald-600" />} 
           color="bg-emerald-50" 
+          loading={summaryLoading}
         />
         <StatCard 
           title="Total Orders" 
           value={summary?.totalOrders} 
           icon={<ShoppingBag className="text-blue-600" />} 
           color="bg-blue-50" 
+          loading={summaryLoading}
         />
         <StatCard 
           title="Avg. Order Value" 
           value={`₦${summary?.averageOrderValue || 0}`} 
           icon={<TrendingUp className="text-purple-600" />} 
           color="bg-purple-50" 
+          loading={summaryLoading}
         />
         <StatCard 
           title="Ready for Pickup" 
           value={summary?.readyForPickup || 0} 
           icon={<Users className="text-amber-600" />} 
           color="bg-amber-50" 
+          loading={summaryLoading}
         />
       </div>
 

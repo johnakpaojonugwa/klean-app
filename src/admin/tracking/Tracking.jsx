@@ -36,9 +36,44 @@ export default function Tracking() {
         </form>
 
         {isFetching ? (
-          <div className="space-y-4">
-            <Skeleton className="h-24 w-full rounded-2xl" />
-            <Skeleton className="h-48 w-full rounded-2xl" />
+          <div className="space-y-6">
+            {/* OrderDetailsCard Skeleton */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+              <Skeleton className="h-6 w-40" />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Skeleton className="h-3 w-24" />
+                  <Skeleton className="h-5 w-32" />
+                </div>
+                <div className="space-y-2">
+                  <Skeleton className="h-3 w-24" />
+                  <Skeleton className="h-5 w-32" />
+                </div>
+                <div className="space-y-2">
+                  <Skeleton className="h-3 w-24" />
+                  <Skeleton className="h-5 w-32" />
+                </div>
+                <div className="space-y-2">
+                  <Skeleton className="h-3 w-24" />
+                  <Skeleton className="h-5 w-32" />
+                </div>
+              </div>
+            </div>
+            {/* OrderTimeline Skeleton */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+              <Skeleton className="h-6 w-40" />
+              <div className="space-y-4">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="flex gap-4">
+                    <Skeleton className="h-8 w-8 rounded-full shrink-0" />
+                    <div className="flex-1 space-y-2">
+                      <Skeleton className="h-4 w-40" />
+                      <Skeleton className="h-3 w-56" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         ) : !searchTerm ? (
           <EmptyState icon={Search} title="Track your order" description="Enter an order number or phone number." />

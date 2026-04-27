@@ -14,6 +14,7 @@ import { Package, Loader2, AlertCircle, Activity, Plus, Search } from "lucide-re
 import { Card, CardContent } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
@@ -227,9 +228,35 @@ export default function Inventory() {
         <Card className="border-none shadow-sm bg-white/70 backdrop-blur-md overflow-hidden">
           <CardContent className="p-0">
             {isPending ? (
-              <div className="flex flex-col items-center justify-center py-24 gap-4">
-                <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
-                <span className="text-slate-400 text-sm font-medium">Fetching Catalog...</span>
+              <div className="overflow-hidden">
+                <table className="w-full">
+                  <thead className="bg-indigo-50 border-b border-slate-100">
+                    <tr className="hover:bg-transparent">
+                      <th className="px-6 py-3 text-xs"><Skeleton className="h-4 w-24" /></th>
+                      <th className="px-6 py-3 text-xs"><Skeleton className="h-4 w-16" /></th>
+                      <th className="px-6 py-3 text-xs"><Skeleton className="h-4 w-28" /></th>
+                      <th className="px-6 py-3 text-xs"><Skeleton className="h-4 w-20" /></th>
+                      <th className="px-6 py-3 text-xs"><Skeleton className="h-4 w-24" /></th>
+                      <th className="px-6 py-3 text-xs"><Skeleton className="h-4 w-20" /></th>
+                      <th className="px-6 py-3 text-xs"><Skeleton className="h-4 w-16" /></th>
+                      <th className="px-6 py-3 text-xs"><Skeleton className="h-4 w-12" /></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[...Array(5)].map((_, i) => (
+                      <tr key={i} className="border-b border-slate-50 hover:bg-indigo-50/50">
+                        <td className="px-6 py-4"><div className="flex items-center gap-3"><Skeleton className="h-8 w-8 rounded" /><Skeleton className="h-4 w-32" /></div></td>
+                        <td className="px-6 py-4"><Skeleton className="h-6 w-20" /></td>
+                        <td className="px-6 py-4"><div className="space-y-2"><Skeleton className="h-4 w-20" /><Skeleton className="h-2 w-full" /></div></td>
+                        <td className="px-6 py-4"><Skeleton className="h-4 w-24" /></td>
+                        <td className="px-6 py-4"><Skeleton className="h-4 w-24" /></td>
+                        <td className="px-6 py-4"><Skeleton className="h-4 w-16" /></td>
+                        <td className="px-6 py-4"><Skeleton className="h-6 w-12" /></td>
+                        <td className="px-6 py-4"><Skeleton className="h-8 w-8 rounded" /></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             ) : filteredData.length > 0 ? (
               <InventoryTable

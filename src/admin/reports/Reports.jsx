@@ -2,6 +2,7 @@ import React from "react";
 import { Download, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 import { Card, CardContent } from "@/components/ui/Card";
+import { Skeleton } from "@/components/ui/Skeleton";
 import PageHeader from "@/components/common/PageHeader";
 
 import { useReports } from "@/components/reports/UseReports";
@@ -56,10 +57,10 @@ export default function Reports() {
         </div>
         <CardContent className="p-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
-            <FooterStat label="New Acquisitions" value={data.customers?.total_new_customers} />
-            <FooterStat label="Daily Avg" value={Number(data.customers?.averageNewCustomersPerDay || 0).toFixed(1)} />
-            <FooterStat label="Active Branches" value={data.summary?.branchCount || 1} />
-            <FooterStat label="Retention Rate" value={`${Number(data.customers?.growth || 0).toFixed(1)}%`} />
+            <FooterStat label="New Acquisitions" value={data.customers?.total_new_customers} loading={states.isLoading} />
+            <FooterStat label="Daily Avg" value={Number(data.customers?.averageNewCustomersPerDay || 0).toFixed(1)} loading={states.isLoading} />
+            <FooterStat label="Active Branches" value={data.summary?.branchCount || 1} loading={states.isLoading} />
+            <FooterStat label="Retention Rate" value={`${Number(data.customers?.growth || 0).toFixed(1)}%`} loading={states.isLoading} />
           </div>
         </CardContent>
       </Card>
@@ -67,7 +68,16 @@ export default function Reports() {
   );
 }
 
-function FooterStat({ label, value }) {
+function FooterStat({ label, value, loading }) {
+  if (loading) {
+    return (
+      <div>
+        <Skeleton className="h-4 w-32 bg-indigo-400/20" />
+        <Skeleton className="h-8 w-24 mt-3 bg-indigo-400/20" />
+      </div>
+    );
+  }
+
   return (
     <div>
       <p className="text-indigo-200 text-sm font-medium">{label}</p>
