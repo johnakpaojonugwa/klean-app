@@ -49,10 +49,18 @@ export default function OrderStatusChart({ data: inputData, loading }) {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 h-full">
+        {/* Title skeleton */}
         <Skeleton className="h-6 w-56 mb-6" />
+        {/* Chart skeleton */}
         <div className="flex justify-center items-center h-[280px]">
           <Skeleton className="h-48 w-48 rounded-full" />
+        </div>
+        {/* Legend skeleton */}
+        <div className="flex items-center justify-center gap-4 mt-4 flex-wrap">
+          {[1, 2, 3].map((item) => (
+            <Skeleton key={item} className="h-4 w-24" />
+          ))}
         </div>
       </div>
     );

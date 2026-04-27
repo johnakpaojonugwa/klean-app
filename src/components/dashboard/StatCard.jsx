@@ -17,14 +17,25 @@ export default function StatCard({
   // Loading State
   if (loading) {
     return (
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 h-40 flex flex-col justify-between">
-        <div className="flex justify-between">
-          <div className="space-y-3">
-             <Skeleton className="h-3 w-20" />
-             <Skeleton className="h-8 w-28" />
-             <Skeleton className="h-3 w-32" />
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+        <div className="flex items-start justify-between">
+          <div className="space-y-3 flex-1">
+            {/* Title skeleton */}
+            <Skeleton className="h-3 w-20" />
+            
+            {/* Value skeleton */}
+            <div className="space-y-1">
+              <Skeleton className="h-8 w-40" />
+              {/* Subtitle skeleton */}
+              <Skeleton className="h-3 w-32" />
+            </div>
+
+            {/* Trend skeleton */}
+            <Skeleton className="h-5 w-24 rounded-full" />
           </div>
-          <Skeleton className="h-12 w-12 rounded-2xl" />
+
+          {/* Icon skeleton */}
+          <Skeleton className="h-12 w-12 rounded-2xl shrink-0" />
         </div>
       </div>
     );

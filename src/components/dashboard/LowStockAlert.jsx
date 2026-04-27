@@ -1,6 +1,7 @@
 import React from "react";
 import { AlertTriangle, Package } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { normalizeApiList } from "@/lib/inventoryUtils";
@@ -20,14 +21,25 @@ export default function LowStockAlert({ data = [], loading }) {
   // Loading State
   if (loading) {
     return (
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 animate-pulse">
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 h-full flex flex-col">
+        {/* Header skeleton */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-9 h-9 bg-slate-100 rounded-lg" />
-          <div className="h-5 bg-slate-100 rounded w-1/3" />
+          <Skeleton className="w-9 h-9 rounded-lg flex-shrink-0" />
+          <Skeleton className="h-5 w-32" />
         </div>
-        <div className="space-y-3">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="h-14 bg-slate-50 rounded-lg" />
+        {/* Alert items skeleton */}
+        <div className="space-y-3 flex-grow">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="flex items-center justify-between p-3 border border-slate-100 rounded-xl">
+              <div className="max-w-[140px] space-y-2 flex-1">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-3 w-20" />
+              </div>
+              <div className="text-right space-y-2">
+                <Skeleton className="h-4 w-16" />
+                <Skeleton className="h-3 w-12" />
+              </div>
+            </div>
           ))}
         </div>
       </div>

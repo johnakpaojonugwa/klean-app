@@ -214,9 +214,31 @@ const SectionHeader = ({ title, count, color }) => (
  */
 function OrderTable({ data, loading, actionLabel, onAction, actionVariant, loadingAction, showPhone = false }) {
   if (loading) return (
-    <div className="bg-white rounded-xl border p-12 text-center">
-        <Loader2 className="animate-spin mx-auto text-indigo-500 h-8 w-8 mb-2" />
-        <p className="text-sm text-slate-500">Loading orders...</p>
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader className="bg-slate-50">
+            <TableRow>
+              <TableHead className="w-[120px] font-bold text-slate-700"><div className="flex items-center gap-1"><Hash size={14}/> ID</div></TableHead>
+              <TableHead className="font-bold text-slate-700">Customer</TableHead>
+              {showPhone && <TableHead className="font-bold text-slate-700"><div className="flex items-center gap-1"><Phone size={14}/> Contact</div></TableHead>}
+              <TableHead className="font-bold text-slate-700">Order Details</TableHead>
+              <TableHead className="text-right font-bold text-slate-700">Action</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {[...Array(4)].map((_, i) => (
+              <TableRow key={i} className="hover:bg-slate-50/50">
+                <TableCell><Skeleton className="h-4 w-16" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-24" /></TableCell>
+                {showPhone && <TableCell><Skeleton className="h-4 w-20" /></TableCell>}
+                <TableCell><Skeleton className="h-4 w-32" /></TableCell>
+                <TableCell className="text-right"><Skeleton className="h-8 w-28 ml-auto" /></TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 

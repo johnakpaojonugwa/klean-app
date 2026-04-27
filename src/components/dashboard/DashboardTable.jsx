@@ -41,10 +41,23 @@ export const DashboardTable = ({
           <CardTitle>{title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2">
-            {[...Array(5)].map((_, i) => (
-              <Skeleton key={i} className="h-10 w-full" />
-            ))}
+          <div className="relative w-full overflow-auto">
+            <div className="space-y-2">
+              {/* Header row skeleton */}
+              <div className="flex gap-4 pb-2 border-b border-slate-100">
+                {[...Array(Math.min(columns.length, 4))].map((_, i) => (
+                  <Skeleton key={i} className="h-4 flex-1" />
+                ))}
+              </div>
+              {/* Data rows skeleton */}
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="flex gap-4 py-3 border-b border-slate-50">
+                  {[...Array(Math.min(columns.length, 4))].map((_, j) => (
+                    <Skeleton key={j} className="h-6 flex-1" />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </CardContent>
       </Card>

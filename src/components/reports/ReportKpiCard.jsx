@@ -20,7 +20,24 @@ export const ReportKpiCard = ({
   loading 
 }) => {
   if (loading) {
-    return <Skeleton className="h-32 w-full rounded-xl shadow-sm" />;
+    return (
+      <div className="overflow-hidden border-none shadow-md bg-white rounded-xl">
+        <div className="p-6">
+          <div className="flex justify-between items-start">
+            <div className="space-y-2 flex-1">
+              {/* Title skeleton */}
+              <Skeleton className="h-4 w-24" />
+              {/* Value skeleton */}
+              <Skeleton className="h-8 w-40" />
+              {/* Trend skeleton */}
+              <Skeleton className="h-4 w-32 rounded-full" />
+            </div>
+            {/* Icon skeleton */}
+            <Skeleton className="h-12 w-12 rounded-2xl flex-shrink-0" />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   // Determine trend color and symbol

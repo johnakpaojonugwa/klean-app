@@ -24,8 +24,20 @@ export default function BranchRevenueComparison({ summaryData, loading }) {
   if (loading) {
     return (
       <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-        <Skeleton className="h-6 w-56 mb-6" />
-        <Skeleton className="h-[380px] w-full" />
+        {/* Title and subtitle skeleton */}
+        <div className="flex items-start justify-between mb-6">
+          <div className="space-y-2 flex-1">
+            <Skeleton className="h-6 w-56" />
+            <Skeleton className="h-3 w-64" />
+          </div>
+          {/* Total revenue box skeleton */}
+          <div className="space-y-2">
+            <Skeleton className="h-3 w-32" />
+            <Skeleton className="h-6 w-40" />
+          </div>
+        </div>
+        {/* Chart skeleton */}
+        <Skeleton className="h-[320px] w-full" />
       </div>
     );
   }

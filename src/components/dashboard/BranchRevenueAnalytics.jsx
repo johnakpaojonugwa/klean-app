@@ -43,10 +43,25 @@ export default function BranchRevenueAnalytics({ orders = [], loading }) {
   if (loading) {
     return (
       <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-        <Skeleton className="h-6 w-48 mb-6" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[1, 2, 3, 4].map((item) => (
-            <Skeleton key={item} className="h-24 rounded-xl" />
+        {/* Header skeleton */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <div className="space-y-2">
+            <Skeleton className="h-6 w-48" />
+            <Skeleton className="h-3 w-64" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-3 w-32" />
+            <Skeleton className="h-6 w-40" />
+          </div>
+        </div>
+        {/* Progress bars skeleton */}
+        <div className="space-y-4">
+          {[1, 2, 3, 4, 5, 6].map((item) => (
+            <div key={item} className="space-y-2">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-2 w-full" />
+              <Skeleton className="h-3 w-32" />
+            </div>
           ))}
         </div>
       </div>

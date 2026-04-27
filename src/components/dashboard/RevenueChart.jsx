@@ -23,8 +23,16 @@ export default function RevenueChart({ data = [], loading }) {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 h-[380px]">
-        <Skeleton className="h-6 w-48 mb-6" />
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+        {/* Header skeleton */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="space-y-2">
+            <Skeleton className="h-6 w-48" />
+            <Skeleton className="h-3 w-40" />
+          </div>
+          <Skeleton className="h-4 w-32" />
+        </div>
+        {/* Chart skeleton */}
         <Skeleton className="h-[280px] w-full" />
       </div>
     );

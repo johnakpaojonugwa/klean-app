@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { Clock, Package } from "lucide-react";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
@@ -30,14 +31,31 @@ export default function RecentOrders({ data = [], loading }) {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-        <div className="animate-pulse space-y-4">
-          <div className="h-4 bg-slate-200 rounded w-1/4"></div>
-          <div className="space-y-3">
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="h-16 bg-slate-100 rounded-xl"></div>
-            ))}
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full">
+        {/* Header skeleton */}
+        <div className="p-6 border-b border-slate-100">
+          <div className="flex items-center justify-between">
+            <Skeleton className="h-6 w-40" />
+            <Skeleton className="h-8 w-20" />
           </div>
+        </div>
+        {/* Order list skeleton */}
+        <div className="divide-y divide-slate-100">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="p-4 space-y-3">
+              <div className="flex items-start justify-between">
+                <div className="space-y-2 flex-1">
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-3 w-40" />
+                </div>
+                <Skeleton className="h-6 w-20" />
+              </div>
+              <div className="flex items-center gap-2">
+                <Skeleton className="h-3 w-32" />
+                <Skeleton className="h-3 w-20" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );

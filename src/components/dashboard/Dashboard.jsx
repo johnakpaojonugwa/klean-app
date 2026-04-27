@@ -176,14 +176,43 @@ function StatCard({ title, value, icon, color }) {
 // Loading state
 function DashboardSkeleton() {
   return (
-    <div className="p-8 space-y-8">
-      <div className="h-8 w-48 bg-slate-200 rounded animate-pulse" />
-      <div className="grid grid-cols-4 gap-6">
+    <div className="p-6 space-y-8 bg-slate-50/50 min-h-screen">
+      {/* Header Skeleton */}
+      <div className="space-y-2">
+        <Skeleton className="h-8 w-64 rounded-lg" />
+        <Skeleton className="h-4 w-96 rounded-lg" />
+      </div>
+
+      {/* Stat Cards Skeleton */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[...Array(4)].map((_, i) => (
-          <Skeleton key={i} className="h-32 w-full" />
+          <div key={i} className="space-y-4 p-6 border rounded-xl bg-white shadow-sm">
+            <Skeleton className="h-4 w-32 rounded" />
+            <Skeleton className="h-8 w-20 rounded" />
+            <Skeleton className="h-3 w-24 rounded" />
+          </div>
         ))}
       </div>
-      <Skeleton className="w-full h-80" />
+
+      {/* Charts Section Skeleton */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-4 p-6 border rounded-xl bg-white shadow-sm">
+          <Skeleton className="h-6 w-40 rounded" />
+          <Skeleton className="h-64 w-full rounded" />
+        </div>
+        <div className="space-y-4 p-6 border rounded-xl bg-white shadow-sm">
+          <Skeleton className="h-6 w-40 rounded" />
+          <Skeleton className="h-64 w-full rounded" />
+        </div>
+      </div>
+
+      {/* Bottom Section Skeleton */}
+      <div className="grid grid-cols-1 gap-6">
+        <div className="space-y-4 p-6 border rounded-xl bg-white shadow-sm">
+          <Skeleton className="h-6 w-40 rounded" />
+          <Skeleton className="h-48 w-full rounded" />
+        </div>
+      </div>
     </div>
   );
 }
