@@ -23,16 +23,6 @@ export const customerKeys = {
   profile: () => [...customerKeys.all, 'profile'],
 };
 
-export const payrollKeys = {
-  all: ['payroll'],
-  lists: (filters = {}) => [...payrollKeys.all, 'list', filters],
-  detail: (id) => [...payrollKeys.all, 'detail', id],
-  cycles: (filters = {}) => [...payrollKeys.all, 'cycles', filters],
-  byEmployee: (employeeId) => [...payrollKeys.all, 'employee', employeeId],
-  salaryStructures: (filters = {}) => [...payrollKeys.all, 'structure', filters],
-  salarySlip: (id) => [...payrollKeys.all, 'slip', id],
-};
-
 export const invoiceKeys = {
   all: ['invoices'],
   lists: (filters = {}) => [...invoiceKeys.all, 'list', filters],
@@ -57,18 +47,6 @@ export const analyticsKeys = {
   customers: (filters = {}) => [...analyticsKeys.all, 'customers', filters],
 };
 
-export const attendanceKeys = {
-  all: ['attendance'],
-  lists: (filters = {}) => [...attendanceKeys.all, 'list', filters],
-  byEmployee: (employeeId, filters = {}) => [...attendanceKeys.all, 'employee', employeeId, filters],
-};
-
-export const leaveKeys = {
-  all: ['leaves'],
-  lists: (filters = {}) => [...leaveKeys.all, 'list', filters],
-  detail: (id) => [...leaveKeys.all, 'detail', id],
-};
-
 export const notificationKeys = {
   all: ['notifications'],
   lists: (filters = {}) => [...notificationKeys.all, 'list', filters],
@@ -80,4 +58,3 @@ export const branchManagerKeys = {
   detail: (id) => [...branchManagerKeys.all, 'detail', id],
 }
 
-// add more factories as your app grows (customers, payroll, analytics, …)
