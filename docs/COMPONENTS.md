@@ -504,7 +504,129 @@ describe('CustomerList', () => {
 });
 ```
 
-## 📝 Component Documentation Template
+## � Toast Notifications
+
+The application includes a comprehensive toast notification system for displaying feedback to users. Toast notifications are built on Sonner with responsive positioning, spring physics animations, and smart auto-dismissal.
+
+### Basic Usage
+
+```javascript
+import { showSuccess, showError, showWarning, showInfo } from '@/hooks/useToast';
+
+// Show different notification types
+showSuccess('Profile updated successfully');
+showError('Failed to save changes');
+showWarning('Your session expires in 5 minutes');
+showInfo('New orders available');
+```
+
+### Toast Types
+
+| Type | Duration | Color | Use Case |
+|------|----------|-------|----------|
+| **success** | 3 seconds | 🟢 Green | Operation completed |
+| **error** | Until closed | 🔴 Red | Critical failures |
+| **warning** | 7 seconds | 🟡 Amber | Cautions/alerts |
+| **info** | 4 seconds | 🔵 Blue | General information |
+
+### Advanced Features
+
+#### Toasts with Descriptions
+```javascript
+import toast from '@/hooks/useToast';
+
+toast.error('Payment Failed', {
+  description: 'Your card was declined. Please try another payment method.'
+});
+```
+
+#### Promise-Based Notifications
+```javascript
+toast.promise(submitForm(), {
+  loading: 'Submitting...',
+  success: 'Form submitted successfully!',
+  error: 'Failed to submit'
+});
+```
+
+#### Custom Content
+```javascript
+toast.custom(
+  <div className="flex items-center gap-2">
+    <CheckIcon />
+    <span>Custom notification</span>
+  </div>,
+  'success'
+);
+```
+
+#### Manual Dismissal
+```javascript
+const toastId = toast.success('Action pending...');
+
+// Dismiss specific toast
+toast.dismiss(toastId);
+
+// Dismiss all toasts
+toast.dismissAll();
+```
+
+### Responsive Features
+
+**Desktop (≥768px)**:
+- Position: Bottom-right
+- Hover to pause timer
+- Smooth animations
+
+**Mobile (<768px)**:
+- Position: Top-center
+- Swipe to dismiss
+- Touch-optimized controls
+
+### Integration with React Components
+
+#### With React Query
+```javascript
+import { useMutation } from '@tanstack/react-query';
+import { showSuccess, showError } from '@/hooks/useToast';
+
+const mutation = useMutation({
+  mutationFn: updateProfile,
+  onSuccess: () => showSuccess('Profile updated'),
+  onError: (error) => showError(error.message),
+});
+```
+
+#### In Form Components
+```javascript
+const handleSubmit = async (data) => {
+  try {
+    await submitForm(data);
+    showSuccess('Form submitted successfully');
+  } catch (error) {
+    showError(`Error: ${error.message}`);
+  }
+};
+```
+
+### Accessibility
+
+- ✅ Keyboard support (ESC to dismiss)
+- ✅ Respects `prefers-reduced-motion`
+- ✅ WCAG AA compliant colors
+- ✅ Screen reader support
+
+### Documentation
+
+For complete toast documentation and examples, see:
+- [Toast System Guide](/docs/TOAST_SYSTEM.md)
+- [Code Examples](/docs/TOAST_EXAMPLES.md)
+- [Quick Reference](/docs/TOAST_QUICK_REFERENCE.md)
+- [API Documentation](/docs/API.md#-toast-notifications)
+
+---
+
+## �📝 Component Documentation Template
 
 When creating new components, follow this documentation template:
 

@@ -1,9 +1,11 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
 import ErrorBoundary from "@/components/layout/ErrorBoundary.jsx";
 import AdminRoute from "@/router/AdminRoute.jsx";
 import ScrollToTop from "@/utils/ScrollToTop.jsx";
+import { getToasterConfig, getToastPosition } from "@/lib/toastConfig.js";
+import "@/styles/toast.css";
 
 // Lazy-loaded components for Admin Dashboard and Pages
 const AdminLayout = lazy(() => import("@/admin/layout/AdminLayout.jsx"));
@@ -106,6 +108,18 @@ const LoadingFallback = () => {
 };
 
 export default function App() {
+  const [position, setPosition] = useState(getToastPosition());
+
+  // Handle responsive positioning
+  useEffect(() => {
+    const handleResize = () => {
+      setPosition(getToastPosition());
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <ErrorBoundary>
@@ -154,19 +168,53 @@ export default function App() {
         </Suspense>
       </ErrorBoundary>
       <Toaster
-        position="bottom-right"
+        position={position}
         theme="light"
+        richColors={false}
+        closeButton
+        pauseWhenPageIsHidden
+        visibleToasts={3}
+        gap={12}
         toastOptions={{
-          // Default container styling
           classNames: {
-            toast:
-              "group rounded-2xl border shadow-lg font-medium text-sm px-4 py-3 flex items-center gap-3",
-            success: "!bg-emerald-500 !border-emerald-600 !text-white",
-            error: "!bg-red-500 !border-red-600 !text-white",
-            warning: "!bg-amber-500 !border-amber-600 !text-white",
-            info: "!bg-blue-500 !border-blue-600 !text-white",
-            icon: "text-white",
-            closeButton: "bg-white/20 hover:bg-white/40 text-white border-none",
+            toast: `
+              group relative rounded-lg shadow-lg font-medium text-sm
+              flex items-start gap-3 px-4 py-3
+              backdrop-blur-sm border border-gray-200
+              dark:border-gray-800 dark:shadow-xl
+            `,
+            description: "text-sm opacity-90 mt-1",
+            actionButton:
+              "bg-white/20 hover:bg-white/40 text-inherit border-none rounded px-2 py-1",
+            closeButton: `
+              h-5 w-5 shrink-0 rounded opacity-70 hover:opacity-100
+              transition-opacity ml-auto
+            `,
+            // Success Toast
+            success: `
+              !bg-emerald-50 !border-emerald-200 !text-emerald-900
+              dark:!bg-emerald-950 dark:!border-emerald-800 dark:!text-emerald-100
+              [&_svg]:!text-emerald-500
+            `,
+            // Error Toast
+            error: `
+              !bg-red-50 !border-red-200 !text-red-900
+              dark:!bg-red-950 dark:!border-red-800 dark:!text-red-100
+              [&_svg]:!text-red-500
+            `,
+            // Warning Toast
+            warning: `
+              !bg-amber-50 !border-amber-200 !text-amber-900
+              dark:!bg-amber-950 dark:!border-amber-800 dark:!text-amber-100
+              [&_svg]:!text-amber-500
+            `,
+            // Info Toast
+            info: `
+              !bg-blue-50 !border-blue-200 !text-blue-900
+              dark:!bg-blue-950 dark:!border-blue-800 dark:!text-blue-100
+              [&_svg]:!text-blue-500
+            `,
+            icon: "h-5 w-5 shrink-0 mt-0.5",
           },
         }}
       />

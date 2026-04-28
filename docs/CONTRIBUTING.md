@@ -221,6 +221,45 @@ const useCreateUser = () => {
 };
 ```
 
+### User Notifications
+
+Use the toast notification system to provide user feedback:
+
+```javascript
+import { showSuccess, showError, showWarning, showInfo } from '@/hooks/useToast';
+
+// Success: Operation completed (3 seconds)
+const handleSave = async () => {
+  try {
+    await saveData();
+    showSuccess('Changes saved successfully');
+  } catch (error) {
+    showError('Failed to save changes');
+  }
+};
+
+// Error: Critical failures (stays until closed)
+showError('Payment failed. Please try again.');
+
+// Warning: Cautions needing attention (7 seconds)
+showWarning('Your session will expire in 5 minutes');
+
+// Info: General information (4 seconds)
+showInfo('New orders are available');
+```
+
+**Guidelines:**
+- Use appropriate toast types for different scenarios
+- Keep messages concise and clear
+- Avoid showing more than 3 toasts simultaneously
+- For async operations, show appropriate loading/error states
+- Errors should stay until acknowledged (user closes them)
+- Success/info messages can auto-dismiss
+
+See [Toast System Documentation](/docs/TOAST_SYSTEM.md) for more details.
+
+---
+
 ## 🧪 Testing
 
 ### Testing Strategy

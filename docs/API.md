@@ -283,11 +283,127 @@ const OrdersPage = () => {
 };
 ```
 
-### Mutations
+## 🔔 Toast Notifications
+
+The application includes a comprehensive toast notification system built on Sonner with advanced features like responsive positioning, spring physics animations, and type-based auto-dismissal.
+
+### Quick Start
+
+```javascript
+import { showSuccess, showError, showWarning, showInfo } from '@/hooks/useToast';
+
+// Success (auto-dismisses in 3 seconds)
+showSuccess('Order created successfully');
+
+// Error (stays until user closes)
+showError('Failed to create order');
+
+// Warning (auto-dismisses in 7 seconds)
+showWarning('Your session is expiring soon');
+
+// Info (auto-dismisses in 4 seconds)
+showInfo('New orders available');
+```
+
+### Toast Types & Durations
+
+| Type | Duration | Use Case | Styling |
+|------|----------|----------|---------|
+| **success** | 3 seconds | Operation completed | 🟢 Green background + border |
+| **error** | Until closed | Critical failures | 🔴 Red background + border |
+| **warning** | 7 seconds | Cautions needing attention | 🟡 Amber background + border |
+| **info** | 4 seconds | General information | 🔵 Blue background + border |
+
+### Advanced Toast Features
+
+#### With Description
+```javascript
+import toast from '@/hooks/useToast';
+
+toast.error('Payment Failed', {
+  description: 'Your card was declined. Please try another payment method.'
+});
+```
+
+#### Promise-Based (for async operations)
+```javascript
+import toast from '@/hooks/useToast';
+
+toast.promise(submitForm(), {
+  loading: 'Submitting your form...',
+  success: 'Form submitted successfully!',
+  error: 'Failed to submit form. Please try again.'
+});
+```
+
+#### Custom JSX Content
+```javascript
+import toast from '@/hooks/useToast';
+
+toast.custom(
+  (toastId) => (
+    <div className="flex items-center gap-3">
+      <CustomIcon />
+      <div>
+        <p className="font-semibold">Action Complete</p>
+        <p className="text-sm opacity-75">Click to see details</p>
+      </div>
+    </div>
+  ),
+  'success'
+);
+```
+
+#### Manual Dismiss
+```javascript
+import toast from '@/hooks/useToast';
+
+// Dismiss specific toast
+const toastId = toast.success('Undo action?');
+toast.dismiss(toastId);
+
+// Dismiss all toasts
+toast.dismissAll();
+```
+
+### Toast Functions Reference
+
+#### `showSuccess(message, options?)`
+Shows a success notification that auto-dismisses in 3 seconds.
+
+#### `showError(message, options?)`
+Shows an error notification that stays until the user closes it.
+
+#### `showWarning(message, options?)`
+Shows a warning notification that auto-dismisses in 7 seconds.
+
+#### `showInfo(message, options?)`
+Shows an info notification that auto-dismisses in 4 seconds.
+
+#### `toast.promise(promise, messages, options?)`
+Tracks an async operation with different toasts for loading, success, and error states.
+
+#### `toast.custom(content, type, options?)`
+Displays custom JSX content in a toast.
+
+### Features
+
+- **Responsive Positioning**: Bottom-right on desktop, top-center on mobile
+- **Spring Physics**: Smooth animations with damping (20) and stiffness (180)
+- **Smart Stacking**: Maximum 3 visible toasts with automatic overflow handling
+- **Mobile Gestures**: Swipe to dismiss on touch devices
+- **Hover Pause**: Timer pauses when hovering over a toast
+- **Keyboard Support**: ESC key to dismiss
+- **Color Coded**: Each type has distinctive colors and left border accent
+- **Icons**: Automatic icons for each toast type
+
+### Usage in React Components
+
+#### With Mutations
 ```jsx
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createOrder } from '@/api/orders';
-import { toast } from 'sonner';
+import { showSuccess, showError } from '@/hooks/useToast';
 
 const CreateOrderForm = () => {
   const queryClient = useQueryClient();
@@ -296,10 +412,133 @@ const CreateOrderForm = () => {
     mutationFn: createOrder,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['orders'] });
-      toast.success('Order created successfully');
+      showSuccess('Order created successfully');
     },
     onError: (error) => {
-      toast.error('Failed to create order');
+      showError(error.message || 'Failed to create order');
+    },
+  });
+
+  const handleSubmit = (orderData) => {
+    createOrderMutation.mutate(orderData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* Form fields */}
+      <button
+        type="submit"
+        disabled={createOrderMutation.isPending}
+      >
+        {createOrderMutation.isPending ? 'Creating...' : 'Create Order'}
+      </button>
+    </form>
+  );
+};
+```
+
+#### Async Operations
+```javascript
+import { showSuccess, showError } from '@/hooks/useToast';
+
+export async function deleteOrder(orderId) {
+  try {
+    await fetch(`/api/orders/${orderId}`, { method: 'DELETE' });
+    showSuccess('Order deleted successfully');
+  } catch (error) {
+    showError(`Failed to delete: ${error.message}`);
+  }
+}
+```
+
+### Responsive Behavior
+
+**Desktop (≥768px)**:
+- Position: Bottom-right corner
+- Padding: 20px from edges
+- Max width: 420px
+
+**Mobile (<768px)**:
+- Position: Top-center
+- Full width minus padding
+- Touch-optimized close button (24px)
+- Swipe gestures enabled
+
+### Accessibility
+
+- ✅ Respects `prefers-reduced-motion` for animations
+- ✅ Keyboard navigation (ESC to dismiss)
+- ✅ WCAG AA color contrast compliant
+- ✅ Screen reader support via Sonner
+- ✅ Touch-friendly targets (24px minimum)
+
+### Configuration
+
+For detailed configuration and customization, see:
+- [Toast System Documentation](/docs/TOAST_SYSTEM.md)
+- [Code Examples](/docs/TOAST_EXAMPLES.md)
+- [Quick Reference](/docs/TOAST_QUICK_REFERENCE.md)
+- [Configuration File](/src/lib/toastConfig.js)
+
+---
+
+## 🔄 React Query Integration
+
+### Query Keys Pattern
+```javascript
+// src/constants/queryKeys.js
+export const QUERY_KEYS = {
+  BRANCHES: ['branches'],
+  CUSTOMERS: ['customers'],
+  ORDERS: ['orders'],
+  INVENTORY: ['inventory'],
+  ANALYTICS: ['analytics'],
+  USER: ['user'],
+};
+```
+
+### Usage in Components
+```jsx
+import { useQuery } from '@tanstack/react-query';
+import { getOrders } from '@/api/orders';
+
+const OrdersPage = () => {
+  const { data: orders, isLoading, error } = useQuery({
+    queryKey: ['orders'],
+    queryFn: getOrders,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage error={error} />;
+
+  return (
+    <div>
+      {orders?.data?.map(order => (
+        <OrderCard key={order.id} order={order} />
+      ))}
+    </div>
+  );
+};
+```
+
+### Mutations
+```jsx
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createOrder } from '@/api/orders';
+import { showSuccess, showError } from '@/hooks/useToast';
+
+const CreateOrderForm = () => {
+  const queryClient = useQueryClient();
+
+  const createOrderMutation = useMutation({
+    mutationFn: createOrder,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['orders'] });
+      showSuccess('Order created successfully');
+    },
+    onError: (error) => {
+      showError('Failed to create order');
       console.error('Order creation error:', error);
     },
   });

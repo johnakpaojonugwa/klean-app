@@ -9,6 +9,7 @@ This document provides a comprehensive overview of the Klean Frontend applicatio
 - [Application Structure](#application-structure)
 - [Component Architecture](#component-architecture)
 - [State Management](#state-management)
+- [Notification System](#notification-system)
 - [Routing Architecture](#routing-architecture)
 - [API Integration](#api-integration)
 - [Security Architecture](#security-architecture)
@@ -57,7 +58,7 @@ The Klean Frontend is a modern React-based web application for managing laundry 
 
 ### Additional Libraries
 - **date-fns 4.1.0**: Date manipulation utilities
-- **Sonner 2.0.7**: Toast notifications
+- **Sonner 2.0.7**: Advanced toast notification system with spring physics animations, responsive positioning, and smart timing
 - **Recharts 3.7.0**: Data visualization
 
 ## 📁 Application Structure
@@ -350,7 +351,156 @@ const AppProvider = ({ children }) => {
 };
 ```
 
-## 🛣️ Routing Architecture
+## � Notification System
+
+### Overview
+
+The application includes a comprehensive toast notification system built on Sonner 2.0.7 with advanced features including:
+
+- **Responsive Positioning**: Bottom-right on desktop, top-center on mobile
+- **Spring Physics Animations**: Smooth stacking with damping (20) and stiffness (180)
+- **Type-Based Durations**: Auto-dismiss timing based on notification type
+- **Interactive Gestures**: Hover pause, swipe dismiss (mobile), keyboard support
+- **Color Coding**: Each type has distinctive colors with left border accents and icons
+
+### Architecture
+
+```
+src/
+├── lib/
+│   └── toastConfig.js          # Configuration & constants
+├── hooks/
+│   └── useToast.js             # Toast utilities
+├── styles/
+│   └── toast.css               # Styling & animations
+└── App.jsx                     # Toaster provider
+```
+
+### Key Components
+
+#### Toast Configuration (`src/lib/toastConfig.js`)
+
+```javascript
+export const TOAST_DURATIONS = {
+  success: 3000,     // Auto-dismiss in 3 seconds
+  info: 4000,        // Auto-dismiss in 4 seconds
+  warning: 7000,     // Auto-dismiss in 7 seconds
+  error: Infinity,   // Stay until closed
+};
+
+export const TOAST_COLORS = {
+  success: { bg: 'bg-emerald-50', border: 'border-emerald-500', ... },
+  error: { bg: 'bg-red-50', border: 'border-red-500', ... },
+  warning: { bg: 'bg-amber-50', border: 'border-amber-500', ... },
+  info: { bg: 'bg-blue-50', border: 'border-blue-500', ... },
+};
+
+export const SPRING_CONFIG = {
+  damping: 20,
+  stiffness: 180,
+  mass: 1,
+};
+
+export const TOAST_STACKING = {
+  maxVisible: 3,
+  offset: 12, // pixels between toasts
+};
+```
+
+#### Toast Utilities (`src/hooks/useToast.js`)
+
+```javascript
+import { showSuccess, showError, showWarning, showInfo } from '@/hooks/useToast';
+
+// Simple notifications with auto-duration
+showSuccess('Action completed');
+showError('Something went wrong');
+showWarning('Please review this');
+showInfo('New information');
+
+// Advanced usage
+import toast from '@/hooks/useToast';
+
+toast.promise(asyncOperation(), {
+  loading: 'Processing...',
+  success: 'Done!',
+  error: 'Failed!',
+});
+
+toast.custom(
+  <CustomJSXComponent />,
+  'success'
+);
+
+const id = toast.success('Message');
+toast.dismiss(id);
+toast.dismissAll();
+```
+
+### Responsive Behavior
+
+#### Desktop (≥768px)
+- Position: Bottom-right (20px padding)
+- Max width: 420px
+- Hover pause timer
+- Smooth animations
+
+#### Mobile (<768px)
+- Position: Top-center
+- Full width (minus 40px padding)
+- Swipe to dismiss
+- Touch-optimized (24px close button)
+
+### CSS Architecture (`src/styles/toast.css`)
+
+The toast styling system includes:
+
+1. **Layout & Positioning**: Media queries for responsive positioning
+2. **Animations**: Spring physics easing with cubic-bezier curves
+3. **Color Schemes**: Type-based colors with dark mode support
+4. **Interactive States**: Hover, focus, and active states
+5. **Gestures**: Swipe animation handling
+6. **Accessibility**: Reduced motion support, WCAG AA contrast
+
+### Integration with Mutations
+
+```javascript
+import { useMutation } from '@tanstack/react-query';
+import { showSuccess, showError } from '@/hooks/useToast';
+
+const mutation = useMutation({
+  mutationFn: async (data) => {
+    // API call
+  },
+  onSuccess: () => {
+    showSuccess('Operation successful');
+  },
+  onError: (error) => {
+    showError(error.message);
+  },
+});
+```
+
+### Configuration & Customization
+
+All toast behavior is configurable through `src/lib/toastConfig.js`:
+
+- **Duration**: Modify `TOAST_DURATIONS` for different timing
+- **Colors**: Update `TOAST_COLORS` for custom styling
+- **Stacking**: Adjust `TOAST_STACKING.maxVisible` for max concurrent toasts
+- **Physics**: Modify `SPRING_CONFIG` for animation behavior
+
+### Documentation
+
+For complete documentation and examples, see:
+- [Toast System Guide](/docs/TOAST_SYSTEM.md)
+- [Code Examples](/docs/TOAST_EXAMPLES.md)
+- [Quick Reference](/docs/TOAST_QUICK_REFERENCE.md)
+- [API Documentation](/docs/API.md#-toast-notifications)
+
+---
+
+## �🛣️ Routing Architecture
 
 ### Route Structure
 

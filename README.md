@@ -70,8 +70,14 @@ A comprehensive React-based frontend application for managing a laundry and clea
 ### Additional Libraries
 - **Recharts 3.7.0** - Data visualization components
 - **date-fns 4.1.0** - Modern date utility library
-- **Sonner 2.0.7** - Toast notification system
+- **Sonner 2.0.7** - Advanced toast notification system with spring physics
 - **nanoid 5.0.7** - Unique ID generation
+
+### Notification System
+- **Responsive Toast Notifications**: Automatic positioning (bottom-right desktop, top-center mobile)
+- **Spring Physics Animations**: Smooth stacking with customizable damping and stiffness
+- **Type-Based Durations**: Auto-dismiss timing based on notification type (success 3s, info 4s, warning 7s)
+- **Smart Interactions**: Pause on hover, swipe to dismiss (mobile), keyboard support
 
 ## 📋 Prerequisites
 
@@ -182,10 +188,14 @@ klean-frontend/
 │   ├── 📁 hooks/                 # Custom React hooks
 │   │   ├── useAuthGuard.jsx     # Authentication guard hook
 │   │   ├── useBookingManager.js # Booking management hook
-│   │   └── useRoleGuard.js      # Role-based access hook
+│   │   ├── useRoleGuard.js      # Role-based access hook
+│   │   └── useToast.js          # Toast notification utilities
 │   ├── 📁 lib/                   # Utility libraries
+│   │   ├── toastConfig.js       # Toast configuration & constants
 │   │   ├── inventoryUtils.js    # Inventory calculations
 │   │   └── utils.js             # General utilities
+│   ├── 📁 styles/                # Global styles
+│   │   └── toast.css            # Toast notification styles
 │   ├── 📁 pages/                 # Public page components
 │   │   ├── 📁 about/             # About page
 │   │   ├── 📁 auth/              # Authentication pages
@@ -428,7 +438,10 @@ This project includes comprehensive documentation to help developers understand 
 - **[Architecture Guide](./docs/ARCHITECTURE.md)** - System overview, design patterns, and technical decisions
 - **[API Documentation](./docs/API.md)** - Complete API integration guide with examples
 - **[Component Library](./docs/COMPONENTS.md)** - UI components, patterns, and usage guidelines
-
+### 🔔 Notification System
+- **[Toast System Guide](./docs/TOAST_SYSTEM.md)** - Complete toast notification documentation with features and configuration
+- **[Toast Examples](./docs/TOAST_EXAMPLES.md)** - Code examples and best practices
+- **[Toast Quick Reference](./docs/TOAST_QUICK_REFERENCE.md)** - Quick reference guide for common use cases
 ### 🛠️ Development Resources
 - **[Environment Setup](./docs/ENVIRONMENT.md)** - Detailed setup instructions and troubleshooting
 - **[Contributing Guidelines](./docs/CONTRIBUTING.md)** - How to contribute, coding standards, and workflow
