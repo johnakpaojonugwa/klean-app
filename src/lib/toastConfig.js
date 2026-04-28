@@ -73,6 +73,61 @@ export const getToastPosition = () => {
 };
 
 /**
+ * Get toast classNames for a specific type - used for individual toast calls
+ */
+export const getToastClassNames = (type = "info") => {
+  const baseClassNames = {
+    toast: `
+      group relative rounded-lg shadow-lg font-medium text-sm
+      flex items-center gap-4 px-4 py-4
+      backdrop-blur-sm border
+      animate-toast-enter
+      dark:shadow-xl
+    `,
+    icon: `flex items-center justify-center w-10 h-10 rounded-lg bg-white shrink-0 mt-0`,
+    content: "flex flex-col justify-center flex-1",
+    title: "text-sm font-semibold leading-tight text-inherit",
+    description: "text-xs opacity-70 mt-0.5 leading-tight text-inherit",
+    actionButton: `
+      bg-white/10 hover:bg-white/20 
+      text-inherit border-none 
+      px-3 py-1.5 rounded-md 
+      text-xs font-bold transition-colors
+      ml-2
+    `,
+    closeButton: `
+      h-6 w-6 shrink-0 rounded opacity-75 hover:opacity-100
+      transition-opacity ml-auto
+      group-hover:opacity-100
+    `,
+  };
+
+  const typeSpecificClasses = {
+    error: `
+      !bg-red-50 !border-red-200 dark:!bg-red-950 dark:!border-red-800
+      [&_svg]:!text-red-500
+    `,
+    success: `
+      !bg-emerald-50 !border-emerald-200 dark:!bg-emerald-950 dark:!border-emerald-800
+      [&_svg]:!text-emerald-500
+    `,
+    warning: `
+      !bg-amber-50 !border-amber-200 dark:!bg-amber-950 dark:!border-amber-800
+      [&_svg]:!text-amber-500
+    `,
+    info: `
+      !bg-blue-50 !border-blue-200 dark:!bg-blue-950 dark:!border-blue-800
+      [&_svg]:!text-blue-500
+    `,
+  };
+
+  return {
+    ...baseClassNames,
+    [type]: typeSpecificClasses[type] || typeSpecificClasses.info,
+  };
+};
+
+/**
  * Get Sonner Toaster configuration based on device type and requirements
  */
 export const getToasterConfig = () => {
@@ -92,47 +147,7 @@ export const getToasterConfig = () => {
     duration: TOAST_DURATIONS.info, // Default fallback
     toastOptions: {
       // Default styling for all toasts
-      classNames: {
-        toast: `
-          group relative rounded-lg shadow-lg font-medium text-sm
-          flex items-center gap-4 px-4 py-4
-          backdrop-blur-sm border
-          animate-toast-enter
-          dark:shadow-xl
-        `,
-        icon:`flex items-center justify-center w-10 h-10 rounded-lg bg-white shrink-0 mt-0`,
-        content: "flex flex-col justify-center flex-1",
-        title: "text-sm font-semibold leading-tight text-inherit",
-        description: "text-xs opacity-70 mt-0.5 leading-tight text-inherit",
-        actionButton: `
-            bg-white/10 hover:bg-white/20 
-            text-inherit border-none 
-            px-3 py-1.5 rounded-md 
-            text-xs font-bold transition-colors
-            ml-2 /* Spacing from the description text */
-        `,
-        closeButton: `
-          h-6 w-6 shrink-0 rounded opacity-75 hover:opacity-100
-          transition-opacity ml-auto
-          group-hover:opacity-100
-        `,
-        error: `
-          !bg-red-50 !border-red-200 dark:!bg-red-950 dark:!border-red-800
-          [&_svg]:!text-red-500
-        `,
-        success: `
-          !bg-emerald-50 !border-emerald-200 dark:!bg-emerald-950 dark:!border-emerald-800
-          [&_svg]:!text-emerald-500
-        `,
-        warning: `
-          !bg-amber-50 !border-amber-200 dark:!bg-amber-950 dark:!border-amber-800
-          [&_svg]:!text-amber-500
-        `,
-        info: `
-          !bg-blue-50 !border-blue-200 dark:!bg-blue-950 dark:!border-blue-800
-          [&_svg]:!text-blue-500
-        `,
-      },
+      classNames: getToastClassNames("info"),
       style: {
         padding: "0", // Let Tailwind handle padding
       },

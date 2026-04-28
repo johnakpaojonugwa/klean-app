@@ -16,11 +16,11 @@
  */
 
 import { toast as sonnerToast } from "sonner";
-import { getDuration, getToasterConfig } from "@/lib/toastConfig.js";
+import { getDuration, getToasterConfig, getToastClassNames } from "@/lib/toastConfig.js";
 
 /**
  * Create a toast notification with automatic duration based on type
- * All styling is applied via the Toaster component's toastOptions from getToasterConfig()
+ * Explicitly passes classNames to ensure enhanced styling is applied
  * 
  * @param {string} message - The toast message/title
  * @param {string} type - Toast type: 'success', 'error', 'warning', 'info'
@@ -41,6 +41,7 @@ const createToast = (message, type = "info", options = {}) => {
 
   return sonnerToast[type](message, {
     duration,
+    classNames: getToastClassNames(type),
     ...options,
   });
 };
