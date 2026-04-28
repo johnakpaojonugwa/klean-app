@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { toast } from "sonner";
+import { showSuccess, showError } from "@/hooks/useToast";
 import { Download } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 import { Button } from "@/components/ui/Button";
@@ -29,9 +29,9 @@ export function ExportButton({ dashboardData, dateRange }) {
       const blob = await exportDashboardPdf(dashboardData, dateRange);
       if (!blob) throw new Error("Server returned no file");
       downloadFile(blob, `Dashboard_Report_${new Date().toLocaleDateString()}.pdf`);
-      toast.success("Download started!");
+      showSuccess("Download started!");
     } catch (err) {
-      toast.error("Export failed: " + err.message);
+      showError("Export failed: " + err.message);
     } finally {
       setIsExporting(false);
     }

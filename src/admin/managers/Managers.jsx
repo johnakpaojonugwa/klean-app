@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus, Package } from "lucide-react";
-import { toast } from "sonner";
+import { showSuccess, showError } from "@/hooks/useToast";
 import { getBranchManagers, branchManagerApi } from "@/api/branchManager";
 
 import { useApp } from "@/context/AppContext";
@@ -61,11 +61,11 @@ export default function Managers() {
     mutationFn: (data) => branchManagerApi.create(data),
     onSuccess: () => {
       invalidate();
-      toast.success("Manager created successfully");
+      showSuccess("Manager created successfully");
       setShowForm(false);
     },
     onError: (err) => {
-      toast.error(err.response?.data?.message || "Failed to create manager");
+      showError(err.response?.data?.message || "Failed to create manager");
       console.error("Create Manager Error:", err);
     },
   });
@@ -75,10 +75,10 @@ export default function Managers() {
       branchManagerApi.update(id, data),
     onSuccess: () => {
       invalidate();
-      toast.success("Manager updated successfully");
+      showSuccess("Manager updated successfully");
     },
     onError: (err) => {
-      toast.error(err.response?.data?.message || "Failed to update manager");
+      showError(err.response?.data?.message || "Failed to update manager");
     },
   });
 
@@ -86,10 +86,10 @@ export default function Managers() {
     mutationFn: (id) => branchManagerApi.delete(id),
     onSuccess: () => {
       invalidate();
-      toast.success("Manager deleted successfully");
+      showSuccess("Manager deleted successfully");
     },
     onError: (err) => {
-      toast.error(err.response?.data?.message || "Failed to delete manager");
+      showError(err.response?.data?.message || "Failed to delete manager");
     },
   });
 

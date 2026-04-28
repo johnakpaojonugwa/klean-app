@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useApp } from "@/context/AppContext";
-import { toast } from "sonner";
+import { showSuccess, showError, showInfo } from "@/hooks/useToast";
 import {
   FileText,
   Plus,
@@ -79,10 +79,10 @@ export default function Invoices() {
       queryClient.invalidateQueries({
         queryKey: ordersApi.keys.all,
       });
-      toast.success("Payment synchronized");
+      showSuccess("Payment synchronized");
       setShowDetails(false);
     },
-    onError: (err) => toast.error(err.message || "Payment update failed"),
+    onError: (err) => showError(err.message || "Payment update failed"),
   });
 
   // --- CALCULATIONS ---
@@ -184,7 +184,7 @@ export default function Invoices() {
               </TabsList>
             </Tabs>
             <Button
-              onClick={() => toast.info("Redirecting to POS...")}
+              onClick={() => showInfo("Redirecting to POS...")}
               className="bg-indigo-600 hover:bg-indigo-700 h-11 px-6 shadow-md shadow-indigo-100 cursor-pointer"
             >
               <Plus className="w-4 h-4 mr-2" /> New Invoice

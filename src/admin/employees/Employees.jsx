@@ -1,8 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserCircle, Plus } from "lucide-react";
-import { toast } from "sonner";
-
+import { showSuccess, showError, showInfo } from "@/hooks/useToast";
 import {
   employeesApi,
   getEmployees,
@@ -60,32 +59,32 @@ export default function Employees() {
     mutationFn: (data) => createEmployee(data),
     onSuccess: () => {
       invalidate();
-      toast.success("Added!");
+      showSuccess("Added!");
       setShowForm(false);
     },
     onError: (err) =>
-      toast.error(err.response?.data?.message || "Creation failed"),
+      showError(err.response?.data?.message || "Creation failed"),
   });
 
   const updateMutation = useMutation({
     mutationFn: ({ id, data }) => updateEmployee(id, data),
     onSuccess: () => {
       invalidate();
-      toast.success("Updated!");
+      showSuccess("Updated!");
       setShowForm(false);
     },
     onError: (err) =>
-      toast.error(err.response?.data?.message || "Update failed"),
+      showError(err.response?.data?.message || "Update failed"),
   });
 
   const deleteMutation = useMutation({
     mutationFn: ({ id, data }) => terminateEmployee(id, data),
     onSuccess: () => {
       invalidate();
-      toast.success("Terminated!");
+      showSuccess("Terminated!");
     },
     onError: (err) =>
-      toast.error(err.response?.data?.message || "Termination failed"),
+      showError(err.response?.data?.message || "Termination failed"),
   });
 
   const handleSave = (formData) => {
@@ -110,7 +109,7 @@ export default function Employees() {
 
       // If no changes, don't send update
       if (Object.keys(payload).length === 0) {
-        toast.info("No changes detected");
+        showInfo("No changes detected");
         setShowForm(false);
         return;
       }

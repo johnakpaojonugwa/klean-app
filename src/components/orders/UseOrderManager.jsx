@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { showSuccess, showError, showWarning } from "@/hooks/useToast";
 
 // API Imports
 import { ordersApi, getOrders } from "@/api/orders";
@@ -82,10 +82,10 @@ export function useOrdersManager() {
       }
       queryClient.invalidateQueries({ queryKey: invoicesApi.keys.lists() });
 
-      toast.success("Order created successfully!");
+      showSuccess("Order created successfully!");
       handleCloseForm();
     },
-    onError: (err) => toast.error(err.response?.data?.errors?.[0] || err.message),
+    onError: (err) => showError(err.response?.data?.errors?.[0] || err.message),
   });
 
   // 2. Update Status
@@ -102,7 +102,7 @@ export function useOrdersManager() {
         queryClient.invalidateQueries({ queryKey: inventoryApi.keys.lists(targetBranch) });
       }
 
-      toast.success("Status updated");
+      showSuccess("Status updated");
     },
     onSettled: () => setUpdatingStatusId(null),
   });
@@ -112,9 +112,9 @@ export function useOrdersManager() {
     mutationFn: (id) => ordersApi.remove(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ordersApi.keys.all });
-      toast.success("Order deleted");
+      showSuccess("Order deleted");
     },
-    onError: (err) => toast.error(err.response?.data?.errors?.[0] || err.message),
+    onError: (err) => showError(err.response?.data?.errors?.[0] || err.message),
   });
 
   // 4. Record Payment
@@ -122,7 +122,7 @@ export function useOrdersManager() {
     mutationFn: ({ id, payload }) => ordersApi.markAsPaid(id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ordersApi.keys.all });
-      toast.success("Payment recorded!");
+      showSuccess("Payment recorded!");
       setShowPaymentDialog(false);
     },
   });

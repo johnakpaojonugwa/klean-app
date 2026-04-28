@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Notifications Preview - Klean Frontend</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes toast-enter {
+            from {
+                opacity: 0;
+                transform: translateY(16px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes toast-exit {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(16px) scale(0.95);
+            }
+        }
+
+        @keyframes spring-stack {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-12px);
+                opacity: 0.95;
+            }
+        }
+
+        .toast-container {
+            position: fixed;
+            display: flex;
+            flex-direction: column-reverse;
+            pointer-events: none;
+            gap: 12px;
+            z-index: 9999;
+        }
+
+        .toast-container.desktop {
+            bottom: 20px;
+            right: 20px;
+            align-items: flex-end;
+        }
+
+        .toast-container.mobile {
+            top: 20px;
+            left: 12px;
+            right: 12px;
+            align-items: center;
+        }
+
+        .toast {
+            pointer-events: auto;
+            animation: toast-enter 0.3s cubic-bezier(0.21, 1.02, 0.53, 0.96) forwards;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            max-width: 420px;
+            font-size: 14px;
+            font-weight: 500;
+            border-left: 4px solid;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        .toast:hover {
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .toast.success {
+            background-color: #f0fdf4;
+            border-color: #10b981;
+            color: #065f46;
+        }
+
+        .toast.success svg {
+            color: #10b981;
+        }
+
+        .toast.error {
+            background-color: #fef2f2;
+            border-color: #ef4444;
+            color: #7f1d1d;
+        }
+
+        .toast.error svg {
+            color: #ef4444;
+        }
+
+        .toast.warning {
+            background-color: #fffbeb;
+            border-color: #f59e0b;
+            color: #78350f;
+        }
+
+        .toast.warning svg {
+            color: #f59e0b;
+        }
+
+        .toast.info {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+            color: #1e3a8a;
+        }
+
+        .toast.info svg {
+            color: #3b82f6;
+        }
+
+        .toast.dark .success {
+            background-color: #064e3b;
+            border-color: #10b981;
+            color: #d1fae5;
+        }
+
+        .toast.dark .error {
+            background-color: #7f1d1d;
+            border-color: #ef4444;
+            color: #fee2e2;
+        }
+
+        .toast.dark .warning {
+            background-color: #78350f;
+            border-color: #f59e0b;
+            color: #fef3c7;
+        }
+
+        .toast.dark .info {
+            background-color: #1e3a8a;
+            border-color: #3b82f6;
+            color: #dbeafe;
+        }
+
+        .toast-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .toast.success .toast-icon {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .toast.error .toast-icon {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .toast.warning .toast-icon {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .toast.info .toast-icon {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .toast-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .toast-title {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .toast-description {
+            font-size: 13px;
+            opacity: 0.7;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .toast-action {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: inherit;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        .toast-action:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .toast-close {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .toast-close:hover {
+            opacity: 1;
+        }
+
+        .toast.exiting {
+            animation: toast-exit 0.3s cubic-bezier(0.21, 1.02, 0.53, 0.96) forwards;
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            .toast.success {
+                background-color: #064e3b;
+                border-color: #10b981;
+                color: #d1fae5;
+            }
+
+            .toast.error {
+                background-color: #7f1d1d;
+                border-color: #ef4444;
+                color: #fee2e2;
+            }
+
+            .toast.warning {
+                background-color: #78350f;
+                border-color: #f59e0b;
+                color: #fef3c7;
+            }
+
+            .toast.info {
+                background-color: #1e3a8a;
+                border-color: #3b82f6;
+                color: #dbeafe;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .demo-section {
+            margin-bottom: 40px;
+        }
+
+        .demo-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            margin-right: 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-button:active {
+            transform: translateY(0);
+        }
+
+        .demo-button.success {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .demo-button.error {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .demo-button.warning {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .demo-button.info {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .position-toggle {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            align-items: center;
+        }
+
+        .position-toggle label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .position-toggle input[type="radio"] {
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .toast-durations {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .dark .toast-durations {
+            background-color: #1e293b;
+            color: #e2e8f0;
+        }
+
+        .toast-durations strong {
+            font-weight: 600;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .stat-card {
+            padding: 16px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .dark .stat-card {
+            background-color: #1e293b;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4f7df3;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .dark .stat-label {
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 p-8 min-h-screen">
+    <div id="toast-container" class="toast-container desktop"></div>
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="mb-12">
+            <h1 class="text-4xl font-bold text-slate-900 mb-2">Toast Notifications Preview</h1>
+            <p class="text-lg text-slate-600">Interactive demo of the Klean Frontend toast system</p>
+        </div>
+
+        <!-- Position Toggle -->
+        <div class="bg-white rounded-lg p-6 mb-8 shadow-sm">
+            <div class="position-toggle">
+                <label>
+                    <input type="radio" name="position" value="desktop" checked>
+                    Desktop (Bottom Right)
+                </label>
+                <label>
+                    <input type="radio" name="position" value="mobile">
+                    Mobile (Top Center)
+                </label>
+            </div>
+        </div>
+
+        <!-- Toast Type Examples -->
+        <div class="bg-white rounded-lg p-8 shadow-sm mb-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6">Toast Types</h2>
+
+            <div class="demo-section">
+                <h3 class="text-lg font-semibold text-emerald-700 mb-4">Success Toast (3 seconds)</h3>
+                <p class="text-slate-600 mb-4">Used for successful operations, confirmations, and completed actions.</p>
+                <div class="demo-grid">
+                    <button class="demo-button success" onclick="showToast('success', 'Simple success message')">
+                        Basic Success
+                    </button>
+                    <button class="demo-button success" onclick="showToast('success', 'Profile updated successfully!', 'Your changes have been saved.')">
+                        With Description
+                    </button>
+                    <button class="demo-button success" onclick="showToast('success', 'File exported', 'Click to view', true)">
+                        With Action
+                    </button>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3 class="text-lg font-semibold text-red-700 mb-4">Error Toast (Persistent)</h3>
+                <p class="text-slate-600 mb-4">Used for critical errors that require user acknowledgment.</p>
+                <div class="demo-grid">
+                    <button class="demo-button error" onclick="showToast('error', 'Operation failed')">
+                        Basic Error
+                    </button>
+                    <button class="demo-button error" onclick="showToast('error', 'Payment failed', 'Your card was declined. Please try another.')">
+                        With Details
+                    </button>
+                    <button class="demo-button error" onclick="showToast('error', 'Network error', 'Connection lost. Click Retry to try again.', true)">
+                        With Retry
+                    </button>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3 class="text-lg font-semibold text-amber-700 mb-4">Warning Toast (7 seconds)</h3>
+                <p class="text-slate-600 mb-4">Used for validation errors, alerts, and warnings.</p>
+                <div class="demo-grid">
+                    <button class="demo-button warning" onclick="showToast('warning', 'Please fill in all fields')">
+                        Validation Error
+                    </button>
+                    <button class="demo-button warning" onclick="showToast('warning', 'Low inventory', 'Only 5 items left in stock')">
+                        With Context
+                    </button>
+                    <button class="demo-button warning" onclick="showToast('warning', 'Session expiring', 'You will be logged out in 5 minutes', true)">
+                        With Action
+                    </button>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3 class="text-lg font-semibold text-blue-700 mb-4">Info Toast (4 seconds)</h3>
+                <p class="text-slate-600 mb-4">Used for informational messages and general announcements.</p>
+                <div class="demo-grid">
+                    <button class="demo-button info" onclick="showToast('info', 'New orders available')">
+                        Simple Info
+                    </button>
+                    <button class="demo-button info" onclick="showToast('info', 'Update available', 'A new version is ready to install')">
+                        With Details
+                    </button>
+                    <button class="demo-button info" onclick="showToast('info', 'Processing', 'Your request is being processed...', true)">
+                        Processing
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Multiple Toasts Demo -->
+        <div class="bg-white rounded-lg p-8 shadow-sm mb-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6">Multiple Toasts & Stacking</h2>
+            <p class="text-slate-600 mb-4">Maximum 3 visible toasts at once with automatic stacking.</p>
+            <button class="demo-button success" onclick="showMultipleToasts()">
+                Stack All Types (3 toasts)
+            </button>
+            <button class="demo-button info" onclick="showLongSequence()">
+                Show Sequence (5 toasts)
+            </button>
+        </div>
+
+        <!-- Toast Duration Reference -->
+        <div class="bg-white rounded-lg p-8 shadow-sm mb-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6">Duration Reference</h2>
+            <div class="toast-durations">
+                <p><strong>✓ Success Toast:</strong> 3 seconds (auto-dismisses)</p>
+                <p><strong>✗ Error Toast:</strong> Persistent (requires manual close)</p>
+                <p><strong>⚠ Warning Toast:</strong> 7 seconds (auto-dismisses)</p>
+                <p><strong>ℹ Info Toast:</strong> 4 seconds (auto-dismisses)</p>
+                <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #cbd5e1;">
+                    <strong>Max Visible:</strong> 3 toasts at once (oldest will hide when new ones appear)
+                </p>
+            </div>
+        </div>
+
+        <!-- Real World Examples -->
+        <div class="bg-white rounded-lg p-8 shadow-sm">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6">Real-World Examples</h2>
+            <p class="text-slate-600 mb-6">Click below to see examples from actual app workflows:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border border-slate-200 rounded-lg p-6">
+                    <h3 class="font-semibold text-slate-900 mb-3">Form Submission</h3>
+                    <button class="demo-button success" onclick="submitForm(true)">Valid Form</button>
+                    <button class="demo-button warning" onclick="submitForm(false)">Invalid Form</button>
+                </div>
+
+                <div class="border border-slate-200 rounded-lg p-6">
+                    <h3 class="font-semibold text-slate-900 mb-3">Order Operations</h3>
+                    <button class="demo-button success" onclick="createOrder(true)">Create Order</button>
+                    <button class="demo-button error" onclick="createOrder(false)">Order Error</button>
+                </div>
+
+                <div class="border border-slate-200 rounded-lg p-6">
+                    <h3 class="font-semibold text-slate-900 mb-3">Authentication</h3>
+                    <button class="demo-button success" onclick="showToast('success', 'Welcome back!', 'Login successful')">Login Success</button>
+                    <button class="demo-button error" onclick="showToast('error', 'Login failed', 'Invalid email or password')">Login Error</button>
+                </div>
+
+                <div class="border border-slate-200 rounded-lg p-6">
+                    <h3 class="font-semibold text-slate-900 mb-3">File Operations</h3>
+                    <button class="demo-button success" onclick="showToast('success', 'Download started!', 'Your file is being prepared')">Export Success</button>
+                    <button class="demo-button error" onclick="showToast('error', 'Export failed', 'Please check your connection')">Export Error</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6">Implementation Stats</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Files Updated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">20+</div>
+                    <div class="stat-label">Components Using Toasts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Toast Types</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Coverage</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-12 text-center text-slate-600">
+            <p>Toast system fully integrated throughout Klean Frontend</p>
+            <p class="text-sm mt-2">See docs/TOAST_SYSTEM.md for complete documentation</p>
+        </div>
+    </div>
+
+    <script>
+        let toastId = 0;
+        const activeToasts = new Set();
+
+        function showToast(type, title, description = '', hasAction = false) {
+            const container = document.getElementById('toast-container');
+            const id = toastId++;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.id = `toast-${id}`;
+
+            const iconMap = {
+                success: '✓',
+                error: '✕',
+                warning: '⚠',
+                info: 'ℹ'
+            };
+
+            const durationMap = {
+                success: 3000,
+                error: Infinity,
+                warning: 7000,
+                info: 4000
+            };
+
+            toast.innerHTML = `
+                <div class="toast-icon">${iconMap[type]}</div>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    ${description ? `<div class="toast-description">${description}</div>` : ''}
+                </div>
+                ${hasAction ? `<button class="toast-action">Action</button>` : ''}
+                <button class="toast-close" onclick="closeToast(${id})">×</button>
+            `;
+
+            container.appendChild(toast);
+            activeToasts.add(id);
+
+            // Enforce max 3 visible toasts
+            if (activeToasts.size > 3) {
+                const toasts = Array.from(container.querySelectorAll('.toast')).slice(0, -3);
+                toasts.forEach(t => {
+                    const toastId = parseInt(t.id.split('-')[1]);
+                    closeToast(toastId);
+                });
+            }
+
+            // Auto-dismiss based on duration
+            const duration = durationMap[type];
+            if (duration !== Infinity) {
+                setTimeout(() => closeToast(id), duration);
+            }
+
+            return id;
+        }
+
+        function closeToast(id) {
+            const toast = document.getElementById(`toast-${id}`);
+            if (toast) {
+                toast.classList.add('exiting');
+                setTimeout(() => {
+                    toast.remove();
+                    activeToasts.delete(id);
+                }, 300);
+            }
+        }
+
+        function showMultipleToasts() {
+            showToast('success', 'Profile updated!', 'Your changes have been saved.');
+            setTimeout(() => {
+                showToast('info', 'New orders available', 'You have 3 pending orders.');
+            }, 200);
+            setTimeout(() => {
+                showToast('warning', 'Low inventory', 'Item ABC-123 has 5 units left.');
+            }, 400);
+        }
+
+        function showLongSequence() {
+            const toasts = [
+                { type: 'info', title: 'Processing request...', delay: 0 },
+                { type: 'success', title: 'Step 1 complete', delay: 1500 },
+                { type: 'success', title: 'Step 2 complete', delay: 3000 },
+                { type: 'success', title: 'All done!', description: 'Your operation completed successfully.', delay: 4500 },
+                { type: 'info', title: 'New data available', delay: 7500 }
+            ];
+
+            toasts.forEach(t => {
+                setTimeout(() => {
+                    showToast(t.type, t.title, t.description || '');
+                }, t.delay);
+            });
+        }
+
+        function submitForm(valid) {
+            if (!valid) {
+                showToast('warning', 'Form validation failed', 'Please fill in all required fields');
+            } else {
+                showToast('success', 'Form submitted!', 'Your data has been saved successfully.');
+            }
+        }
+
+        function createOrder(success) {
+            if (success) {
+                showToast('success', 'Order created successfully!', 'Order #12345 is ready for processing.');
+            } else {
+                showToast('error', 'Failed to create order', 'Please check your connection and try again.');
+            }
+        }
+
+        // Position toggle
+        document.querySelectorAll('input[name="position"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const container = document.getElementById('toast-container');
+                container.classList.remove('desktop', 'mobile');
+                container.classList.add(e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>

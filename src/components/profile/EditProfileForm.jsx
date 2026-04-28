@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { showSuccess, showError, showWarning } from "@/hooks/useToast";
 import { Loader2, Upload, X, User } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -34,14 +34,14 @@ export default function EditProfileForm({ user, onSuccess }) {
   const updateMutation = useMutation({
     mutationFn: (data) => updateUserProfile(data),
     onSuccess: () => {
-      toast.success("Profile updated successfully!");
+      showSuccess("Profile updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["currentUser"] });
       setIsEditing(false);
       setAvatarFile(null);
       onSuccess?.();
     },
     onError: (error) => {
-      toast.error(error?.response?.data?.message || "Failed to update profile");
+      showError(error?.response?.data?.message || "Failed to update profile");
     },
   });
 
@@ -54,7 +54,7 @@ export default function EditProfileForm({ user, onSuccess }) {
     const file = e.target.files?.[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        toast.error("File size must be less than 5MB");
+        showError("File size must be less than 5MB");
         return;
       }
       
@@ -71,8 +71,8 @@ export default function EditProfileForm({ user, onSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.fullname.trim()) return toast.error("Full name is required");
-    if (!formData.phoneNumber.trim()) return toast.error("Phone number is required");
+    if (!formData.fullname.trim()) return showError("Full name is required");
+    if (!formData.phoneNumber.trim()) return showError("Phone number is required");
 
     const hasAvatar = avatarFile !== null;
     const payload = hasAvatar
