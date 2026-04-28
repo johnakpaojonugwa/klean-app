@@ -80,11 +80,11 @@ export const getToastClassNames = (type = "info") => {
     toast: `
       group relative rounded-lg shadow-lg font-medium text-sm
       flex items-center gap-4 px-4 py-4 pb-1
-      backdrop-blur-sm border
+      backdrop-blur-sm border border-l-4
       animate-toast-enter
       dark:shadow-xl
     `,
-    icon: `flex items-center justify-center w-10 h-10 rounded-lg bg-white shrink-0 mt-0`,
+    icon: `flex items-center justify-center w-10 h-10 rounded-lg bg-white shrink-0 mt-0 ml-4`,
     content: "flex flex-col justify-center flex-1",
     title: "text-sm font-semibold leading-tight text-inherit",
     description: "text-xs opacity-70 mt-0.5 leading-tight text-inherit",
@@ -105,18 +105,22 @@ export const getToastClassNames = (type = "info") => {
   const typeSpecificClasses = {
     error: `
       !bg-red-50 !border-red-200 dark:!bg-red-950 dark:!border-red-800
+      !border-l-4 !border-l-red-500 dark:!border-l-red-400
       [&_svg]:!text-red-500
     `,
     success: `
       !bg-emerald-50 !border-emerald-200 dark:!bg-emerald-950 dark:!border-emerald-800
+      !border-l-4 !border-l-emerald-500 dark:!border-l-emerald-400
       [&_svg]:!text-emerald-500
     `,
     warning: `
       !bg-amber-50 !border-amber-200 dark:!bg-amber-950 dark:!border-amber-800
+      !border-l-4 !border-l-amber-500 dark:!border-l-amber-400
       [&_svg]:!text-amber-500
     `,
     info: `
       !bg-blue-50 !border-blue-200 dark:!bg-blue-950 dark:!border-blue-800
+      !border-l-4 !border-l-blue-500 dark:!border-l-blue-400
       [&_svg]:!text-blue-500
     `,
   };
