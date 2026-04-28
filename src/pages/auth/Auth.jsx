@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { showSuccess, showError, showWarning } from "@/hooks/useToast";
@@ -45,6 +45,10 @@ export default function AuthPage() {
 
   const navigate = useNavigate();
   const { login: contextLogin } = useApp();
+
+  const handleInputChange = useCallback((field, value) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  }, []);
 
   // --- Logic: Handle Remember Me on Load ---
   useEffect(() => {
@@ -243,8 +247,7 @@ export default function AuthPage() {
                 icon={<User size={18} />}
                 placeholder="John Doe"
                 value={form.fullname}
-                onChange={(v) => setForm({ ...form, fullname: v })}
-                required
+                onChange={(v) => handleInputChange("fullname", v)}
               />
             )}
 
@@ -254,8 +257,7 @@ export default function AuthPage() {
               icon={<Mail size={18} />}
               placeholder="name@example.com"
               value={form.email}
-              onChange={(v) => setForm({ ...form, email: v })}
-              required
+              onChange={(v) => handleInputChange("email", v)}
             />
 
             {/* PHONE NUMBER */}
@@ -264,9 +266,8 @@ export default function AuthPage() {
                 label="Phone Number"
                 icon={<Phone size={18} />}
                 placeholder="+234 123 456 7890"
-                value={form.phone}
-                onChange={(v) => setForm({ ...form, phoneNumber: v })}
-                required
+                value={form.phoneNumber}
+                onChange={(v) => handleInputChange("phoneNumber", v)}
               />
             )}
 
@@ -281,8 +282,7 @@ export default function AuthPage() {
                   icon={<Lock size={18} />}
                   placeholder="••••••••"
                   value={form.password}
-                  onChange={(v) => setForm({ ...form, password: v })}
-                  required
+                  onChange={(v) => handleInputChange("password", v)}
                   rightElement={
                     <Button
                       type="button"
@@ -308,8 +308,7 @@ export default function AuthPage() {
                   icon={<Lock size={18} />}
                   placeholder="••••••••"
                   value={form.confirmPassword}
-                  onChange={(v) => setForm({ ...form, confirmPassword: v })}
-                  required
+                  onChange={(v) => handleInputChange("confirmPassword", v)}
                 />
               )}
             </div>
