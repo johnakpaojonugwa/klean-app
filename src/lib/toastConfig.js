@@ -79,7 +79,7 @@ export const getToastClassNames = (type = "info") => {
   const baseClassNames = {
     toast: `
       group relative rounded-lg shadow-lg font-medium text-sm
-      flex items-center gap-4 px-4 py-4
+      flex items-center gap-4 px-4 py-4 pb-1
       backdrop-blur-sm border
       animate-toast-enter
       dark:shadow-xl
