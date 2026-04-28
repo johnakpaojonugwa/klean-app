@@ -168,10 +168,14 @@ export default function App() {
         </Suspense>
       </ErrorBoundary>
       <Toaster
-        {...getToasterConfig()}
         position={position}
+        theme="light"
+        richColors={false}
+        closeButton={true}
+        pauseWhenPageIsHidden={true}
         visibleToasts={TOAST_STACKING.maxVisible}
         gap={TOAST_STACKING.offset}
+        toastOptions={getToasterConfig().toastOptions}
       />
     </>
   );
