@@ -95,16 +95,25 @@ export const getToasterConfig = () => {
       classNames: {
         toast: `
           group relative rounded-lg shadow-lg font-medium text-sm
-          flex items-start gap-3 px-4 py-3
+          flex items-center gap-4 px-4 py-4
           backdrop-blur-sm border
           animate-toast-enter
           dark:shadow-xl
         `,
-        description: "text-sm opacity-90 mt-1",
-        actionButton: "bg-white/20 hover:bg-white/40 text-inherit border-none",
+        icon:`flex items-center justify-center w-10 h-10 rounded-lg bg-white shrink-0 mt-0`,
+        content: "flex flex-col justify-center flex-1",
+        title: "text-sm font-semibold leading-tight text-inherit",
+        description: "text-xs opacity-70 mt-0.5 leading-tight text-inherit",
+        actionButton: `
+            bg-white/10 hover:bg-white/20 
+            text-inherit border-none 
+            px-3 py-1.5 rounded-md 
+            text-xs font-bold transition-colors
+            ml-2 /* Spacing from the description text */
+        `,
         closeButton: `
           h-6 w-6 shrink-0 rounded opacity-75 hover:opacity-100
-          transition-opacity ml-2
+          transition-opacity ml-auto
           group-hover:opacity-100
         `,
         error: `
@@ -123,7 +132,6 @@ export const getToasterConfig = () => {
           !bg-blue-50 !border-blue-200 dark:!bg-blue-950 dark:!border-blue-800
           [&_svg]:!text-blue-500
         `,
-        icon: "h-5 w-5 shrink-0 mt-0.5",
       },
       style: {
         padding: "0", // Let Tailwind handle padding

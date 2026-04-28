@@ -4,7 +4,7 @@ import { Toaster } from "sonner";
 import ErrorBoundary from "@/components/layout/ErrorBoundary.jsx";
 import AdminRoute from "@/router/AdminRoute.jsx";
 import ScrollToTop from "@/utils/ScrollToTop.jsx";
-import { getToasterConfig, getToastPosition } from "@/lib/toastConfig.js";
+import { getToasterConfig, getToastPosition, TOAST_STACKING } from "@/lib/toastConfig.js";
 import "@/styles/toast.css";
 
 // Lazy-loaded components for Admin Dashboard and Pages
@@ -168,55 +168,10 @@ export default function App() {
         </Suspense>
       </ErrorBoundary>
       <Toaster
+        {...getToasterConfig()}
         position={position}
-        theme="light"
-        richColors={false}
-        closeButton
-        pauseWhenPageIsHidden
-        visibleToasts={3}
-        gap={12}
-        toastOptions={{
-          classNames: {
-            toast: `
-              group relative rounded-lg shadow-lg font-medium text-sm
-              flex items-start gap-3 px-4 py-3
-              backdrop-blur-sm border border-gray-200
-              dark:border-gray-800 dark:shadow-xl
-            `,
-            description: "text-sm opacity-90 mt-1",
-            actionButton:
-              "bg-white/20 hover:bg-white/40 text-inherit border-none rounded px-2 py-1",
-            closeButton: `
-              h-5 w-5 shrink-0 rounded opacity-70 hover:opacity-100
-              transition-opacity ml-auto
-            `,
-            // Success Toast
-            success: `
-              !bg-emerald-50 !border-emerald-200 !text-emerald-900
-              dark:!bg-emerald-950 dark:!border-emerald-800 dark:!text-emerald-100
-              [&_svg]:!text-emerald-500
-            `,
-            // Error Toast
-            error: `
-              !bg-red-50 !border-red-200 !text-red-900
-              dark:!bg-red-950 dark:!border-red-800 dark:!text-red-100
-              [&_svg]:!text-red-500
-            `,
-            // Warning Toast
-            warning: `
-              !bg-amber-50 !border-amber-200 !text-amber-900
-              dark:!bg-amber-950 dark:!border-amber-800 dark:!text-amber-100
-              [&_svg]:!text-amber-500
-            `,
-            // Info Toast
-            info: `
-              !bg-blue-50 !border-blue-200 !text-blue-900
-              dark:!bg-blue-950 dark:!border-blue-800 dark:!text-blue-100
-              [&_svg]:!text-blue-500
-            `,
-            icon: "h-5 w-5 shrink-0 mt-0.5",
-          },
-        }}
+        visibleToasts={TOAST_STACKING.maxVisible}
+        gap={TOAST_STACKING.offset}
       />
     </>
   );

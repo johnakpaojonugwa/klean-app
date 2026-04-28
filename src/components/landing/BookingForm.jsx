@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
-import { toast } from "sonner";
+import { showSuccess, showError, showWarning } from "@/hooks/useToast";
 import {
   Select,
   SelectContent,
@@ -251,7 +251,10 @@ export default function BookingForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateStep()) return;
+    if (!validateStep()) {
+      showWarning(validationError || "Please fill in all required fields");
+      return;
+    }
 
     const branchIdValue = formData.branchId || getBranchId(normalizedCustomer);
     const payload = {
@@ -273,7 +276,7 @@ export default function BookingForm({
       if (onSubmit) {
         await onSubmit(payload);
       }
-      toast.success("Booking confirmed! We'll contact you shortly.");
+      showSuccess("Booking confirmed! We'll contact you shortly.");
       setFormData({
         customerId: getCustomerId(normalizedCustomer),
         customerName: getCustomerName(normalizedCustomer),
@@ -302,7 +305,7 @@ export default function BookingForm({
         error?.message ||
         "Failed to complete booking";
       setValidationError(message);
-      toast.error(message);
+      showError(message);
     }
   };
 

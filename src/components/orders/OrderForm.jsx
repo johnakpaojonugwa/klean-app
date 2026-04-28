@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
-import { toast } from "sonner";
+import { showSuccess, showError, showWarning } from "@/hooks/useToast";
 import {
   Select,
   SelectContent,
@@ -197,22 +197,27 @@ export default function OrderForm({
 
     if (!formData.customerId) {
       setValidationError("Please select a customer.");
+      showWarning("Please select a customer");
       return;
     }
     if (formData.serviceType === "") {
       setValidationError("Please select a service type.");
+      showWarning("Please select a service type");
       return;
     }
     if (formData.items.length === 0) {
       setValidationError("Order must have at least one item.");
+      showWarning("Order must have at least one item");
       return;
     }
     if (formData.items.some((i) => i.quantity < 1)) {
       setValidationError("All items must have quantity ≥ 1.");
+      showWarning("All items must have quantity ≥ 1");
       return;
     }
     if (formData.items.some((i) => i.unitPrice <= 0)) {
       setValidationError("All items must have a unit price > 0.");
+      showWarning("All items must have a unit price > 0");
       return;
     }
 
@@ -248,7 +253,7 @@ export default function OrderForm({
 
     try {
       await onSave(payload);
-      toast.success(
+      showSuccess(
         editOrder ? "Order updated successfully" : "Order created successfully",
       );
       onClose();
@@ -258,7 +263,7 @@ export default function OrderForm({
         error.message ||
         "Failed to save order.";
       setValidationError(message);
-      toast.error(message);
+      showError(message);
     }
   };
 
