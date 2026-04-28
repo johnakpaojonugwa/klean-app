@@ -282,7 +282,7 @@ export const toast = sonnerToast;
  * const config = getToasterConfig();
  * console.log(config.toastOptions.classNames);
  */
-export { getToasterConfig } from "./toastConfig.js";
+export { getToasterConfig } from "@/lib/toastConfig.js";
 
 /**
  * Default export - convenient namespace for all toast functions
