@@ -68,6 +68,7 @@
 
 /* 4. THE BOXED ICON */
 [data-sonner-toast] [data-icon] {
+  order: 1 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -87,6 +88,7 @@
 
 /* 5. CONTENT & TEXT (Fixed Visibility & Layout) */
 [data-sonner-toast] [data-content] {
+  order: 2 !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
@@ -115,6 +117,7 @@
 
 /* 6. CLOSE BUTTON (Positioned after text on the right) */
 [data-sonner-toast] [data-close-button] {
+  order: 4 !important;
   position: relative !important;
   inset: unset !important;
   top: auto !important;
@@ -144,6 +147,7 @@
 
 /* 7. ACTION BUTTON */
 [data-sonner-toast] [data-button] {
+  order: 3 !important;
   margin-left: 12px !important;
   padding: 6px 12px !important;
   background-color: var(--toast-icon-bg) !important;
