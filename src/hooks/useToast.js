@@ -16,7 +16,7 @@
  */
 
 import { toast as sonnerToast } from "sonner";
-import { getDuration, getToasterConfig } from "./toastConfig.js";
+import { getDuration, getToasterConfig } from "@/lib/toastConfig.js";
 
 /**
  * Create a toast notification with automatic duration based on type
