@@ -79,12 +79,12 @@ export const getToastClassNames = (type = "info") => {
   const baseClassNames = {
     toast: `
       group relative rounded-lg shadow-lg font-medium text-sm
-      flex items-center gap-4 px-4 py-4 pb-1
+      flex items-center gap-4 px-5 py-4 pb-1 pr-10
       backdrop-blur-sm border border-l-4
       animate-toast-enter
       dark:shadow-xl
     `,
-    icon: `flex items-center justify-center w-10 h-10 rounded-lg bg-white shrink-0 mt-0 ml-4`,
+    icon: `flex items-center justify-center w-10 h-10 rounded-lg bg-white shrink-0 mt-0 ml-6`,
     content: "flex flex-col justify-center flex-1",
     title: "text-sm font-semibold leading-tight text-inherit",
     description: "text-xs opacity-70 mt-0.5 leading-tight text-inherit",
@@ -96,8 +96,8 @@ export const getToastClassNames = (type = "info") => {
       ml-2
     `,
     closeButton: `
-      h-6 w-6 shrink-0 rounded opacity-75 hover:opacity-100
-      transition-opacity ml-auto
+      absolute top-2 right-2 h-5 w-5 shrink-0 rounded opacity-75 hover:opacity-100
+      transition-opacity
       group-hover:opacity-100
     `,
   };
