@@ -154,7 +154,7 @@ export default function App() {
         </Suspense>
       </ErrorBoundary>
       <Toaster
-        position="top-center"
+        position="bottom-right"
         theme="light"
         toastOptions={{
           // Default container styling
