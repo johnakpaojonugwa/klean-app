@@ -1,9 +1,3 @@
-/**
- * Toast notification styles with spring physics animations
- * Supports responsive positioning, smooth stacking with spring dynamics,
- * hover pause, and swipe gestures on mobile
- */
-
 /* Spring physics animation configuration (damping: 20, stiffness: 180) */
 @keyframes toast-enter {
   from {
