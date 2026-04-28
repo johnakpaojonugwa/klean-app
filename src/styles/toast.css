@@ -1,4 +1,4 @@
-/* Spring physics animation configuration (damping: 20, stiffness: 180) */
+/* 1. ANIMATIONS & PHYSICS */
 @keyframes toast-enter {
   from {
     opacity: 0;
@@ -21,43 +21,16 @@
   }
 }
 
-/* Spring physics easing for stacking transitions */
-@keyframes spring-stack {
-  0% {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Swipe gesture exit for mobile */
-@keyframes toast-swipe-out {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(var(--swipe-end-x, 100%));
-    opacity: 0;
-  }
-}
-
-/* Progress bar countdown animation */
 @keyframes progress-countdown {
   from {
     width: 100%;
-    opacity: 1;
   }
   to {
     width: 0%;
-    opacity: 0.5;
   }
 }
 
-/* Toast container positioning and responsive behavior */
+/* 2. CORE TOASTER CONTAINER */
 [data-sonner-toaster] {
   position: fixed;
   z-index: 9999;
@@ -67,376 +40,163 @@
   gap: 12px;
 }
 
-/* Desktop: bottom-right positioning */
-@media (min-width: 768px) {
-  [data-sonner-toaster][data-position="bottom-right"] {
-    bottom: 20px;
-    right: 20px;
-    left: auto;
-    top: auto;
-    align-items: flex-end;
-  }
-}
-
-/* Mobile: center positioning */
-@media (max-width: 767px) {
-  [data-sonner-toaster][data-position="top-center"] {
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    right: auto;
-    bottom: auto;
-    align-items: center;
-    width: calc(100% - 40px);
-    max-width: 100%;
-  }
-}
-
-/* Individual toast styling */
+/* 3. INDIVIDUAL TOAST - THE LAYOUT */
 [data-sonner-toast] {
+  --padding: 16px;
   pointer-events: auto;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 16px;
-  border-radius: 8px;
+  display: flex !important; /* Force flex over Sonner default */
+  align-items: center !important;
+  gap: 16px;
+  padding: var(--padding) !important;
+  border-radius: 12px;
   border: 1px solid transparent;
-  border-left-width: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid currentColor !important; /* Ensure the left accent is dominant */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
   animation: toast-enter 350ms cubic-bezier(0.21, 1.02, 0.53, 0.96);
-  backdrop-filter: blur(8px);
-  min-height: 48px;
+  backdrop-filter: blur(12px);
   max-width: 420px;
   width: 100%;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 200ms ease,
+    opacity 200ms ease;
 }
 
-/* Exit animation */
-[data-sonner-toast][data-mounted="false"] {
-  animation: toast-exit 350ms cubic-bezier(0.21, 1.02, 0.53, 0.96) forwards;
-}
-
-/* Swipe gesture handling */
-[data-sonner-toast][data-swipe="move"] {
-  transform: translateX(var(--swipe-move-x, 0));
-}
-
-[data-sonner-toast][data-swipe="cancel"] {
-  transform: translateX(0);
-  transition: transform 200ms ease-out;
-}
-
-[data-sonner-toast][data-swipe="end"] {
-  animation: toast-swipe-out 100ms ease-out forwards;
-}
-
-/* Pause animation on hover */
-[data-sonner-toast]:hover {
-  /* Toast remains visible on hover - duration auto-pauses */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-/* Pause progress animation on hover */
-[data-sonner-toast]:hover::after {
-  animation-play-state: paused;
-}
-
-/* Progress bar for auto-dismissing toasts */
-[data-sonner-toast]::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  border-radius: 0 0 6px 6px;
-  opacity: 0.8;
-}
-
-/* Progress animation for success (3s) - use success border-left color */
-[data-sonner-toast][data-type="success"]::after {
-  background-color: #10b981;
-  animation: progress-countdown 3s linear forwards;
-}
-
-/* Progress animation for info (4s) - use info border-left color */
-[data-sonner-toast][data-type="info"]::after {
-  background-color: #3b82f6;
-  animation: progress-countdown 4s linear forwards;
-}
-
-/* Progress animation for warning (7s) - use warning border-left color */
-[data-sonner-toast][data-type="warning"]::after {
-  background-color: #f59e0b;
-  animation: progress-countdown 7s linear forwards;
-}
-
-/* Error toasts don't auto-dismiss, so no progress bar animation */
-[data-sonner-toast][data-type="error"]::after {
-  display: none;
-}
-
-/* Dark mode progress bar colors */
-@media (prefers-color-scheme: dark) {
-  [data-sonner-toast][data-type="success"]::after {
-    background-color: #10b981;
-  }
-
-  [data-sonner-toast][data-type="info"]::after {
-    background-color: #60a5fa;
-  }
-
-  [data-sonner-toast][data-type="warning"]::after {
-    background-color: #fbbf24;
-  }
-}
-
-/* Mobile: Full width with padding */
-@media (max-width: 767px) {
-  [data-sonner-toast] {
-    max-width: calc(100vw - 40px);
-    width: 100%;
-  }
-}
-
-/* Success Toast Styling */
-[data-sonner-toast][data-type="success"] {
-  background-color: #ecfdf5;
-  border-color: #a7f3d0;
-  border-left-color: #10b981;
-  color: #065f46;
-}
-
-[data-sonner-toast][data-type="success"][data-icon] {
-  color: #10b981;
-}
-
-@media (prefers-color-scheme: dark) {
-  [data-sonner-toast][data-type="success"] {
-    background-color: #051f1a;
-    border-color: #166534;
-    border-left-color: #10b981;
-    color: #d1fae5;
-  }
-}
-
-/* Error Toast Styling */
-[data-sonner-toast][data-type="error"] {
-  background-color: #fef2f2;
-  border-color: #fecaca;
-  border-left-color: #ef4444;
-  color: #7f1d1d;
-}
-
-[data-sonner-toast][data-type="error"][data-icon] {
-  color: #ef4444;
-}
-
-@media (prefers-color-scheme: dark) {
-  [data-sonner-toast][data-type="error"] {
-    background-color: #7f1d1d;
-    border-color: #991b1b;
-    border-left-color: #f87171;
-    color: #fee2e2;
-  }
-}
-
-/* Warning Toast Styling */
-[data-sonner-toast][data-type="warning"] {
-  background-color: #fffbeb;
-  border-color: #fde68a;
-  border-left-color: #f59e0b;
-  color: #78350f;
-}
-
-[data-sonner-toast][data-type="warning"][data-icon] {
-  color: #f59e0b;
-}
-
-@media (prefers-color-scheme: dark) {
-  [data-sonner-toast][data-type="warning"] {
-    background-color: #78350f;
-    border-color: #92400e;
-    border-left-color: #fbbf24;
-    color: #fef3c7;
-  }
-}
-
-/* Info Toast Styling */
-[data-sonner-toast][data-type="info"] {
-  background-color: #eff6ff;
-  border-color: #bfdbfe;
-  border-left-color: #3b82f6;
-  color: #1e3a8a;
-}
-
-[data-sonner-toast][data-type="info"][data-icon] {
-  color: #3b82f6;
-}
-
-@media (prefers-color-scheme: dark) {
-  [data-sonner-toast][data-type="info"] {
-    background-color: #0c2340;
-    border-color: #1e40af;
-    border-left-color: #60a5fa;
-    color: #dbeafe;
-  }
-}
-
-/* Icon styling */
+/* 4. THE BOXED ICON (Screenshot Style) */
 [data-sonner-icon] {
-  width: 20px;
-  height: 20px;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
+  width: 42px !important;
+  height: 42px !important;
   flex-shrink: 0;
-  margin-top: 2px;
+  border-radius: 10px;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.08
+  ) !important; /* The subtle "box" background */
+  margin: 0 !important;
 }
 
-/* Close button styling with hover effects */
+[data-sonner-icon] svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* 5. TEXT CONTENT */
+[data-sonner-toast-content] {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+[data-sonner-title] {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+[data-sonner-description] {
+  font-size: 12px;
+  opacity: 0.6;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+/* 6. ACTION & CLOSE BUTTONS */
+[data-sonner-action-button] {
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 [data-sonner-close-button] {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
   width: 24px;
   height: 24px;
   padding: 0;
-  margin-left: 8px;
+  margin-left: 4px;
   background: transparent;
   border: none;
+  opacity: 0.4;
+  transition: opacity 0.2s;
   cursor: pointer;
-  color: currentColor;
-  opacity: 0.6;
-  transition: opacity 200ms ease-out;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
 }
 
 [data-sonner-close-button]:hover {
   opacity: 1;
 }
 
-[data-sonner-close-button]:active {
-  transform: scale(0.95);
+/* 7. TYPE SPECIFIC - DARK MODE FOCUS */
+[data-sonner-toast][data-type="success"] {
+  background-color: #0d1117; /* Deep Navy/Black */
+  border-color: rgba(16, 185, 129, 0.1);
+  color: #10b981; /* Accent color applied to text/border */
 }
 
-/* Content wrapper */
-[data-sonner-toast-content] {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex: 1;
+[data-sonner-toast][data-type="error"] {
+  background-color: #120a0a;
+  border-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
 }
 
-/* Description text styling */
-[data-sonner-description] {
-  font-size: 13px;
-  opacity: 0.85;
-  margin-top: 4px;
-  line-height: 1.4;
+[data-sonner-toast][data-type="warning"] {
+  background-color: #120f0a;
+  border-color: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
 }
 
-/* Action button styling */
-[data-sonner-action-button] {
-  padding: 4px 12px;
-  border-radius: 4px;
-  border: 1px solid currentColor;
-  background: transparent;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  margin-left: auto;
-  flex-shrink: 0;
-  transition: all 200ms ease-out;
+[data-sonner-toast][data-type="info"] {
+  background-color: #0a0e12;
+  border-color: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
 }
 
-[data-sonner-action-button]:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* Loading spinner for promise toasts */
-[data-sonner-loading] {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid currentColor;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 600ms linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Progress bar at bottom of toast for countdown animation */
-.toast-progress-bar {
+/* 8. PROGRESS BAR (Countdown) */
+[data-sonner-toast]::after {
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 3px;
-  background: currentColor;
-  border-radius: 0 0 6px 6px;
-  opacity: 0.6;
+  height: 2px;
+  width: 100%;
+  background: currentColor; /* Matches the type color */
+  opacity: 0.5;
 }
 
-/* Type-specific progress bar colors */
-[data-sonner-toast][data-type="success"] .toast-progress-bar {
-  background: rgb(34, 197, 94); /* emerald-500 */
+[data-sonner-toast][data-type="success"]::after {
+  animation: progress-countdown 3s linear forwards;
+}
+[data-sonner-toast][data-type="info"]::after {
+  animation: progress-countdown 4s linear forwards;
+}
+[data-sonner-toast][data-type="warning"]::after {
+  animation: progress-countdown 7s linear forwards;
 }
 
-[data-sonner-toast][data-type="error"] .toast-progress-bar {
-  background: rgb(239, 68, 68); /* red-500 */
-}
-
-[data-sonner-toast][data-type="warning"] .toast-progress-bar {
-  background: rgb(245, 158, 11); /* amber-500 */
-}
-
-[data-sonner-toast][data-type="info"] .toast-progress-bar {
-  background: rgb(59, 130, 246); /* blue-500 */
-}
-
-/* Progress bar animation - duration varies by toast type */
-.toast-progress-bar.animating {
-  animation: progress-countdown linear forwards;
-}
-
-/* Mobile-specific gestures */
-@media (max-width: 640px) {
+/* 9. MOBILE RESPONSIVENESS & GESTURES */
+@media (max-width: 600px) {
   [data-sonner-toast] {
-    touch-action: pan-y;
-    /* Enable swipe gestures */
-    cursor: grab;
-  }
-
-  [data-sonner-toast]:active {
-    cursor: grabbing;
+    max-width: 90vw;
+    margin: 0 auto;
   }
 }
 
-/* Accessibility: Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  [data-sonner-toast],
-  [data-sonner-toast][data-mounted="false"],
-  [data-sonner-toast][data-swipe="move"],
-  [data-sonner-toast][data-swipe="end"] {
-    animation: none;
-    transition: none;
-  }
-}
-
-/* Print styles: Hide toasts */
-@media print {
-  [data-sonner-toaster] {
-    display: none !important;
-  }
+[data-sonner-toast][data-swipe="move"] {
+  transform: translateX(var(--swipe-amount, 0));
 }
