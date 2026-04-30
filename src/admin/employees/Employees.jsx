@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserCircle, Plus } from "lucide-react";
-import { showSuccess, showError, showInfo } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import {
   employeesApi,
   getEmployees,
@@ -59,32 +59,32 @@ export default function Employees() {
     mutationFn: (data) => createEmployee(data),
     onSuccess: () => {
       invalidate();
-      showSuccess("Added!");
+      toast.success("Added!");
       setShowForm(false);
     },
     onError: (err) =>
-      showError(err.response?.data?.message || "Creation failed"),
+      toast.error(err.response?.data?.message || "Creation failed"),
   });
 
   const updateMutation = useMutation({
     mutationFn: ({ id, data }) => updateEmployee(id, data),
     onSuccess: () => {
       invalidate();
-      showSuccess("Updated!");
+      toast.success("Updated!");
       setShowForm(false);
     },
     onError: (err) =>
-      showError(err.response?.data?.message || "Update failed"),
+      toast.error(err.response?.data?.message || "Update failed"),
   });
 
   const deleteMutation = useMutation({
     mutationFn: ({ id, data }) => terminateEmployee(id, data),
     onSuccess: () => {
       invalidate();
-      showSuccess("Terminated!");
+      toast.success("Terminated!");
     },
     onError: (err) =>
-      showError(err.response?.data?.message || "Termination failed"),
+      toast.error(err.response?.data?.message || "Termination failed"),
   });
 
   const handleSave = (formData) => {
@@ -109,7 +109,7 @@ export default function Employees() {
 
       // If no changes, don't send update
       if (Object.keys(payload).length === 0) {
-        showInfo("No changes detected");
+        toast.info("No changes detected");
         setShowForm(false);
         return;
       }
@@ -150,9 +150,9 @@ export default function Employees() {
   };
 
   const filteredEmployees = employees.filter(
-    (e) =>
-      e.fullname.toLowerCase().includes(search.toLowerCase()) ||
-      e.email.toLowerCase().includes(search.toLowerCase()),
+    (employee) =>
+      employee.fullname.toLowerCase().includes(search.toLowerCase()) ||
+      employee.email.toLowerCase().includes(search.toLowerCase()),
   );
 
   // Pagination

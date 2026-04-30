@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Users, Plus } from "lucide-react";
-import { showSuccess, showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 
 import { getCustomers } from "@/api/customers";
 import api from "@/api/api";
@@ -71,7 +71,7 @@ export default function Customers() {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["customers"] });
-      showSuccess(editCustomer ? "Customer updated!" : "Customer created!");
+      toast.success(editCustomer ? "Customer updated!" : "Customer created!");
       setShowForm(false);
       // Reset form data after successful submission
       setFormData({ fullname: "", email: "", phoneNumber: "", address: "", password: "", avatar: null });
@@ -79,7 +79,7 @@ export default function Customers() {
     },
     onError: (err) => {
       console.error("Customer save error:", err);
-      showError(err.response?.data?.message || "Operation failed");
+      toast.error(err.response?.data?.message || "Operation failed");
     },
   });
 
@@ -87,9 +87,9 @@ export default function Customers() {
     mutationFn: (id) => api.delete(`/users/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["customers"] });
-      showSuccess("Customer deleted!");
+      toast.success("Customer deleted!");
     },
-    onError: (err) => showError(err.response?.data?.message || "Deletion failed"),
+    onError: (err) => toast.error(err.response?.data?.message || "Deletion failed"),
   });
 
   // --- HANDLERS ---

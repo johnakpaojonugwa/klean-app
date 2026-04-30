@@ -9,7 +9,7 @@ import {
 } from "@/api/inventory";
 import { apiFromUi, normalizeApiList } from "@/lib/inventoryUtils";
 import { useApp } from "@/context/AppContext";
-import { showSuccess, showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import { Package, Loader2, AlertCircle, Activity, Plus, Search } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
@@ -78,12 +78,12 @@ export default function Inventory() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: inventoryApi.keys.lists(branchId) });
-      showSuccess("Inventory synchronized");
+      toast.success("Inventory synchronized");
       setFormState({ open: false, data: null });
     },
     onError: (err) => {
       const msg = err.response?.data?.errors?.[0] || err.response?.data?.message || err.message;
-      showError(msg);
+      toast.error(msg);
     },
   });
 
@@ -101,15 +101,15 @@ export default function Inventory() {
   },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: inventoryApi.keys.lists(branchId) });
-      showSuccess("Stock level updated");
+      toast.success("Stock level updated");
       setAdjustItem(null);
     },
     onError: (err) => {
       const backendErrors = err.response?.data?.errors;
       if (Array.isArray(backendErrors)) {
-        backendErrors.forEach((msg) => showError(msg));
+        backendErrors.forEach((msg) => toast.error(msg));
       } else {
-        showError(err.response?.data?.message || "Adjustment failed");
+        toast.error(err.response?.data?.message || "Adjustment failed");
       }
     },
   });
@@ -119,11 +119,11 @@ export default function Inventory() {
     mutationFn: (id) => updateInventoryItem(id, { isActive: false }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: inventoryApi.keys.lists(branchId) });
-      showSuccess("Item archived");
+      toast.success("Item archived");
     },
     onError: (err) => {
       const msg = err.response?.data?.errors?.[0] || err.response?.data?.message || err.message;
-      showError(msg || "Failed to archive item");
+      toast.error(msg || "Failed to archive item");
     },
   });
 

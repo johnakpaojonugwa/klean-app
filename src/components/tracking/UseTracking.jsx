@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getOrders, getOrderById } from "@/api/orders";
-import { showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 
 export function useTracking() {
   const [query, setQuery] = useState("");
@@ -27,7 +27,7 @@ export function useTracking() {
     enabled: !!searchTerm,
     staleTime: 0,
     retry: 1,
-    onError: (err) => showError("Unable to fetch order", err?.message),
+    onError: (err) => toast.error("Unable to fetch order", err?.message),
   });
 
   const order = useMemo(() => {

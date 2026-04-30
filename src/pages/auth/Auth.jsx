@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { showSuccess, showError, showWarning } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import { useApp } from "@/context/AppContext";
 import Header from "@/components/layout/Header.jsx";
 import {
@@ -81,7 +81,7 @@ export default function AuthPage() {
         
         contextLogin(user, accessToken, refreshToken || null);
 
-        showSuccess(
+        toast.success(
           isLogin ? "Welcome back!" : "Account created successfully!",
         );
         navigate("/");
@@ -90,7 +90,7 @@ export default function AuthPage() {
           "Auth Logic Error: Data found but user/token missing",
           response,
         );
-        showError("An error occurred during login. Please try again.");
+        toast.error("An error occurred during login. Please try again.");
       }
     },
     onError: (err) => {
@@ -100,7 +100,7 @@ export default function AuthPage() {
           ? backendErrors[0]
           : err?.response?.data?.message || err?.message || "Connection failed";
 
-      showError(errorMsg);
+      toast.error(errorMsg);
       // Safe logging — avoid reading properties from undefined
       console.error(
         "Auth Error Detail:",
@@ -113,12 +113,12 @@ export default function AuthPage() {
   const forgotMutation = useMutation({
     mutationFn: forgotPasswordApi,
     onSuccess: () => {
-      showSuccess("Check your email for a recovery link!");
+      toast.success("Check your email for a recovery link!");
       setIsForgotModalOpen(false);
       setResetEmail("");
     },
     onError: (err) => {
-      showError(
+      toast.error(
         err?.response?.data?.message || "Reset link could not be sent",
       );
     },
@@ -130,33 +130,33 @@ export default function AuthPage() {
 
     // Signup-specific validation
     if (!form.fullname || form.fullname.trim().length < 3) {
-      showWarning("Full name must be at least 3 characters");
+      toast.warning("Full name must be at least 3 characters");
       return false;
     }
 
     const phoneRegex = /^\+?[1-9]\d{1,14}$/; // E.164 format
     if (!phoneRegex.test(form.phoneNumber)) {
-      showWarning("Valid phone number is required");
+      toast.warning("Valid phone number is required");
       return false;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
-      showWarning("Valid email is required");
+      toast.warning("Valid email is required");
       return false;
     }
 
     const strongPassRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!strongPassRegex.test(form.password)) {
-      showError(
+      toast.warning(
         "Password must be at least 8 characters with uppercase, number, and symbol",
       );
       return false;
     }
 
     if (form.password !== form.confirmPassword) {
-      showError("Passwords do not match");
+      toast.error("Passwords do not match");
       return false;
     }
 
@@ -196,7 +196,7 @@ export default function AuthPage() {
 
   // Forgot Password Handler
   const handleForgotPassword = () => {
-    if (!resetEmail) return showWarning("Please enter your email address");
+    if (!resetEmail) return toast.warning("Please enter your email address");
     forgotMutation.mutate({ email: resetEmail });
   };
 

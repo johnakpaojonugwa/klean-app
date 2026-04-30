@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { showSuccess, showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "@/context/AppContext";
 import { loginApi } from "@/api/api";
@@ -49,13 +49,13 @@ export default function AdminAuthPage() {
 
       // Context login (handles localStorage & state)
       login(userData, token, refresh);
-      showSuccess(`Welcome, ${userData.fullname || 'Admin'}`);
+      toast.success(`Welcome, ${userData.fullname || 'Admin'}`);
       
     },
     onError: (error) => {
       const errorMsg = error?.response?.data?.message || "Authentication failed. Check your connection.";
       setServerError(errorMsg);
-      showError(errorMsg);
+      toast.error(errorMsg);
     },
   });
 

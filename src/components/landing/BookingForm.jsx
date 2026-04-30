@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
-import { showSuccess, showError, showWarning } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import {
   Select,
   SelectContent,
@@ -124,7 +124,7 @@ export default function BookingForm({
     );
 
     const priorityObj = PRIORITY_OPTIONS.find(
-      (p) => p.value === formData.priority,
+      (priority) => priority.value === formData.priority,
     );
     const multiplier = priorityObj?.multiplier || 1;
     const subtotal = rawSubtotal * multiplier;
@@ -252,7 +252,7 @@ export default function BookingForm({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateStep()) {
-      showWarning(validationError || "Please fill in all required fields");
+      toast.warning(validationError || "Please fill in all required fields");
       return;
     }
 
@@ -276,7 +276,7 @@ export default function BookingForm({
       if (onSubmit) {
         await onSubmit(payload);
       }
-      showSuccess("Booking confirmed! We'll contact you shortly.");
+      toast.success("Booking confirmed! We'll contact you shortly.");
       setFormData({
         customerId: getCustomerId(normalizedCustomer),
         customerName: getCustomerName(normalizedCustomer),
@@ -305,7 +305,7 @@ export default function BookingForm({
         error?.message ||
         "Failed to complete booking";
       setValidationError(message);
-      showError(message);
+      toast.error(message);
     }
   };
 
@@ -448,7 +448,7 @@ export default function BookingForm({
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {ITEM_TYPE_SUGGESTIONS.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
+                          {ITEM_TYPE_SUGGESTIONS.map((item_suggestion) => <SelectItem key={item_suggestion} value={item_suggestion}>{item_suggestion}</SelectItem>)}
                         </SelectContent>
                       </Select>
                     </div>
@@ -510,7 +510,7 @@ export default function BookingForm({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {PRIORITY_OPTIONS.map((p) => <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>)}
+                  {PRIORITY_OPTIONS.map((priority_option) => <SelectItem key={priority_option.value} value={priority_option.value}>{priority_option.label}</SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -522,7 +522,7 @@ export default function BookingForm({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {PAYMENT_METHODS.map((m) => <SelectItem key={m.value} value={m.value}>{m.label}</SelectItem>)}
+                {PAYMENT_METHODS.map((payment_method) => <SelectItem key={payment_method.value} value={payment_method.value}>{payment_method.label}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>

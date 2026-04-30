@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { showSuccess, showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import { Download } from "lucide-react";
-import { useApp } from "@/context/AppContext";
 import { Button } from "@/components/ui/Button";
 import { exportDashboardPdf } from "@/api/analytics";
 
 export function ExportButton({ dashboardData, dateRange }) {
   const [isExporting, setIsExporting] = useState(false);
-  const { baseURL } = useApp();
 
   // Helper to safely handle file downloads and memory cleanup
   const downloadFile = (blob, fileName) => {
@@ -29,9 +27,9 @@ export function ExportButton({ dashboardData, dateRange }) {
       const blob = await exportDashboardPdf(dashboardData, dateRange);
       if (!blob) throw new Error("Server returned no file");
       downloadFile(blob, `Dashboard_Report_${new Date().toLocaleDateString()}.pdf`);
-      showSuccess("Download started!");
+      toast.success("Download started!");
     } catch (err) {
-      showError("Export failed: " + err.message);
+      toast.error("Export failed: " + err.message);
     } finally {
       setIsExporting(false);
     }

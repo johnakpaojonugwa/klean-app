@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { showSuccess, showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import { CheckCircle, Clock, AlertTriangle, Loader2, Package, Phone, Hash } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/Table";
@@ -59,13 +59,13 @@ export function StaffDashboard({ branchId }) {
     mutationFn: ({ orderId, newStatus }) =>
       updateOrderStatus(orderId, newStatus),
     onSuccess: () => {
-      showSuccess('Status updated');
+      toast.success('Status updated');
       // Invalidate the specific branch list to trigger a refetch
       queryClient.invalidateQueries({ queryKey: branchQueryKey });
       setIsDialogOpen(false);
     },
     onError: (error) => {
-      showError(error?.message || 'Update failed');
+      toast.error(error?.message || 'Update failed');
     },
   });
 

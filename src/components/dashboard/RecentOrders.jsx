@@ -66,7 +66,7 @@ export default function RecentOrders({ data = [], loading }) {
       <div className="p-6 border-b border-slate-100">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-slate-800">Recent Orders</h3>
-          <Link to={createPageUrl("Orders")}>
+          <Link to={createPageUrl("orders")}>
             <Button variant="ghost" size="sm" className="text-teal-600 hover:text-teal-700">
               View All
             </Button>

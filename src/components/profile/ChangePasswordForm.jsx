@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { showSuccess, showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -30,7 +30,7 @@ export default function ChangePasswordForm() {
         confirmPassword: data.confirmPassword,
       }),
     onSuccess: () => {
-      showSuccess("Password changed successfully!");
+      toast.success("Password changed successfully!");
       setFormData({
         currentPassword: "",
         newPassword: "",
@@ -47,7 +47,7 @@ export default function ChangePasswordForm() {
       if (errorMsg.includes("current")) {
         setErrors((prev) => ({ ...prev, current: errorMsg }));
       }
-      showError(errorMsg);
+      toast.error(errorMsg);
     },
   });
 

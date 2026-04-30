@@ -1,6 +1,6 @@
 import React from "react";
 import { Download, TrendingUp } from "lucide-react";
-import { showPromise } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Skeleton } from "@/components/ui/Skeleton";
 import PageHeader from "@/components/common/PageHeader";
@@ -14,7 +14,7 @@ export default function Reports() {
   const { states, setStartDate, setEndDate, handleDateRangeChange, applyFilters, data, kpis } = useReports();
 
   const handleExport = () => {
-    showPromise(new Promise(res => setTimeout(res, 1500)), {
+    toast.promise(new Promise(res => setTimeout(res, 1500)), {
       loading: 'Preparing report...',
       success: 'Report downloaded successfully',
       error: 'Failed to generate report',

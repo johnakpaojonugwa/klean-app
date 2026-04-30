@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { showSuccess, showError, showWarning } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 
 // API Imports
 import { ordersApi, getOrders } from "@/api/orders";
@@ -61,7 +61,7 @@ export function useOrdersManager() {
 
   // --- MUTATIONS ---
 
-  // 1. Create Order
+  // Create Order
   const createOrderMutation = useMutation({
     mutationFn: (newOrder) => ordersApi.create(newOrder),
     onSuccess: async (createdOrder) => {
@@ -82,13 +82,13 @@ export function useOrdersManager() {
       }
       queryClient.invalidateQueries({ queryKey: invoicesApi.keys.lists() });
 
-      showSuccess("Order created successfully!");
+      toast.success("Order created successfully!");
       handleCloseForm();
     },
-    onError: (err) => showError(err.response?.data?.errors?.[0] || err.message),
+    onError: (err) => toast.error(err.response?.data?.errors?.[0] || err.message),
   });
 
-  // 2. Update Status
+  // Update Status
   const updateStatusMutation = useMutation({
     mutationFn: ({ id, status }) => ordersApi.updateStatus(id, status),
     onMutate: ({ id }) => setUpdatingStatusId(id),
@@ -102,27 +102,27 @@ export function useOrdersManager() {
         queryClient.invalidateQueries({ queryKey: inventoryApi.keys.lists(targetBranch) });
       }
 
-      showSuccess("Status updated");
+      toast.success("Status updated");
     },
     onSettled: () => setUpdatingStatusId(null),
   });
 
-  // 3. Delete Order
+  // Delete Order
   const deleteOrderMutation = useMutation({
     mutationFn: (id) => ordersApi.remove(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ordersApi.keys.all });
-      showSuccess("Order deleted");
+      toast.success("Order deleted");
     },
-    onError: (err) => showError(err.response?.data?.errors?.[0] || err.message),
+    onError: (err) => toast.error(err.response?.data?.errors?.[0] || err.message),
   });
 
-  // 4. Record Payment
+  // Record Payment
   const payOrderMutation = useMutation({
     mutationFn: ({ id, payload }) => ordersApi.markAsPaid(id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ordersApi.keys.all });
-      showSuccess("Payment recorded!");
+      toast.success("Payment recorded!");
       setShowPaymentDialog(false);
     },
   });
@@ -143,12 +143,12 @@ export function useOrdersManager() {
     const allowed = statusFilter !== "ALL" ? STATUS_GROUPS[statusFilter] : null;
 
     return orders
-      .filter((o) => {
-        const matchesStatus = allowed ? allowed.includes(o.status?.toUpperCase()) : true;
+      .filter((order) => {
+        const matchesStatus = allowed ? allowed.includes(order.status?.toUpperCase()) : true;
         const matchesSearch = !term || 
-          (o.customerName?.toLowerCase().includes(term) || 
-           o.orderNumber?.toLowerCase().includes(term) || 
-           (o._id || o.id).toString().includes(term));
+          (order.customerName?.toLowerCase().includes(term) || 
+           order.orderNumber?.toLowerCase().includes(term) || 
+           (order._id || order.id).toString().includes(term));
         return matchesStatus && matchesSearch;
       })
       .sort((a, b) => {
@@ -193,8 +193,8 @@ export function useOrdersManager() {
 
   const statusCounts = useMemo(() => {
     const counts = { ALL: orders.length, PENDING: 0, PROCESSING: 0, DELIVERED: 0 };
-    orders.forEach((o) => {
-      const s = o.status?.toUpperCase();
+    orders.forEach((order) => {
+      const s = order.status?.toUpperCase();
       if (STATUS_GROUPS.PENDING.includes(s)) counts.PENDING++;
       if (STATUS_GROUPS.PROCESSING.includes(s)) counts.PROCESSING++;
       if (STATUS_GROUPS.DELIVERED.includes(s)) counts.DELIVERED++;

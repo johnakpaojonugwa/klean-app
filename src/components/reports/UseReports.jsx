@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ShoppingCart, DollarSign, Users, TrendingUp } from "lucide-react";
-import { showSuccess } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import { 
   getDashboardSummary, 
   getAnalyticsPeriod, 
@@ -86,7 +86,7 @@ export function useReports() {
 
   const applyFilters = () => {
     queryClient.invalidateQueries({ queryKey: ["analytics"] });
-    showSuccess("Filters applied successfully!");
+    toast.success("Filters applied successfully!");
   };
 
   return {

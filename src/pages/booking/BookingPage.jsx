@@ -7,7 +7,7 @@ import { useApp } from "@/context/AppContext";
 import { getCurrentUserProfile } from "@/api/customers";
 import { branchesApi, getAllBranches } from "@/api/branches";
 import { createOrder, ordersApi } from "@/api/orders";
-import { showSuccess, showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 
 export default function Booking() {
   const { user } = useApp();
@@ -34,10 +34,10 @@ export default function Booking() {
     mutationFn: createOrder,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ordersApi.keys.all });
-      showSuccess("Booking created successfully!");
+      toast.success("Booking created successfully!");
     },
     onError: (error) => {
-      showError(error?.response?.data?.message || "Failed to create booking. Please try again.");
+      toast.error(error?.response?.data?.message || "Failed to create booking. Please try again.");
     },
   });
 

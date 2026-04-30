@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Facebook, Linkedin, Twitter, MessageSquare, Send, AlertCircle } from 'lucide-react';
-import { showSuccess, showError, showWarning } from '@/hooks/useToast';
+import toast from "@/hooks/useToast";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +43,7 @@ const ContactForm = () => {
     e.preventDefault();
     
     if (!validateForm()) {
-      showWarning('Please fill in all required fields correctly');
+      toast.warning('Please fill in all required fields correctly');
       return;
     }
 
@@ -61,11 +61,11 @@ const ContactForm = () => {
       setErrors({});
       
       // Show success message
-      showSuccess('Thank you for your message! We\'ll get back to you soon.');
+      toast.success('Thank you for your message! We\'ll get back to you soon.');
       
     } catch (error) {
       console.error('Error submitting form:', error);
-      showError('There was an error sending your message. Please try again.');
+      toast.error('There was an error sending your message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }

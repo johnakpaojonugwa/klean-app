@@ -3,7 +3,7 @@ import Sidebar from "@/components/common/Sidebar";
 import Header from "@/components/common/Header";
 import { useApp } from "@/context/AppContext";
 import { Suspense, useState, useMemo } from "react";
-import { showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 import { 
   Home, 
   Loader2, 
@@ -51,7 +51,7 @@ export default function AdminLayout() {
       navigate("/auth");
     } catch (error) {
       console.error("Logout failed:", error);
-      showError("Logout failed. Please try again.");
+      toast.error("Logout failed. Please try again.");
     }
   };
 

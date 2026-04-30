@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/Select";
-import { showSuccess, showError } from "@/hooks/useToast";
+import toast from "@/hooks/useToast";
 
 const PAYMENT_METHODS = [
   { value: "CASH", label: "Cash" },
@@ -46,10 +46,10 @@ export default function PaymentDialog({ open, onOpenChange, order, onSubmit, isP
 
     try {
       await onSubmit(order._id || order.id, payload);
-      showSuccess("Payment recorded");
+      toast.success("Payment recorded");
       onOpenChange(false);
     } catch (err) {
-      showError(err.response?.data?.message || err.message || "Failed to record payment");
+      toast.error(err.response?.data?.message || err.message || "Failed to record payment");
     }
   };
 
