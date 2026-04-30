@@ -152,10 +152,10 @@
 }
 
 /* --- Status Colors --- */
-[data-sonner-toast][data-type="success"] { color: #10b981; }
-[data-sonner-toast][data-type="error"] { color: #ef4444; }
-[data-sonner-toast][data-type="warning"] { color: #f59e0b; }
-[data-sonner-toast][data-type="info"] { color: #3b82f6; }
+[data-sonner-toast][data-type="success"] { color: #10b981 !important; }
+[data-sonner-toast][data-type="error"] { color: #ef4444 !important; }
+[data-sonner-toast][data-type="warning"] { color: #f59e0b !important; }
+[data-sonner-toast][data-type="info"] { color: #3b82f6 !important; }
 
 /* --- Progress Bar --- */
 [data-sonner-toast]::after {
