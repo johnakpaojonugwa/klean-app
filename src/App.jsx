@@ -1,11 +1,10 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Toaster } from "sonner";
 import ErrorBoundary from "@/components/layout/ErrorBoundary.jsx";
 import AdminRoute from "@/router/AdminRoute.jsx";
 import ScrollToTop from "@/utils/ScrollToTop.jsx";
-import { getToasterConfig, getToastPosition, TOAST_STACKING } from "@/lib/toastConfig.js";
-import "@/styles/toast.css";
+import { Toaster } from "sonner";
+import { getToasterConfig } from "@/lib/toastConfig";
 
 // Lazy-loaded components for Admin Dashboard and Pages
 const AdminLayout = lazy(() => import("@/admin/layout/AdminLayout.jsx"));
@@ -108,17 +107,7 @@ const LoadingFallback = () => {
 };
 
 export default function App() {
-  const [position, setPosition] = useState(getToastPosition());
-
-  // Handle responsive positioning
-  useEffect(() => {
-    const handleResize = () => {
-      setPosition(getToastPosition());
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const toasterConfig = getToasterConfig();
 
   return (
     <>
@@ -168,14 +157,9 @@ export default function App() {
         </Suspense>
       </ErrorBoundary>
       <Toaster
-        position={position}
-        theme="light"
-        richColors={false}
-        closeButton={true}
-        pauseWhenPageIsHidden={true}
-        visibleToasts={TOAST_STACKING.maxVisible}
-        gap={TOAST_STACKING.offset}
-        toastOptions={getToasterConfig().toastOptions}
+        {...toasterConfig}
+        unstyled={true}
+        closeButton
       />
     </>
   );
