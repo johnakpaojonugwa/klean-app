@@ -119,7 +119,7 @@ export default function Testimonials() {
                       </div>
 
                       <div className="ml-16 space-y-8">
-                        <Quote className="text-[#D4AF37] opacity-30 w-10 h-10 md:w-20 md:h-20 absolute top-8 right-12" />
+                        <Quote className="text-[#D4AF37] opacity-30 w-10 h-10 md:w-15 md:h-15 absolute top-6 right-10" />
                         <p className="text-[#1A2E56] text-[14px] font-medium leading-relaxed relative z-10">
                           {item.text}
                         </p>
@@ -127,7 +127,7 @@ export default function Testimonials() {
                           <p className="text-[#1A2E56] font-black uppercase text-xl tracking-widest">
                             {item.name}
                           </p>
-                          <p className="text-[#4f7df3] font-bold text-sm uppercase mt-1">
+                          <p className="text-[#4f7df3] font-bold text-base uppercase mt-1">
                             {item.role}
                           </p>
                         </div>
