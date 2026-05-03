@@ -118,16 +118,16 @@ export default function Testimonials() {
                         />
                       </div>
 
-                      <div className="ml-16 space-y-8">
-                        <Quote className="text-[#D4AF37] opacity-30 w-10 h-10 md:w-15 md:h-15 absolute top-6 right-10" />
-                        <p className="text-[#1A2E56] text-[14px] font-medium leading-relaxed relative z-10">
+                      <div className="ml-16 space-y-6">
+                        <Quote className="text-[#D4AF37] opacity-20 w-8 h-8 md:w-12 md:h-12 absolute top-8 right-12" />
+                        <p className="text-[#1A2E56] text-base lg:text-lg font-semibold leading-loose relative z-10">
                           {item.text}
                         </p>
-                        <div className="border-t border-slate-100 pt-8">
-                          <p className="text-[#1A2E56] font-black uppercase text-xl tracking-widest">
+                        <div className="border-t border-slate-100 pt-6">
+                          <p className="text-[#1A2E56] font-bold uppercase text-lg tracking-wide">
                             {item.name}
                           </p>
-                          <p className="text-[#4f7df3] font-bold text-base uppercase mt-1">
+                          <p className="text-[#4f7df3] font-semibold text-sm uppercase mt-2">
                             {item.role}
                           </p>
                         </div>
