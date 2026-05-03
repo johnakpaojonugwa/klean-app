@@ -120,7 +120,7 @@ export default function Testimonials() {
 
                       <div className="ml-16 space-y-8">
                         <Quote className="text-[#D4AF37] opacity-30 w-10 h-10 md:w-20 md:h-20 absolute top-8 right-12" />
-                        <p className="text-[#1A2E56] text-xl lg:text-3xl font-medium leading-relaxed relative z-10">
+                        <p className="text-[#1A2E56] text-[14px] font-medium leading-relaxed relative z-10">
                           {item.text}
                         </p>
                         <div className="border-t border-slate-100 pt-8">
