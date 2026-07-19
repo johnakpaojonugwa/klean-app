@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo } from "react";
 import {
   Plus,
   Trash2,
@@ -51,69 +51,66 @@ const PAYMENT_METHODS = [
   { value: "WALLET", label: "Customer Wallet" },
 ];
 
+// Helper functions for customer parsing and initial state
+const normalizeCustomer = (customerData) => {
+  if (!customerData) return null;
+  if (customerData.data) {
+    return customerData.data.customer || customerData.data.user || customerData.data;
+  }
+  return customerData;
+};
+
+const getBranchId = (customerData) =>
+  customerData?.branchId?._id || customerData?.branchId || customerData?.userId?.branchId || "";
+
+const getCustomerPhone = (customerData) =>
+  customerData?.phoneNumber || customerData?.phone || customerData?.userId?.phoneNumber || (typeof window !== "undefined" && sessionStorage.getItem("klean_user_phone")) || "";
+
+const getCustomerName = (customerData) =>
+  customerData?.fullname || customerData?.name || customerData?.userId?.fullname || "";
+
+const getCustomerId = (customerData) =>
+  customerData?._id || customerData?.id || "";
+
+const getInitialState = (customer) => {
+  const normalizedCustomer = normalizeCustomer(customer);
+  const today = new Date().toISOString().split("T")[0];
+  const phoneValue = getCustomerPhone(normalizedCustomer);
+
+  return {
+    customerId: getCustomerId(normalizedCustomer),
+    customerName: getCustomerName(normalizedCustomer),
+    customerPhone: phoneValue,
+    branchId: getBranchId(normalizedCustomer),
+    serviceType: "WASH_FOLD",
+    priority: "NORMAL",
+    items: [
+      {
+        itemType: "Shirt",
+        quantity: 1,
+        unitPrice: 0,
+        specialInstructions: "",
+      },
+    ],
+    pickupDate: today,
+    deliveryDate: "",
+    assignedEmployee: "",
+    paymentMethod: "CASH",
+    discount: 0,
+    notes: "",
+  };
+};
+
 export default function BookingForm({
   onSubmit = null,
   isPending = false,
   branches = [],
   customer = null,
 }) {
-  const normalizeCustomer = (customerData) => {
-    if (!customerData) return null;
-    if (customerData.data) {
-      return customerData.data.customer || customerData.data.user || customerData.data;
-    }
-    return customerData;
-  };
+  const normalizedCustomer = useMemo(() => normalizeCustomer(customer), [customer]);
 
-  const normalizedCustomer = normalizeCustomer(customer);
-
-  const getBranchId = (customerData) =>
-    customerData?.branchId?._id || customerData?.branchId || customerData?.userId?.branchId || "";
-
-  const getCustomerPhone = (customerData) =>
-    customerData?.phoneNumber || customerData?.phone || customerData?.userId?.phoneNumber || sessionStorage.getItem("klean_user_phone") || "";
-
-  const getCustomerName = (customerData) =>
-    customerData?.fullname || customerData?.name || customerData?.userId?.fullname || "";
-
-  const getCustomerId = (customerData) =>
-    customerData?._id || customerData?.id || "";
-
-  const getInitialState = useCallback(() => {
-    const today = new Date().toISOString().split("T")[0];
-    const phoneValue = getCustomerPhone(normalizedCustomer);
-
-    return {
-      customerId: getCustomerId(normalizedCustomer),
-      customerName: getCustomerName(normalizedCustomer),
-      customerPhone: phoneValue,
-      branchId: getBranchId(normalizedCustomer),
-      serviceType: "WASH_FOLD",
-      priority: "NORMAL",
-      items: [
-        {
-          itemType: "Shirt",
-          quantity: 1,
-          unitPrice: 0,
-          specialInstructions: "",
-        },
-      ],
-      pickupDate: today,
-      deliveryDate: "",
-      assignedEmployee: "",
-      paymentMethod: "CASH",
-      discount: 0,
-      notes: "",
-    };
-  }, [customer]);
-
-  const [formData, setFormData] = useState(getInitialState);
+  const [formData, setFormData] = useState(() => getInitialState(customer));
   const [validationError, setValidationError] = useState("");
-
-  useEffect(() => {
-    setFormData(getInitialState());
-    setValidationError("");
-  }, [getInitialState]);
 
   // Calculate pricing
   const totals = useMemo(() => {
@@ -309,10 +306,6 @@ export default function BookingForm({
     }
   };
 
-  const controlStyles =
-    "h-10 bg-white border-gray-300 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0091D5]";
-  const readOnlyStyles =
-    "h-10 bg-slate-100 border-slate-300 text-slate-700 w-full";
 
   return (
   <div className="min-h-screen bg-white flex flex-col items-center py-16 px-4 font-sans text-slate-900">
