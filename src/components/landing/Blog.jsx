@@ -1,74 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { ArrowLeft, ArrowRight, MessageCircle, User } from "lucide-react";
-import LaundryWoman from "@/assets/Dryclean.png";
-import Powercoin from "@/assets/news-1.jpg";
-import Benefits from "@/assets/news-2.jpg";
-import Chooseus from "@/assets/chooseus-1.jpg";
-import ServiceDry from "@/assets/service-dryclean.jpg";
-import ServiceLaund from "@/assets/service-laundry.jpg";
-
-const blogs = [
-  {
-    id: 1,
-    date: "16 Nov",
-    title: "DRY CLEANING SAVES MONEY IN THE LONG RUN",
-    author: "klean@Admin",
-    comments: "No Comments",
-    excerpt:
-      "There are not many of passages of lorem ipsum available alteration in some form. Donec ...",
-    image: LaundryWoman,
-  },
-  {
-    id: 2,
-    date: "27 Apr",
-    title: "5 BENEFITS OF DRY CLEANING",
-    author: "klean@Admin",
-    comments: "No Comments",
-    excerpt:
-      "When it comes to keeping your wardrobe looking sharp and lasting longer, dry cleaning offers ...",
-    image: Benefits,
-  },
-  {
-    id: 3,
-    date: "16 Nov",
-    title: "OUR POWER COIN LAUNDRY SERVICE AT IT'S BEST",
-    author: "klean@Admin",
-    comments: "No Comments",
-    excerpt:
-      "There are not many of passages of lorem ipsum available alteration in some form. Donec ...",
-    image: Powercoin,
-  },
-  {
-    id: 4,
-    date: "05 Dec",
-    title: "FABRIC CARE: TIPS FOR LUXURY SILKS",
-    author: "klean@Admin",
-    comments: "2 Comments",
-    excerpt:
-      "Handling delicate fabrics requires a touch of expertise and the right chemical balance...",
-    image: ServiceDry,
-  },
-  {
-    id: 5,
-    date: "12 Jan",
-    title: "WHY ECO-FRIENDLY SOLVENTS MATTER",
-    author: "klean@Admin",
-    comments: "5 Comments",
-    excerpt:
-      "Sustainability in dry cleaning isn't just a trend; it's the future of garment longevity...",
-    image: Chooseus,
-  },
-  {
-    id: 6,
-    date: "20 Feb",
-    title: "COMMERCIAL LAUNDRY SOLUTIONS",
-    author: "klean@Admin",
-    comments: "1 Comment",
-    excerpt:
-      "Scaling your business requires reliable partners for your staff uniforms and linen...",
-    image: ServiceLaund,
-  },
-];
+import { Link } from "react-router-dom";
+import { blogs } from "@/constants/blogs";
 
 export default function BlogSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -104,9 +37,11 @@ export default function BlogSection() {
   }, [nextSlide, isPaused]);
 
   // Reset index if totalSlides changes (on resize) to prevent empty view
-  useEffect(() => {
+  const [prevItemsPerSlide, setPrevItemsPerSlide] = useState(itemsPerSlide);
+  if (itemsPerSlide !== prevItemsPerSlide) {
+    setPrevItemsPerSlide(itemsPerSlide);
     setCurrentIndex(0);
-  }, [itemsPerSlide]);
+  }
 
   return (
     <section
@@ -205,14 +140,14 @@ export default function BlogSection() {
                           </p>
 
                           <div className="mt-auto">
-                            <button
-                              type="button"
-                              className="relative overflow-hidden bg-[#E5B14A] text-white font-black px-8 py-4 lg:py-5 cursor-pointer rounded-full text-xs uppercase tracking-[0.2em] group/btn transition-colors duration-300 hover:text-white w-full sm:w-auto"
+                            <Link
+                              to={`/blog?id=${post.id}`}
+                              className="inline-block text-center relative overflow-hidden bg-[#E5B14A] text-white font-black px-8 py-4 lg:py-5 cursor-pointer rounded-full text-xs uppercase tracking-[0.2em] group/btn transition-colors duration-300 hover:text-white w-full sm:w-auto"
                             >
                               <span className="relative z-10">Read More</span>
                               <span className="absolute top-0 left-0 w-0 h-full bg-[#1A2E56] transition-all duration-500 ease-in-out group-hover/btn:w-1/2"></span>
                               <span className="absolute top-0 right-0 w-0 h-full bg-[#1A2E56] transition-all duration-500 ease-in-out group-hover/btn:w-1/2"></span>
-                            </button>
+                            </Link>
                           </div>
                         </div>
                         <div className="absolute bottom-0 right-0 w-20 h-20 rounded-br-[7rem] bg-[#26C1C9]/10 pointer-events-none" />

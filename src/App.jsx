@@ -36,6 +36,7 @@ const ServicesPage = lazy(() => import("@/pages/services/ServicesPage.jsx"));
 const AboutPage = lazy(() => import("@/pages/about/AboutPage.jsx"));
 const ContactPage = lazy(() => import("@/pages/contact/ContactPage.jsx"));
 const BookingPage = lazy(() => import("@/pages/booking/BookingPage.jsx"));
+const BlogPage = lazy(() => import("@/pages/blog/BlogPage.jsx"));
 const NotFound = lazy(() => import("@/pages/notfound/NotFound.jsx"));
 
 const LoadingFallback = () => {
@@ -122,6 +123,7 @@ export default function App() {
               <Route path="services" element={<ServicesPage />} />
               <Route path="booking" element={<BookingPage />} />
               <Route path="contact" element={<ContactPage />} />
+              <Route path="blog" element={<BlogPage />} />
             </Route>
 
             {/* Auth Routes */}
