@@ -1,6 +1,6 @@
 import React from "react";
 import { DollarSign, Bell, ShieldCheck, Truck, Sparkles } from "lucide-react";
-import LaundryWoman from "@/assets/img.png";
+import LaundryWoman from "@/assets/image7.jpg";
 
 export default function Benefits() {
   const benefitCards = [

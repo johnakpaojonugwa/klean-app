@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowRight, Calendar, Play, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import HeroBg from "@/assets/img-3.jpg";
+import HeroBg from "@/assets/image2.jpg";
 
 export default function Hero() {
   const scrollToHow = () => {
