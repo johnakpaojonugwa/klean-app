@@ -95,7 +95,7 @@ const LoadingFallback = () => {
               klean<span className="text-[#4F7DF3] animate-pulse">.</span>
             </h1>
             <div className="overflow-hidden">
-              <span className="block text-[10px] text-[#94A3B8] font-bold uppercase tracking-[0.4em] mt-1 border-r-2 border-[#4F7DF3] animate-typing whitespace-nowrap">
+              <span className="block text-[10px] text-[#94A3B8] font-bold uppercase tracking-[0.4em] mt-1 animate-typing whitespace-nowrap">
                 Enterprise
               </span>
             </div>

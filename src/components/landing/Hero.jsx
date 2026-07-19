@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowRight, Calendar, Play, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import HeroBg from "@/assets/hero-bg.png";
+import HeroBg from "@/assets/img-3.jpg";
 
 export default function Hero() {
   const scrollToHow = () => {
@@ -49,15 +49,16 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/booking">
-                <button className="bg-[#4F7DF3] text-white px-8 py-5 rounded-2xl font-black tracking-widest text-xs flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl shadow-[#4F7DF3]/30">
+              <Link
+                to="/booking"
+                className="bg-[#4F7DF3] text-white px-8 py-5 rounded-2xl font-black tracking-widest text-xs flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl shadow-[#4F7DF3]/30"
+              >
                 SCHEDULE PICKUP <ArrowRight size={16} />
-              </button>
               </Link>
 
               <button
                 onClick={scrollToHow}
-                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-5 rounded-2xl font-black tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white/20 transition-all cursor-pointer"
+                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-5 rounded-2xl font-black tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white/20 transition-all"
               >
                 <Play size={14} fill="currentColor" />
                 HOW IT WORKS

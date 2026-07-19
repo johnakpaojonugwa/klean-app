@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useMemo, useCallback } from "react";
 import {
   Plus,
   Trash2,
@@ -112,13 +112,6 @@ export default function OrderForm({
 
   const [formData, setFormData] = useState(getInitialState);
   const [validationError, setValidationError] = useState("");
-
-  useEffect(() => {
-    if (open) {
-      setFormData(getInitialState());
-      setValidationError("");
-    }
-  }, [open, editOrder, getInitialState]);
 
   const totals = useMemo(() => {
     const rawSubtotal = formData.items.reduce(
@@ -271,19 +264,14 @@ export default function OrderForm({
   const branchName =
     user?.branchName || user?.branchId?.name || "Active Branch";
 
-  // Shared CSS class for consistent height and appearance
-  const controlStyles = "h-10 bg-white border-slate-300 w-full";
-  const readOnlyStyles =
-    "h-10 bg-slate-100 border-slate-300 text-slate-700 w-full";
-
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto p-0 border-0 shadow-2xl">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-white">
+        <div className="bg-[#4F7DF3] p-8 text-white">
           <DialogTitle className="text-2xl font-bold text-white">
             {editOrder ? "Update Laundry Order" : "Create New Laundry Order"}
           </DialogTitle>
-          <p className="text-indigo-100 text-sm mt-2">
+          <p className="text-slate-100 text-sm mt-2">
             Branch: <span className="font-semibold">{branchName}</span>
           </p>
         </div>
@@ -614,7 +602,7 @@ export default function OrderForm({
             <Button
               type="submit"
               disabled={isPending}
-              className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+              className="px-8 py-3 bg-[#4F7DF3] hover:bg-[#3F6AE1] text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
             >
               {isPending ? (
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />

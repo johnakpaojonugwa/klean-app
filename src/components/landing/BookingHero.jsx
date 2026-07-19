@@ -17,17 +17,17 @@ export default function BookingHero() {
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 relative z-20 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="lg:col-start-2 flex flex-col space-y-6 animate-in fade-in slide-in-from-right duration-1000">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[0.9] tracking-tighter uppercase italic">
-            Book Your <br />
-            <span
-              className="text-transparent"
-              style={{ WebkitTextStroke: "1px white" }}
-            >
-              Laundry Service
-            </span>
-          </h1>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter">
+              Book Your <br />
+              <span
+                className="text-transparent"
+                style={{ WebkitTextStroke: "1px white" }}
+              >
+                Laundry Service
+              </span>
+            </h1>
+          </div>
         </div>
-      </div>
       </div>
 
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#F8FAFC] to-transparent z-20"></div>

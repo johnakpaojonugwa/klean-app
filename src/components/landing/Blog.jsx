@@ -205,14 +205,17 @@ export default function BlogSection() {
                           </p>
 
                           <div className="mt-auto">
-                            <button className="relative overflow-hidden bg-[#E5B14A] text-white font-black px-8 py-4 lg:py-5 cursor-pointer rounded-full text-xs uppercase tracking-[0.2em] group/btn transition-colors duration-300 hover:text-white w-full sm:w-auto">
+                            <button
+                              type="button"
+                              className="relative overflow-hidden bg-[#E5B14A] text-white font-black px-8 py-4 lg:py-5 cursor-pointer rounded-full text-xs uppercase tracking-[0.2em] group/btn transition-colors duration-300 hover:text-white w-full sm:w-auto"
+                            >
                               <span className="relative z-10">Read More</span>
                               <span className="absolute top-0 left-0 w-0 h-full bg-[#1A2E56] transition-all duration-500 ease-in-out group-hover/btn:w-1/2"></span>
                               <span className="absolute top-0 right-0 w-0 h-full bg-[#1A2E56] transition-all duration-500 ease-in-out group-hover/btn:w-1/2"></span>
                             </button>
                           </div>
                         </div>
-                        <div className="absolute bottom-0 right-0 w-20 h-20 border-r-2 border-b-2 border-dashed border-[#26C1C9]/30 rounded-br-[7rem] pointer-events-none" />
+                        <div className="absolute bottom-0 right-0 w-20 h-20 rounded-br-[7rem] bg-[#26C1C9]/10 pointer-events-none" />
                       </div>
                     </div>
                   ))}

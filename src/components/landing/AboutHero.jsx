@@ -29,9 +29,9 @@ export default function AboutHero() {
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tighter uppercase italic">
-              Premium <br /> 
-              <span className="text-transparent stroke-white stroke-1" style={{ WebkitTextStroke: '1px white' }}>Dry Cleaners</span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter">
+              Klean <br /> 
+              <span className="text-transparent stroke-white stroke-1" style={{ WebkitTextStroke: '1px white' }}>About us</span>
             </h1>
 
             <p className="text-slate-300 text-lg max-w-lg font-medium leading-relaxed">

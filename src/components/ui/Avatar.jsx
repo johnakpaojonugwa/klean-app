@@ -28,7 +28,7 @@ const AvatarFallback = React.forwardRef(({ className, ...props }, ref) => (
     ref={ref}
     className={cn(
       "flex h-full w-full items-center justify-center rounded-full",
-      "bg-gradient-to-br from-indigo-500 to-indigo-700", // Premium gradient
+      "bg-[#4F7DF3]", // Brand fallback background
       "text-white text-[13px] font-semibold tracking-tight", // Better typography
       "shadow-inner", // Depth
       className

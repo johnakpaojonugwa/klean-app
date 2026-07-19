@@ -1,4 +1,5 @@
 import { ArrowRight, Shirt, Waves, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import ServiceDryclean from "@/assets/service-dryclean.jpg";
 import ServiceLaundry from "@/assets/service-laundry.jpg";
 import StainRemoval from "@/assets/stain-removal.jpg";
@@ -90,9 +91,9 @@ export default function Services() {
 
         {/* BUTTON */}
         <div className="flex justify-center mt-16">
-          <button className="bg-[#4F7DF3] text-white px-10 py-5 rounded-2xl w-fit font-black text-[11px] tracking-[0.2em] uppercase hover:bg-[#3B63C9] hover:-translate-y-1 transition-all flex items-center gap-3 shadow-xl shadow-[#4F7DF3]/25">
+          <Link to="/services" className="bg-[#4F7DF3] text-white px-10 py-5 rounded-2xl w-fit font-black text-[11px] tracking-[0.2em] uppercase hover:bg-[#3B63C9] hover:-translate-y-1 transition-all flex items-center gap-3 shadow-xl shadow-[#4F7DF3]/25">
             More Services <ArrowRight size={16} />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

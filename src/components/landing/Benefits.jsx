@@ -13,7 +13,7 @@ export default function Benefits() {
       icon: <ShieldCheck className="w-12 h-12 md:w-20 md:h-20 text-[#D4AF37]" />,
     },
     {
-      title: "Professionalism",
+      title: "Reliability",
       icon: <Bell className="w-12 h-12 md:w-20 md:h-20 text-[#D4AF37]" />,
     },
     {
@@ -36,24 +36,24 @@ export default function Benefits() {
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
-        <div className="grid grid-cols-1 2xl:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 items-start">
           
           {/* LEFT SIDE: GRID CONTENT */}
           <div className="flex flex-col space-y-12">
             <div className="space-y-2">
               <div className="bg-white/50 border border-[#4F7DF3]/20 px-4 py-2 rounded-full w-50">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#4F7DF3]">Why Choose Us</span>
+                <span className="text-xs font-black uppercase tracking-[0.3em] text-[#4F7DF3]">Why Choose Us</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-black text-[#4f7df3] leading-tight uppercase tracking-tight">
                 Our Laundry <br /> Benefits
               </h2>
-              <div className="text-[#4F7DF3] pt-2">
+              <div className="text-[#4F7DF3] pt-2 hidden md:block">
                 <Sparkles size={24} fill="currentColor" />
               </div>
             </div>
 
             {/* BENEFIT GRID WITH CENTRAL CIRCLE */}
-            <div className="relative inline-grid grid-cols-2 gap-6 max-w-2xl md:max-w-3xl">
+            <div className="relative inline-grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl md:max-w-3xl">
               {benefitCards.map((card, idx) => (
                 <div 
                   key={idx} 
@@ -67,7 +67,7 @@ export default function Benefits() {
               ))}
 
               {/* CENTRAL GOLD CIRCLE ACCENT */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-[#D4AF37] rounded-full flex items-center justify-center border-4 border-[#D4AF37] shadow-lg text-white">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-[#D4AF37] rounded-full hidden md:flex items-center justify-center border-4 border-[#D4AF37] shadow-lg text-white">
                 <Sparkles size={30} fill="white" />
               </div>
             </div>
@@ -81,7 +81,7 @@ export default function Benefits() {
               we do our best to treat them well.
             </p>
             
-            <div className="relative pt-10">
+            <div className="relative pt-10 hidden lg:block">
               <img 
                 src={LaundryWoman} 
                 alt="Woman using washing machine" 

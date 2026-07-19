@@ -88,10 +88,11 @@ export default function How() {
               "We currently serve Abuja from our two Lugbe branches, providing a seamless home collection and delivery experience."
             </p>
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-6">
-               <Link to="/booking">
-                  <button className="bg-[#4F7DF3] text-white px-10 py-5 rounded-2xl cursor-pointer font-black text-[11px] tracking-[0.2em] hover:bg-[#3B63C9] hover:-translate-y-1 transition-all flex items-center gap-3 shadow-xl shadow-[#4F7DF3]/25 uppercase">
-                  Book Online Now <ArrowRight size={16}/>
-               </button>
+               <Link
+                 to="/booking"
+                 className="bg-[#4F7DF3] text-white px-10 py-5 rounded-2xl cursor-pointer font-black text-[11px] tracking-[0.2em] hover:bg-[#3B63C9] hover:-translate-y-1 transition-all flex items-center gap-3 shadow-xl shadow-[#4F7DF3]/25 uppercase"
+               >
+                 Book Online Now <ArrowRight size={16} />
                </Link>
                
                <div className="flex items-center gap-2 group cursor-pointer">

@@ -35,6 +35,16 @@ const testimonials = [
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [isWide, setIsWide] = useState(
+    typeof window !== "undefined" ? window.innerWidth >= 768 : true
+  );
+
+  useEffect(() => {
+    const onResize = () => setIsWide(window.innerWidth >= 768);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -57,7 +67,7 @@ export default function Testimonials() {
             <div className="text-white space-y-4">
               {/* HEADER */}
               <div className="bg-white/80 border border-[#4F7DF3]/20 px-4 py-2 rounded-full w-50">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#4F7DF3]">
+                <span className="text-xs font-black uppercase tracking-[0.3em] text-[#4F7DF3]">
                   Testimonials
                 </span>
               </div>
@@ -95,20 +105,18 @@ export default function Testimonials() {
               {" "}
               {/* py-12 ensures the tail isn't cut */}
               <div
-                className="flex transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                className={`flex transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]`}
                 style={{
-                  // 80% card width + gap moves exactly 80% to keep 20% peek
-                  transform: `translateX(-${currentIndex * 80}%)`,
+                  transform: isWide
+                    ? `translateX(-${currentIndex * 80}%)`
+                    : `translateX(-${currentIndex * 100}%)`,
                 }}
               >
                 {testimonials.map((item) => (
-                  <div
-                    key={item.id}
-                    className="min-w-[80%] pr-8" // Card takes 80%, leaving 20% for next slide
-                  >
-                    <div className="bg-white p-12 lg:p-16 relative min-h-[320px] flex flex-col justify-center ml-14">
+                  <div key={item.id} className={isWide ? "min-w-[80%] pr-8" : "min-w-full pr-0"}>
+                    <div className={`bg-white p-12 lg:p-16 relative min-h-[320px] flex flex-col justify-center ${isWide ? "ml-14" : "pl-0"}`}>
                       {/* AVATAR */}
-                      <div className="absolute -left-14 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full border-[10px] border-[#D4AF37] overflow-hidden bg-white z-20">
+                      <div className={`${isWide ? "absolute -left-14 top-1/2 -translate-y-1/2" : "relative left-0 top-0 translate-y-0 mb-4"} w-32 h-32 rounded-full border-[10px] border-[#D4AF37] overflow-hidden bg-white z-20`}>
                         <img
                           src={item.image}
                           alt={item.name}

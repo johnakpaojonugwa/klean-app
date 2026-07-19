@@ -1,0 +1,1029 @@
+[
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\admin\\invoices\\Invoices.jsx",
+    "line": 274,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "ai-color-palette",
+    "name": "AI color palette",
+    "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette.",
+    "severity": "warning",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\admin\\layout\\AdminLayout.jsx",
+    "line": 105,
+    "snippet": "text-indigo-600 on heading"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\admin\\orders\\Orders.jsx",
+    "line": 56,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "bounce-easing",
+    "name": "Bounce or elastic easing",
+    "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly ÔÇö use exponential easing (ease-out-quart/quint/expo) instead.",
+    "severity": "warning",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\App.jsx",
+    "line": 55,
+    "snippet": "animate-bounce (Tailwind)",
+    "importedBy": [
+      "main.jsx"
+    ]
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\App.jsx",
+    "line": 98,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px",
+    "importedBy": [
+      "main.jsx"
+    ]
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\auth\\AuthStats.jsx",
+    "line": 10,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\auth\\InputField.jsx",
+    "line": 6,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\auth\\InputField.jsx",
+    "line": 60,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\auth\\RoleAccessList.jsx",
+    "line": 30,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "gray-on-color",
+    "name": "Gray text on colored background",
+    "description": "Gray text looks washed out on colored backgrounds. Use a darker shade of the background color instead, or white/near-white for contrast.",
+    "severity": "warning",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\common\\Header.jsx",
+    "line": 150,
+    "snippet": "text-slate-800 on bg-indigo-700"
+  },
+  {
+    "antipattern": "gray-on-color",
+    "name": "Gray text on colored background",
+    "description": "Gray text looks washed out on colored backgrounds. Use a darker shade of the background color instead, or white/near-white for contrast.",
+    "severity": "warning",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\common\\Header.jsx",
+    "line": 163,
+    "snippet": "text-slate-800 on bg-indigo-700"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\common\\Header.jsx",
+    "line": 71,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\common\\Header.jsx",
+    "line": 122,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\common\\Sidebar.jsx",
+    "line": 83,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\customers\\CustomerCard.jsx",
+    "line": 39,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\customers\\CustomerCard.jsx",
+    "line": 85,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\dashboard\\BranchRevenueAnalytics.jsx",
+    "line": 17,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\dashboard\\LowStockAlert.jsx",
+    "line": 84,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\dashboard\\LowStockAlert.jsx",
+    "line": 92,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\dashboard\\OrderStatusChart.jsx",
+    "line": 102,
+    "snippet": "fontSize: 12px is off the DESIGN.md type ramp",
+    "ignoreValue": "12px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\dashboard\\RevenueChart.jsx",
+    "line": 49,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\dashboard\\RevenueChart.jsx",
+    "line": 79,
+    "snippet": "Undocumented color rgba(0,0,0,0.1) is outside DESIGN.md colors",
+    "ignoreValue": "rgba(0,0,0,0.1)"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\dashboard\\StatCard.jsx",
+    "line": 71,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\employees\\EmployeeCard.jsx",
+    "line": 59,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\employees\\EmployeeCard.jsx",
+    "line": 62,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\employees\\EmployeeCard.jsx",
+    "line": 108,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\inventory\\InventoryTable.jsx",
+    "line": 71,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\inventory\\InventoryTable.jsx",
+    "line": 112,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceCard.jsx",
+    "line": 47,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceCard.jsx",
+    "line": 61,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceCard.jsx",
+    "line": 68,
+    "snippet": "text-[ÔÇª] class: 9px is off the DESIGN.md type ramp",
+    "ignoreValue": "9px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceCard.jsx",
+    "line": 77,
+    "snippet": "text-[ÔÇª] class: 9px is off the DESIGN.md type ramp",
+    "ignoreValue": "9px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceCard.jsx",
+    "line": 81,
+    "snippet": "text-[ÔÇª] class: 9px is off the DESIGN.md type ramp",
+    "ignoreValue": "9px"
+  },
+  {
+    "antipattern": "ai-color-palette",
+    "name": "AI color palette",
+    "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette.",
+    "severity": "warning",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceDetailsDialog.jsx",
+    "line": 98,
+    "snippet": "text-indigo-600 on heading"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceDetailsDialog.jsx",
+    "line": 68,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceDetailsDialog.jsx",
+    "line": 92,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceDetailsDialog.jsx",
+    "line": 97,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceDetailsDialog.jsx",
+    "line": 125,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceStatCard.jsx",
+    "line": 25,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "gray-on-color",
+    "name": "Gray text on colored background",
+    "description": "Gray text looks washed out on colored backgrounds. Use a darker shade of the background color instead, or white/near-white for contrast.",
+    "severity": "warning",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceTable.jsx",
+    "line": 86,
+    "snippet": "text-slate-400 on bg-indigo-50"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\invoices\\InvoiceTable.jsx",
+    "line": 70,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\About.jsx",
+    "line": 42,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\About.jsx",
+    "line": 69,
+    "snippet": "text-[ÔÇª] class: 12px is off the DESIGN.md type ramp",
+    "ignoreValue": "12px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\About.jsx",
+    "line": 100,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\AboutContent.jsx",
+    "line": 16,
+    "snippet": "text-[ÔÇª] class: 15px is off the DESIGN.md type ramp",
+    "ignoreValue": "15px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\AboutContent.jsx",
+    "line": 19,
+    "snippet": "text-[ÔÇª] class: 15px is off the DESIGN.md type ramp",
+    "ignoreValue": "15px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\AboutContent.jsx",
+    "line": 22,
+    "snippet": "text-[ÔÇª] class: 15px is off the DESIGN.md type ramp",
+    "ignoreValue": "15px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\AboutContent.jsx",
+    "line": 25,
+    "snippet": "text-[ÔÇª] class: 15px is off the DESIGN.md type ramp",
+    "ignoreValue": "15px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\AboutTest.jsx",
+    "line": 44,
+    "snippet": "text-[ÔÇª] class: 12px is off the DESIGN.md type ramp",
+    "ignoreValue": "12px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\AboutTest.jsx",
+    "line": 66,
+    "snippet": "text-[ÔÇª] class: 13px is off the DESIGN.md type ramp",
+    "ignoreValue": "13px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\Blog.jsx",
+    "line": 122,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\Blog.jsx",
+    "line": 176,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\BookingForm.jsx",
+    "line": 445,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\BookingForm.jsx",
+    "line": 456,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\BookingForm.jsx",
+    "line": 460,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\BookingForm.jsx",
+    "line": 570,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\BookingForm.jsx",
+    "line": 574,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\BookingForm.jsx",
+    "line": 578,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\Hero.jsx",
+    "line": 34,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\How.jsx",
+    "line": 39,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\How.jsx",
+    "line": 66,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "gray-on-color",
+    "name": "Gray text on colored background",
+    "description": "Gray text looks washed out on colored backgrounds. Use a darker shade of the background color instead, or white/near-white for contrast.",
+    "severity": "warning",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\Location.jsx",
+    "line": 120,
+    "snippet": "text-slate-600 on bg-blue-600"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\Location.jsx",
+    "line": 81,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\Location.jsx",
+    "line": 107,
+    "snippet": "text-[ÔÇª] class: 13px is off the DESIGN.md type ramp",
+    "ignoreValue": "13px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\Location.jsx",
+    "line": 114,
+    "snippet": "text-[ÔÇª] class: 12px is off the DESIGN.md type ramp",
+    "ignoreValue": "12px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\MeetTeam.jsx",
+    "line": 23,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\MeetTeam.jsx",
+    "line": 56,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\MeetTeam.jsx",
+    "line": 72,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\Services.jsx",
+    "line": 43,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\ServicesGrid.jsx",
+    "line": 53,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\ServicesGrid.jsx",
+    "line": 82,
+    "snippet": "text-[ÔÇª] class: 9px is off the DESIGN.md type ramp",
+    "ignoreValue": "9px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\ServicesGrid.jsx",
+    "line": 92,
+    "snippet": "text-[ÔÇª] class: 9px is off the DESIGN.md type ramp",
+    "ignoreValue": "9px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\ServicesGrid.jsx",
+    "line": 106,
+    "snippet": "text-[ÔÇª] class: 9px is off the DESIGN.md type ramp",
+    "ignoreValue": "9px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\landing\\Statistics.jsx",
+    "line": 74,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\layout\\Footer.jsx",
+    "line": 65,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\layout\\Footer.jsx",
+    "line": 120,
+    "snippet": "text-[ÔÇª] class: 9px is off the DESIGN.md type ramp",
+    "ignoreValue": "9px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\layout\\Footer.jsx",
+    "line": 126,
+    "snippet": "text-[ÔÇª] class: 15px is off the DESIGN.md type ramp",
+    "ignoreValue": "15px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\layout\\Footer.jsx",
+    "line": 227,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\layout\\Footer.jsx",
+    "line": 230,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\layout\\Header.jsx",
+    "line": 165,
+    "snippet": "text-[ÔÇª] class: 8px is off the DESIGN.md type ramp",
+    "ignoreValue": "8px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\layout\\Header.jsx",
+    "line": 199,
+    "snippet": "text-[ÔÇª] class: 12px is off the DESIGN.md type ramp",
+    "ignoreValue": "12px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\layout\\Header.jsx",
+    "line": 239,
+    "snippet": "text-[ÔÇª] class: 9px is off the DESIGN.md type ramp",
+    "ignoreValue": "9px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\layout\\Header.jsx",
+    "line": 243,
+    "snippet": "text-[ÔÇª] class: 8px is off the DESIGN.md type ramp",
+    "ignoreValue": "8px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\locations\\BranchComponents.jsx",
+    "line": 43,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\locations\\BranchComponents.jsx",
+    "line": 114,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\orders\\OrderCard.jsx",
+    "line": 63,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\orders\\OrderCard.jsx",
+    "line": 74,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\orders\\OrderCard.jsx",
+    "line": 149,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\orders\\OrderDetailsDialog.jsx",
+    "line": 88,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\orders\\OrderDetailsDialog.jsx",
+    "line": 109,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\orders\\OrderDetailsDialog.jsx",
+    "line": 114,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "ai-color-palette",
+    "name": "AI color palette",
+    "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette.",
+    "severity": "warning",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\orders\\OrderForm.jsx",
+    "line": 587,
+    "snippet": "text-indigo-400 on heading"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\reports\\AnalyticsCharts.jsx",
+    "line": 125,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\ui\\AlertDialog.jsx",
+    "line": 66,
+    "snippet": "text-[ÔÇª] class: 15px is off the DESIGN.md type ramp",
+    "ignoreValue": "15px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\ui\\Avatar.jsx",
+    "line": 32,
+    "snippet": "text-[ÔÇª] class: 13px is off the DESIGN.md type ramp",
+    "ignoreValue": "13px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\ui\\DropdownMenu.jsx",
+    "line": 123,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\components\\ui\\DropdownMenu.jsx",
+    "line": 142,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "bounce-easing",
+    "name": "Bounce or elastic easing",
+    "description": "Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly ÔÇö use exponential easing (ease-out-quart/quint/expo) instead.",
+    "severity": "warning",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\index.css",
+    "line": 38,
+    "snippet": "animate-bounce (Tailwind)"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\index.css",
+    "line": 111,
+    "snippet": "font-size: 0.75rem !important is off the DESIGN.md type ramp",
+    "ignoreValue": "0.75rem !important"
+  },
+  {
+    "antipattern": "design-system-radius",
+    "name": "Radius outside DESIGN.md",
+    "description": "A border-radius value is outside the DESIGN.md rounded scale. Use a documented radius token or update the design system if the new shape is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\index.css",
+    "line": 133,
+    "snippet": "border-radius: 6px is outside the DESIGN.md rounded scale",
+    "ignoreValue": "6px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\index.css",
+    "line": 139,
+    "snippet": "font-size: 0.75rem !important is off the DESIGN.md type ramp",
+    "ignoreValue": "0.75rem !important"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\pages\\auth\\Auth.jsx",
+    "line": 226,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "C:\\Users\\Ojonugwa\\klean-app\\src\\pages\\auth\\Auth.jsx",
+    "line": 233,
+    "snippet": "text-[ÔÇª] class: 10px is off the DESIGN.md type ramp",
+    "ignoreValue": "10px"
+  }
+]

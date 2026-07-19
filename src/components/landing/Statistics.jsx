@@ -43,9 +43,9 @@ const CountUp = ({ end, duration = 2000 }) => {
 
 const stats = [
   { id: 1, value: 25, label: "Services Rendered", Icon: Layers },
-  { id: 2, value: 120986, label: "Satisfied Clients", Icon: Users },
-  { id: 3, value: 21, label: "Affiliations & Certifications", Icon: ShieldCheck },
-  { id: 4, value: 11, label: "Awards", Icon: Trophy },
+  { id: 2, value: 1500, label: "Satisfied Clients", Icon: Users },
+  { id: 3, value: 5, label: "Affiliations & Certifications", Icon: ShieldCheck },
+  { id: 4, value: 3, label: "Awards", Icon: Trophy },
 ];
 
 export default function Statistics() {

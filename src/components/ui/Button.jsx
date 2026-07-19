@@ -18,9 +18,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // High-end Gradient with subtle inner border
+        // Brand primary button
         default:
-          "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200",
+          "bg-[#4F7DF3] hover:bg-[#3F6AE1] text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200",
         
         // Soft, desaturated danger
         destructive:

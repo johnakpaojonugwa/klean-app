@@ -143,12 +143,12 @@ export const BranchFormDialog = ({
 }) => (
   <Dialog open={showForm} onOpenChange={setShowForm}>
     <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0 border-0 shadow-2xl">
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-white">
+      <div className="bg-[#4F7DF3] p-8 text-white">
         <DialogTitle className="text-2xl font-bold text-white flex items-center gap-3">
           <Building className="w-8 h-8" />
           {editBranches ? "Update Branch" : "Add New Branch"}
         </DialogTitle>
-        <p className="text-indigo-100 text-sm mt-2">
+        <p className="text-slate-100 text-sm mt-2">
           {editBranches
             ? "Modify branch details and configuration"
             : "Create a new branch location and assign manager"}
@@ -341,7 +341,7 @@ export const BranchFormDialog = ({
           </Button>
           <Button
             type="submit"
-            className="px-6 py-2 h-11 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+            className="px-6 py-2 h-11 bg-[#4F7DF3] hover:bg-[#3F6AE1] text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
             disabled={isSubmitting}
           >
             {isSubmitting ? (

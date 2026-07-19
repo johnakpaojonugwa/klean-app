@@ -66,11 +66,11 @@ export default function OrderDetailsDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0 border-0 shadow-2xl">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-white">
+        <div className="bg-[#4F7DF3] p-8 text-white">
           <DialogTitle className="text-2xl font-bold text-white">
             Order Details
           </DialogTitle>
-          <p className="text-indigo-100 text-sm mt-2">
+          <p className="text-slate-100 text-sm mt-2">
             View your order information and track progress
           </p>
         </div>
@@ -242,7 +242,7 @@ export default function OrderDetailsDialog({
             <div className="flex gap-3 pt-2">
               <Button
                 variant="outline"
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+                className="flex-1 px-6 py-3 bg-[#4F7DF3] hover:bg-[#3F6AE1] text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
                 onClick={() => window.print()}
               >
                 <Printer className="mr-2 h-4 w-4" /> Print

@@ -145,11 +145,11 @@ export function InventoryFormDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0 border-0 shadow-2xl">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-white">
+        <div className="bg-[#4F7DF3] p-8 text-white">
           <DialogTitle className="text-2xl font-bold text-white">
             {initialData ? "Edit Supply" : "Add Supply"}
           </DialogTitle>
-          <p className="text-indigo-100 text-sm mt-2">
+          <p className="text-slate-100 text-sm mt-2">
             {initialData ? "Update inventory item details" : "Add a new inventory item"}
           </p>
         </div>
@@ -310,7 +310,7 @@ export function InventoryFormDialog({
           <DialogFooter>
             <Button
               type="submit"
-              className="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+              className="w-full px-6 py-3 bg-[#4F7DF3] hover:bg-[#3F6AE1] text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200"
               disabled={isPending}
             >
               {isPending ? "Saving..." : "Save Item"}

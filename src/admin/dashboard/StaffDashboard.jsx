@@ -117,21 +117,21 @@ export function StaffDashboard({ branchId }) {
               value={pending.length}
               icon={<AlertTriangle className='text-white' size={24} />}
               colorClass="bg-orange-500"
-              gradientClass='bg-gradient-to-br from-orange-400 to-orange-600'
+              gradientClass='bg-orange-500'
             />
             <LocalStatCard
               title='In Progress'
               value={washing.length}
               icon={<Clock className='text-white' size={24} />}
               colorClass="bg-indigo-600"
-              gradientClass='bg-gradient-to-br from-indigo-500 to-indigo-700'
+              gradientClass='bg-indigo-600'
             />
             <LocalStatCard
               title='Ready'
               value={ready.length}
               icon={<CheckCircle className='text-white' size={24} />}
               colorClass="bg-emerald-500"
-              gradientClass='bg-gradient-to-br from-emerald-400 to-emerald-600'
+              gradientClass='bg-emerald-500'
             />
           </>
         )}

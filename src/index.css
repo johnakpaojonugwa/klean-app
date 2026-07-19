@@ -43,13 +43,17 @@
 
 /* --- Theme Variables --- */
 :root {
+  --brand: #4F7DF3;
+  --brand-shadow: 0 10px 30px -10px rgba(79,125,243,0.18);
+
   --toast-bg: #ffffff;
   --toast-border: rgba(0, 0, 0, 0.08);
   --toast-title: #1a1a1a;
-  --toast-description: #666666;
+  --toast-description: #4b5563; /* improved contrast for small text */
   --toast-icon-bg: rgba(0, 0, 0, 0.04);
   --toast-close-hover: rgba(0, 0, 0, 0.06);
   --toast-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.1);
+  --focus-ring: 0 0 0 4px rgba(79,125,243,0.12);
 }
 
 .dark {
@@ -69,32 +73,26 @@
   --padding: 14px;
   background: var(--toast-bg) !important;
   border: 1px solid var(--toast-border) !important;
-  border-left: 4px solid currentColor !important;
-  box-shadow: var(--toast-shadow) !important;
-  border-radius: 14px !important;
-  padding: var(--padding) !important;
-  display: flex !important;
+
   align-items: center !important;
   gap: 12px !important;
-  backdrop-filter: blur(8px);
   animation: var(--animate-toast-enter);
   overflow: hidden;
 }
 
-/* The Boxed Icon Wrapper */
-[data-sonner-toast] [data-icon] {
-  order: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--toast-icon-bg);
-  color: inherit;
-}
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
 
-/* Content Container */
+    [data-sonner-toast] {
+      animation: none !important;
+      /* heavy visual effects removed for accessibility/performance */
+    }
+  }
 [data-sonner-toast] [data-content] {
   order: 2;
   flex: 1;
@@ -179,4 +177,15 @@
     margin: 0 8px !important;
     width: calc(100vw - 32px) !important;
   }
+}
+
+/* Brand utilities and accessible focus helpers */
+.brand-bg { background-color: var(--brand) !important; }
+.brand-text { color: var(--brand) !important; }
+.brand-shadow { box-shadow: var(--brand-shadow) !important; }
+
+:where(button, a, [role="button"], input, select, textarea):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 8px;
 }

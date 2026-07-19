@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-16T00:00:00Z",
+  "title": "Design System: Klean",
+  "extensions": {
+    "colorMeta": {
+      "primary":         { "role": "primary",   "displayName": "Operational Blue",  "canonical": "#4F7DF3", "tonalRamp": ["#0B1747", "#15276B", "#1E3A8A", "#2749A8", "#3866C9", "#4F7DF3", "#88A5F8", "#C7D5FB"] },
+      "primary-deep":    { "role": "secondary", "displayName": "Deep Cobalt",      "canonical": "#3F6AE1", "tonalRamp": ["#0A1638", "#102358", "#173578", "#1E4798", "#2A5BC0", "#3F6AE1", "#7A95EC", "#B8C7F6"] },
+      "primary-shadow":  { "role": "secondary", "displayName": "Indigo Shadow",    "canonical": "#3B63C9", "tonalRamp": ["#0A1432", "#10204F", "#162C6B", "#1C3A88", "#2649AB", "#3B63C9", "#7791E2", "#B5C5F0"] },
+      "primary-soft":    { "role": "secondary", "displayName": "Indigo Soft",      "canonical": "#EEF2FF", "tonalRamp": ["#1E1B4B", "#312E81", "#3730A3", "#4338CA", "#6366F1", "#A5B4FC", "#EEF2FF", "#F5F7FF"] },
+      "ink":             { "role": "neutral",   "displayName": "Ink",              "canonical": "#0F172A", "tonalRamp": ["#0F172A", "#1E293B", "#334155", "#475569", "#64748B", "#94A3B8", "#CBD5E1", "#E2E8F0", "#F1F5F9", "#F8FAFC"] },
+      "ink-muted":       { "role": "neutral",   "displayName": "Ink Muted",        "canonical": "#64748B", "tonalRamp": ["#0F172A", "#1E293B", "#334155", "#475569", "#64748B", "#94A3B8", "#CBD5E1", "#E2E8F0"] },
+      "ink-faint":       { "role": "neutral",   "displayName": "Ink Faint",        "canonical": "#94A3B8", "tonalRamp": ["#475569", "#64748B", "#94A3B8", "#CBD5E1", "#E2E8F0", "#F1F5F9", "#F8FAFC", "#FFFFFF"] },
+      "surface":         { "role": "neutral",   "displayName": "Surface",          "canonical": "#F8FAFC", "tonalRamp": ["#1E293B", "#334155", "#475569", "#64748B", "#94A3B8", "#CBD5E1", "#E2E8F0", "#F1F5F9", "#F8FAFC", "#FFFFFF"] },
+      "surface-raised":  { "role": "neutral",   "displayName": "Surface Raised",   "canonical": "#FFFFFF", "tonalRamp": ["#94A3B8", "#CBD5E1", "#E2E8F0", "#F1F5F9", "#F8FAFC", "#FFFFFF"] },
+      "surface-deep":    { "role": "neutral",   "displayName": "Surface Deep",     "canonical": "#1A2E56", "tonalRamp": ["#0A1432", "#10204F", "#162C6B", "#1A2E56", "#1E3A8A", "#2749A8", "#3866C9"] },
+      "surface-deepest": { "role": "neutral",   "displayName": "Surface Deepest",  "canonical": "#1E1B4B", "tonalRamp": ["#0B0A1F", "#15123A", "#1E1B4B", "#272463", "#312E81", "#3A3788", "#4F4DAB"] },
+      "accent-cool":     { "role": "tertiary",  "displayName": "Cool Cyan",        "canonical": "#26C1C9", "tonalRamp": ["#0E3F44", "#0F5860", "#137781", "#199AA5", "#26C1C9", "#5FD7DD", "#9FE7EB", "#D2F4F6"] },
+      "success":         { "role": "status",    "displayName": "Success",          "canonical": "#10B981", "tonalRamp": ["#064E3B", "#065F46", "#047857", "#059669", "#10B981", "#34D399", "#6EE7B7", "#A7F3D0"] },
+      "error":           { "role": "status",    "displayName": "Error",            "canonical": "#EF4444", "tonalRamp": ["#7F1D1D", "#991B1B", "#B91C1C", "#DC2626", "#EF4444", "#F87171", "#FCA5A5", "#FECACA"] },
+      "warning":         { "role": "status",    "displayName": "Warning",          "canonical": "#F59E0B", "tonalRamp": ["#78350F", "#92400E", "#B45309", "#D97706", "#F59E0B", "#FBBF24", "#FCD34D", "#FDE68A"] },
+      "info":            { "role": "status",    "displayName": "Info",             "canonical": "#3B82F6", "tonalRamp": ["#1E3A8A", "#1E40AF", "#1D4ED8", "#2563EB", "#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE"] },
+      "border":          { "role": "neutral",   "displayName": "Border",           "canonical": "#E2E8F0", "tonalRamp": ["#475569", "#64748B", "#94A3B8", "#CBD5E1", "#E2E8F0", "#F1F5F9", "#F8FAFC"] },
+      "border-strong":   { "role": "neutral",   "displayName": "Border Strong",    "canonical": "#CBD5E1", "tonalRamp": ["#334155", "#475569", "#64748B", "#94A3B8", "#CBD5E1", "#E2E8F0", "#F1F5F9"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Hero headlines on the marketing site and oversized KPI tiles on the dashboard. Cap at clamp(2.5rem, 7vw, 6rem)." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles, page titles, large in-card values." },
+      "title":    { "displayName": "Title",    "purpose": "Card titles, modal titles, table headers, list-item primary text." },
+      "body":     { "displayName": "Body",     "purpose": "Default body copy. 65–75ch max line length." },
+      "label":    { "displayName": "Label",    "purpose": "Short labels only: button text, kickers, status pills, table column headers. Reserved for short strings." }
+    },
+    "shadows": [
+      { "name": "resting-card",        "value": "0 1px 2px rgba(15, 23, 42, 0.04)",     "purpose": "Optional resting lift on Table headers and select cards." },
+      { "name": "popover",             "value": "0 12px 24px -8px rgba(15, 23, 42, 0.12)", "purpose": "Dropdowns, command menus, popovers." },
+      { "name": "modal",               "value": "0 24px 60px -12px rgba(15, 23, 42, 0.25)","purpose": "Dialogs, drawers, full-page overlays." },
+      { "name": "glow-primary",        "value": "0 12px 30px -10px rgba(79, 125, 243, 0.30)","purpose": "Primary CTA in marketing hero contexts. Reserved for the public site." },
+      { "name": "toast-light",         "value": "0 12px 30px -10px rgba(0, 0, 0, 0.10)",  "purpose": "Light-mode Sonner toast surface." },
+      { "name": "toast-dark",          "value": "0 12px 40px -12px rgba(0, 0, 0, 0.50)",  "purpose": "Dark-mode Sonner toast surface." }
+    ],
+    "motion": [
+      { "name": "ease-standard",       "value": "cubic-bezier(0.4, 0, 0.2, 1)",            "purpose": "Default ease for state transitions (hover, focus, panel open/close)." },
+      { "name": "ease-out-quart",      "value": "cubic-bezier(0.25, 1, 0.5, 1)",            "purpose": "Larger transitions: toast enter, modal mount, sidebar collapse." },
+      { "name": "duration-fast",       "value": "150ms",                                     "purpose": "Hover, focus rings, micro-interactions." },
+      { "name": "duration-standard",   "value": "200ms",                                     "purpose": "Default for most state transitions." },
+      { "name": "duration-slow",       "value": "300ms",                                     "purpose": "Sidebar collapse, header scroll-state transition, panel open." }
+    ],
+    "breakpoints": [
+      { "name": "sm",  "value": "640px" },
+      { "name": "md",  "value": "768px" },
+      { "name": "lg",  "value": "1024px" },
+      { "name": "xl",  "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ],
+    "zindex": {
+      "name": "scale", "value": "0=base, 10=dropdown, 20=sticky, 30=modal-backdrop, 40=modal, 50=toast, 60=tooltip",
+      "purpose": "Semantic z-index scale. No arbitrary values like 9999."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main action on a screen. Flat Operational Blue fill, Deep Cobalt on hover, 4px focus ring.",
+      "html": "<button class=\"ds-btn-primary\">SCHEDULE PICKUP</button>",
+      "css": ".ds-btn-primary { background: #4F7DF3; color: #FFFFFF; padding: 12px 16px; height: 44px; border: none; border-radius: 16px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: #3F6AE1; } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(79, 125, 243, 0.10); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: none; } .ds-btn-primary:active { transform: none; } }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action, low-emphasis. Transparent until hover.",
+      "html": "<button class=\"ds-btn-ghost\">CANCEL</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #64748B; padding: 12px 16px; height: 44px; border: none; border-radius: 16px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1), color 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-ghost:hover { background: #F8FAFC; color: #0F172A; } .ds-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(79, 125, 243, 0.10); } @media (prefers-reduced-motion: reduce) { .ds-btn-ghost { transition: none; } }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Default text input. Slate border, slate placeholder, indigo focus.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Search orders…\" />",
+      "css": ".ds-input { display: flex; align-items: center; width: 100%; height: 44px; padding: 0 16px; background: #FFFFFF; color: #0F172A; border: 1px solid #E2E8F0; border-radius: 12px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; font-size: 14px; transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1), background 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-input::placeholder { color: #94A3B8; } .ds-input:hover { border-color: #CBD5E1; background: rgba(248, 250, 252, 0.30); } .ds-input:focus-visible { outline: none; border-color: #818CF8; box-shadow: 0 0 0 4px rgba(79, 125, 243, 0.10); } .ds-input:disabled { background: #F8FAFC; color: #94A3B8; border-color: #E2E8F0; cursor: not-allowed; } @media (prefers-reduced-motion: reduce) { .ds-input { transition: none; } }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Default surface container. White on a surface wash, 1px border, flat at rest.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-title\">Orders in progress</div><div class=\"ds-card-meta\">12 active · 3 overdue</div></div>",
+      "css": ".ds-card { background: #FFFFFF; color: #0F172A; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; } .ds-card-title { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1.25; letter-spacing: -0.01em; } .ds-card-meta { margin-top: 4px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 500; font-size: 13px; color: #64748B; }"
+    },
+    {
+      "name": "Status Pill",
+      "kind": "chip",
+      "refersTo": "badge-status",
+      "description": "Status communication. Pill, uppercase tracked, status color as text, tinted background.",
+      "html": "<span class=\"ds-pill ds-pill--success\">COMPLETED</span>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 9999px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 800; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; } .ds-pill--success { background: rgba(16, 185, 129, 0.10); color: #047857; } .ds-pill--error { background: rgba(239, 68, 68, 0.10); color: #B91C1C; } .ds-pill--warning { background: rgba(245, 158, 11, 0.10); color: #B45309; } .ds-pill--info { background: rgba(59, 130, 246, 0.10); color: #1D4ED8; } .ds-pill--neutral { background: #F1F5F9; color: #475569; }"
+    },
+    {
+      "name": "Admin Sidebar Item (Active)",
+      "kind": "nav",
+      "refersTo": "nav-sidebar-item-active",
+      "description": "Active state in the dark admin sidebar. 3px left border in Operational Blue is the only sanctioned accent on a nav item.",
+      "html": "<a class=\"ds-nav-item ds-nav-item--active\"><span>Orders</span></a>",
+      "css": ".ds-nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; color: rgba(255, 255, 255, 0.60); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 600; font-size: 14px; text-decoration: none; border-left: 3px solid transparent; border-radius: 0; transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1), color 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-nav-item:hover { background: rgba(255, 255, 255, 0.05); color: #FFFFFF; } .ds-nav-item--active { color: #FFFFFF; background: rgba(255, 255, 255, 0.10); border-left-color: #4F7DF3; } .ds-nav-item:focus-visible { outline: none; box-shadow: inset 0 0 0 2px #4F7DF3; } @media (prefers-reduced-motion: reduce) { .ds-nav-item { transition: none; } }"
+    },
+    {
+      "name": "Marketing Hero CTA",
+      "kind": "custom",
+      "refersTo": "hero-cta",
+      "description": "Primary action in the public marketing hero. Operational Blue with a 30% brand glow. Reserved for the public site.",
+      "html": "<button class=\"ds-hero-cta\">SCHEDULE PICKUP</button>",
+      "css": ".ds-hero-cta { background: #4F7DF3; color: #FFFFFF; padding: 20px 32px; border: none; border-radius: 16px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-weight: 900; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; box-shadow: 0 12px 30px -10px rgba(79, 125, 243, 0.30); transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1), background 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-hero-cta:hover { background: #3F6AE1; transform: scale(1.05); } .ds-hero-cta:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(79, 125, 243, 0.20), 0 12px 30px -10px rgba(79, 125, 243, 0.30); } @media (prefers-reduced-motion: reduce) { .ds-hero-cta { transition: none; } .ds-hero-cta:hover { transform: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Calm Intelligence",
+    "overview": "Klean is a multi-role SaaS for laundry and dry-cleaning operations. Its primary surface is the dashboard that branch managers and staff use all day; the public marketing site is a secondary surface. The system is designed to surface what needs attention, not everything that's happening. Every screen answers one question first; secondary information earns its place through density, not decoration.\n\nThe system explicitly rejects the three reflexes that surface too often in this category: generic admin templates, stock dashboard looks, and AI-scaffold tells. Concretely, the system prohibits Material-default feels, identical card grids, decorative gradients, the small-uppercase-kicker reflex, and the numbered-eyebrow reflex. The system's character is operational, not performative.",
+    "keyCharacteristics": [
+      "One screen, one question — primary surfaces lead with the answer; secondary info is one layer below.",
+      "Density without clutter — operators read fast, so type and spacing are tuned for a three-second scan without making the screen hostile to a new user.",
+      "Brand consistency across registers — the marketing site and the dashboard share tokens (color, type, motion) so a customer booking online and the manager fulfilling the order are visibly using the same product.",
+      "Brand color carries weight, not surface area — Operational Blue is a focused signal, not a wallpaper."
+    ],
+    "rules": [
+      { "name": "The Operational-Blue Rule",       "body": "Operational Blue occupies ≤10% of any given screen. Its rarity is the point. Wherever the eye lands, blue is the answer, not the wallpaper.",                                          "section": "colors" },
+      { "name": "The No-Decorative-Gradient Rule", "body": "The primary action is a flat fill of Operational Blue (hover → Deep Cobalt). Gradients are permitted only inside the brand logo lockup, the loader's drawing circle, and the admin sidebar background. They are not a button, a card, or a section background.", "section": "colors" },
+      { "name": "The No-Glassmorphism Rule",       "body": "backdrop-filter: blur is permitted only on the dark-mode toast container, the auth screen's split panel, and the public site's marketing hero where it sits on a real photograph. Inside the dashboard, blur is reserved for elevated popovers only. Never a default card surface.", "section": "colors" },
+      { "name": "The One-Family Rule",             "body": "Inter is the only typeface. Weight, tracking, and case carry the hierarchy. Adding a second family is a structural change, not a stylistic one.",                                                "section": "typography" },
+      { "name": "The Balanced-Headline Rule",      "body": "text-wrap: balance is required on every h1, h2, and h3. text-wrap: pretty on long prose. No orphan widows in section openers.",                                                                                  "section": "typography" },
+      { "name": "The Label-Reserved Rule",         "body": "The uppercase tracked label is reserved for short labels (button text, kickers, status pills, table column headers). It is never used for body or paragraph copy.",                                       "section": "typography" },
+      { "name": "The Flat-At-Rest Rule",           "body": "Surfaces are flat at rest. Shadows appear only as a response to state (hover, elevation, focus) or on a small set of elements that conceptually leave the page plane (popover, modal, toast).",                  "section": "elevation" },
+      { "name": "The Soft-Shadow Rule",            "body": "Shadows are short and soft (low offset, low blur, low opacity). If a shadow looks like a 2014 app, the offset is too big and the blur is too small.",                                                       "section": "elevation" }
+    ],
+    "dos": [
+      "Lead every primary surface with the answer to one question. Make the next action visible in a three-second scan.",
+      "Use Operational Blue for the primary action, the active nav state, the focus ring, and the brand accent. Nothing else.",
+      "Use the flat primary button for the main CTA. Hover → Deep Cobalt. Active → scale 0.97.",
+      "Cap display type at clamp(2.5rem, 7vw, 6rem). Above 6rem the page is shouting, not designing.",
+      "Apply text-wrap: balance to every h1, h2, h3.",
+      "Verify body text hits ≥4.5:1 against its background. Bump body color toward ink if the muted gray is even close to failing.",
+      "Keep surfaces flat at rest. Use shadows only for hover, focus, popover, and modal elevation.",
+      "Provide a prefers-reduced-motion alternative for every animation — typically a crossfade or an instant transition.",
+      "Test the longest heading copy at every breakpoint. Headings that overflow their container on tablet are not 'responsive.'"
+    ],
+    "donts": [
+      "Use side-stripe borders (border-left or border-right greater than 1px as a colored accent) on cards, list items, callouts, or alerts. The 4px Sonner toast accent is the only sanctioned exception.",
+      "Use gradient text (background-clip: text combined with a gradient). Emphasis via weight or size.",
+      "Use glassmorphism as a default. Blur is permitted only on the auth panel, the marketing hero on a real photograph, the dark-mode toast, and popovers.",
+      "Repeat the same identical card grid across a screen. Use cards only when they're the best affordance; nested cards are always wrong.",
+      "Put a tiny uppercase tracked eyebrow above every section. The 2023-era 'ABOUT / PROCESS / PRICING' kicker is the saturated AI scaffold. One named kicker as deliberate brand voice is allowed; an eyebrow on every section is AI grammar.",
+      "Number sections (01 / 02 / 03) as default scaffolding. Numbers earn their place when the section is actually a sequence and the order carries information.",
+      "Ship the deprecated indigo→purple button gradient. Use the flat primary.",
+      "Use stock dashboard layouts: stats grid + bar chart + activity feed in a three-column template, copy-paste component libraries, Bootstrap-era blue. Custom composition per screen.",
+      "Exceed 75ch body line length. Long heading words + large clamp scales + narrow grids cause overflow on tablet/mobile. Test, don't assume."
+    ]
+  }
+}

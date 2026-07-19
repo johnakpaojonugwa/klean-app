@@ -26,7 +26,7 @@ export const getToastPosition = () => {
  * Tailwind JIT compiler doesn't purge these styles.
  */
 export const getToastClassNames = (type = "info") => {
-  const baseClasses = "group relative rounded-xl shadow-lg font-medium text-sm flex items-center gap-4 px-5 py-4 backdrop-blur-sm border border-l-4 transition-all duration-300";
+  const baseClasses = "group relative rounded-xl shadow-lg font-medium text-sm flex items-center gap-4 px-5 py-4 border transition-all duration-300";
   
   const typeStyles = {
     success: "bg-emerald-50 border-emerald-200 border-l-emerald-500 text-emerald-900 dark:bg-emerald-950 dark:border-emerald-800 dark:border-l-emerald-400 dark:text-emerald-100",

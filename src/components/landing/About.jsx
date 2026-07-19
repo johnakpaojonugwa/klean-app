@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import AboutPerson from "@/assets/about.gif";
 
@@ -57,18 +58,19 @@ export default function About() {
           <div className="flex flex-col space-y-10 max-w-xl">
             
             {/* TAB NAVIGATION - ANIMATED UNDERLINE */}
-            <div className="flex flex-wrap gap-x-10 gap-y-2 border-b border-white/40">
-              {["mission", "vision", "faith"].map((tab) => (
+            <div role="tablist" aria-label="About section tabs" className="flex flex-wrap gap-x-10 gap-y-2 border-b border-white/40">
+              {['mission', 'vision', 'faith'].map((tab) => (
                 <button
                   key={tab}
+                  role="tab"
+                  aria-selected={activeTab === tab}
+                  tabIndex={activeTab === tab ? 0 : -1}
                   onClick={() => setActiveTab(tab)}
                   className={`pb-4 text-[12px] font-black uppercase tracking-[0.2em] transition-all cursor-pointer relative ${
                     activeTab === tab ? "text-[#4F7DF3]" : "text-slate-400 hover:text-slate-500"
                   }`}
                 >
-                  {tab === "faith" ? "Article of Faith" : tab}
-                  
-                  {/* ACTIVE UNDERLINE: Animates from left on click */}
+                  {tab === 'faith' ? 'Article of Faith' : tab}
                   {activeTab === tab && (
                     <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#4F7DF3] animate-in fade-in slide-in-from-left-full duration-300 ease-out" />
                   )}
@@ -86,9 +88,9 @@ export default function About() {
               </p>
             </div>
 
-            <button className="bg-[#4F7DF3] text-white px-10 py-5 rounded-2xl w-fit font-black text-[11px] tracking-[0.2em] uppercase hover:bg-[#3B63C9] hover:-translate-y-1 transition-all flex items-center gap-3 shadow-xl shadow-[#4F7DF3]/25">
+            <Link to="/about" className="bg-[#4F7DF3] text-white px-10 py-5 rounded-2xl w-fit font-black text-[11px] tracking-[0.2em] uppercase hover:bg-[#3B63C9] hover:-translate-y-1 transition-all flex items-center gap-3 shadow-xl shadow-[#4F7DF3]/25">
               Read More <ArrowRight size={16} />
-            </button>
+            </Link>
           </div>
 
           {/* RIGHT SIDE - Stats Badge */}

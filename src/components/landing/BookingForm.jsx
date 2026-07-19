@@ -331,7 +331,7 @@ export default function BookingForm({
       <form onSubmit={handleSubmit} className="space-y-10">
         
         {validationError && (
-          <div className="p-4 bg-red-50 border-l-4 border-red-500 rounded-md flex gap-3 animate-fadeIn">
+          <div className="p-4 bg-red-50 border border-red-200 rounded-md flex gap-3 animate-fadeIn">
             <AlertCircle className="h-5 w-5 text-red-600 shrink-0" />
             <p className="text-sm text-red-700">{validationError}</p>
           </div>

@@ -101,18 +101,19 @@ export default function ServiceGrid() {
                   </p>
 
                   <div className="mt-auto">
-                    <Link to="/booking">
-                    <button className="relative overflow-hidden bg-[#1A2E56] text-white font-black px-5 py-3 sm:px-6 sm:py-3.5 cursor-pointer rounded-full text-[9px] uppercase tracking-[0.2em] group/btn transition-all duration-300 shadow-lg shadow-[#1A2E56]/20 w-full sm:w-auto text-center">
+                    <Link
+                      to="/booking"
+                      className="relative overflow-hidden bg-[#1A2E56] text-white font-black px-5 py-3 sm:px-6 sm:py-3.5 cursor-pointer rounded-full text-[9px] uppercase tracking-[0.2em] group/btn transition-all duration-300 shadow-lg shadow-[#1A2E56]/20 w-full sm:w-auto text-center inline-flex items-center justify-center gap-2"
+                    >
                       <span className="relative z-10 flex items-center justify-center gap-2">
                         Book Now <CheckCircle size={12} />
                       </span>
                       <span className="absolute inset-0 bg-[#26C1C9] translate-y-full transition-transform duration-300 ease-out group-hover/btn:translate-y-0"></span>
-                    </button>
                     </Link>
                   </div>
                   
                   {/* DASHED ACCENT - Adjusted size for responsiveness */}
-                  <div className="absolute bottom-0 right-0 w-8 h-8 sm:w-12 sm:h-12 border-r-2 border-b-2 border-dashed border-[#26C1C9]/20 rounded-br-[4rem] sm:rounded-br-[6rem] pointer-events-none" />
+                  <div className="absolute bottom-0 right-0 w-8 h-8 sm:w-12 sm:h-12 rounded-br-[4rem] sm:rounded-br-[6rem] bg-[#26C1C9]/10 pointer-events-none" />
                 </div>
               </div>
             </div>

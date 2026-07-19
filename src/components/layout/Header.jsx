@@ -27,6 +27,7 @@ export default function Header() {
   const profileButtonRef = useRef(null);
   const mobileCloseRef = useRef(null);
 
+  const mobileMenuRef = useRef(null);
   const isAuthPage = location.pathname === "/auth" || location.pathname === "/signup";
   const shouldShowSolidHeader = isScrolled || isAuthPage;
 
@@ -57,6 +58,60 @@ export default function Header() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  // Focus trap for profile menu
+  useEffect(() => {
+    if (!isProfileOpen || !dropdownRef.current) return;
+    const node = dropdownRef.current;
+    const focusables = node.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])');
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const prev = document.activeElement;
+    if (first && typeof first.focus === 'function') first.focus();
+    const onKey = (e) => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          if (last && typeof last.focus === 'function') last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          if (first && typeof first.focus === 'function') first.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      if (prev && typeof prev.focus === 'function') prev.focus();
+    };
+  }, [isProfileOpen]);
+
+  // Focus trap for mobile menu dialog
+  useEffect(() => {
+    if (!isMobileMenuOpen || !mobileMenuRef.current) return;
+    const node = mobileMenuRef.current;
+    const focusables = node.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])');
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const prev = document.activeElement;
+    if (first && typeof first.focus === 'function') first.focus();
+    const onKey = (e) => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          if (last && typeof last.focus === 'function') last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          if (first && typeof first.focus === 'function') first.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      if (prev && typeof prev.focus === 'function') prev.focus();
+    };
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -154,6 +209,7 @@ export default function Header() {
             {user ? (
               <div className="relative" ref={dropdownRef}>
                 <button
+                  id="profile-button"
                   ref={profileButtonRef}
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                   aria-haspopup="true"
@@ -251,15 +307,12 @@ export default function Header() {
       </div>
 
       {/* MOBILE NAV OVERLAY */}
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-hidden={!isMobileMenuOpen}
-        className={cn(
-          "fixed inset-0 bg-white z-[150] p-6 flex flex-col transition-transform duration-500 lg:hidden",
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        )}
-      >
+      {isMobileMenuOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 bg-white z-[150] p-6 flex flex-col lg:hidden"
+        >
         <div className="flex justify-between items-center mb-10">
           <span className="font-black tracking-tighter text-xl text-[#0F172A]">
             KLEAN<span className="text-[#4F7DF3]">.</span>
@@ -295,7 +348,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-
+      )}
     </header>
   );
 }
