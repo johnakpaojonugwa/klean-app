@@ -1,9 +1,9 @@
 import React from "react";
-import BlogBg from "@/assets/aboutUs.jpg";
+import BlogBg from "@/assets/img-3.jpg";
 
 export default function BlogHero() {
   return (
-    <section className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center pt-20 overflow-hidden bg-[#0f172a]">
+    <section className="relative min-h-[50vh] lg:min-h-[70vh] flex items-center pt-20 overflow-hidden bg-[#0f172a]">
       {/* THE BACKGROUND IMAGE LAYER */}
       <div className="absolute inset-0 z-0">
         <img
@@ -21,14 +21,6 @@ export default function BlogHero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* MAIN CONTENT */}
           <div className="flex flex-col space-y-6 animate-in fade-in slide-in-from-left duration-1000">
-            {/* BRAND ACCENT */}
-            <div className="flex items-center gap-2">
-              <span className="w-12 h-[2px] bg-[#26C1C9]"></span>
-              <span className="text-[#26C1C9] font-black uppercase tracking-[0.3em] text-xs lg:text-sm">
-                Klean Insights & News
-              </span>
-            </div>
-
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter">
               Our <br />
               <span
